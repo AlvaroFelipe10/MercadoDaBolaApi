@@ -18,8 +18,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@Entity
-public class Contrato {
+@Entity(name="contrato")
+public class ContratoEntity {
 
 	@EqualsAndHashCode.Include
 	@Id
@@ -40,11 +40,11 @@ public class Contrato {
 	
 	@OneToOne
 	@JoinColumn(name = "jogador_id", nullable = false)
-	private Jogador Jogador;
+	private JogadorEntity Jogador;
 	
 	@OneToOne
 	@JoinColumn(name = "clube_id", nullable = false)
-	private Clube Clube;
+	private ClubeEntity Clube;
 	
 	
 	
