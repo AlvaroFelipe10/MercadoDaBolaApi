@@ -8,8 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.mercadodabola.mercadotransferencia.services.ClubeService;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -31,8 +34,11 @@ public class JogadorEntity {
 
 	@Column(nullable = false)
 	private String posicao;
-
-	@JsonIgnoreProperties(value="jogadores", allowSetters = true)
+	
+	
+	@Valid
+	@NotNull
+	//@JsonIgnoreProperties(value="jogadores", allowSetters = true)
 	@ManyToOne//(fetch = FetchType.LAZY)
 	@JoinColumn(name = "clube_id", nullable = false)
 	private ClubeEntity clube;

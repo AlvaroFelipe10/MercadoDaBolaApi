@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -37,7 +38,7 @@ public class ClubeEntity {
 
 	@JsonIgnore
 	//@JsonIgnoreProperties(value="clube", allowSetters = true)
-	@OneToMany//(mappedBy = "clube", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "clube")
 	private List<JogadorEntity> jogadores = new ArrayList<>();
 
 }

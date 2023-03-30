@@ -1,6 +1,7 @@
 package com.mercadodabola.mercadotransferencia.api.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorDto;
+import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
 import com.mercadodabola.mercadotransferencia.services.JogadorService;
 
@@ -33,15 +35,15 @@ public class JogadorController {
 		return jogadorService.listar();
 	}
 	
-	@GetMapping ("/{jogadorId}")
-	public ResponseEntity<JogadorEntity> buscar(@PathVariable Long jogadorId) {
+	@GetMapping("/{jogadorId}")
+	public ResponseEntity<JogadorDto> buscar(@PathVariable Long jogadorId){
 		return jogadorService.buscar(jogadorId);
 	}
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public void cadastrar(@RequestBody @Valid JogadorEntity jogador) {
-		jogadorService.salvar(jogador);
+	public JogadorEntity cadastrar(@RequestBody @Valid JogadorEntity jogador) {
+		return jogadorService.salvar(jogador);
 	}
 	
 }
