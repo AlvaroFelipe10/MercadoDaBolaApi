@@ -13,7 +13,8 @@ public class JogadorConverterImpl implements JogadorConverter{
 				.id(jogadorEntity.getId())
 				.nome(jogadorEntity.getNome())
 				.dataNascimento(jogadorEntity.getDataNascimento())
-				.posicao(jogadorEntity.getPosicao())
+				.idade(jogadorEntity.getIdade())
+				.posicao(jogadorEntity.getPosicao().name())
 				.clube(jogadorEntity.getClube().getNome())
 				.build();
 	}

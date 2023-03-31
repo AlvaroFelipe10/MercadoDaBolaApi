@@ -1,5 +1,6 @@
 package com.mercadodabola.mercadotransferencia.domain.enums;
 
+
 public enum Posicoes {
 	
 	GK,

@@ -1,7 +1,6 @@
 package com.mercadodabola.mercadotransferencia.api.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorDto;
-import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
 import com.mercadodabola.mercadotransferencia.services.JogadorService;
 
@@ -25,6 +23,7 @@ import com.mercadodabola.mercadotransferencia.services.JogadorService;
 @RestController
 @RequestMapping(value = "/jogadores")
 public class JogadorController {
+	
 	
 	
 	@Autowired

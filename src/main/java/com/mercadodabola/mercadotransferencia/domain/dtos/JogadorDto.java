@@ -18,6 +18,7 @@ public class JogadorDto {
 	private Long id;
 	private String nome;
 	private String dataNascimento;
+	private int idade;
 	private String posicao;
 	private String clube;
 	

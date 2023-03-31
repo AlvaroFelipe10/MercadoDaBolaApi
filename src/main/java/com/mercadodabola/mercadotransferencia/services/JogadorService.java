@@ -10,11 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.mercadodabola.mercadotransferencia.domain.converters.JogadorConverter;
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
-import com.mercadodabola.mercadotransferencia.domain.exception.ClubeNaoEncontradoException;
-import com.mercadodabola.mercadotransferencia.domain.exception.NegocioException;
+import com.mercadodabola.mercadotransferencia.domain.enums.Posicoes;
 import com.mercadodabola.mercadotransferencia.repositories.JogadorRepository;
 
 @Service
@@ -48,15 +49,14 @@ public class JogadorService {
 			return ResponseEntity.ok(jogadorConverter.toJogadorDto(jogador.get()));
 		}
 		return ResponseEntity.notFound().build();
+	}	
+	
+	
+	
+	public JogadorEntity adicionar(JogadorEntity jogadorEntity) {
+		return jogadorRepository.save(jogadorEntity);
 	}
-	
-	
-	public JogadorEntity cadastrar(JogadorEntity jogador) {
-		try {
-			return jogadorRepository.save(jogador);
-		} catch (ClubeNaoEncontradoException e) {
-			throw new NegocioException(e.getMessage());
-		}
-	}
-	
 }
+
+
+	

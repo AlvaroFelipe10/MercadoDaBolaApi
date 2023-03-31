@@ -2,6 +2,8 @@ package com.mercadodabola.mercadotransferencia.domain.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +14,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.mercadodabola.mercadotransferencia.domain.enums.Posicoes;
 import com.mercadodabola.mercadotransferencia.services.ClubeService;
 
 import lombok.Data;
@@ -21,6 +24,8 @@ import lombok.EqualsAndHashCode;
 @Entity(name = "jogador")
 public class JogadorEntity {
 
+
+	
 	@EqualsAndHashCode.Include
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,11 +34,16 @@ public class JogadorEntity {
 	@Column(nullable = false)
 	private String nome;
 
+	
 	@Column(nullable = false)
 	private String dataNascimento;
 
 	@Column(nullable = false)
-	private String posicao;
+	private int idade;
+	
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	private Posicoes posicao;
 	
 	
 	@Valid
