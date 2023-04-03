@@ -1,5 +1,7 @@
 package com.mercadodabola.mercadotransferencia.domain.converters.impl;
 
+
+
 import org.springframework.stereotype.Component;
 
 import com.mercadodabola.mercadotransferencia.domain.converters.JogadorConverter;
@@ -13,10 +15,12 @@ public class JogadorConverterImpl implements JogadorConverter{
 				.id(jogadorEntity.getId())
 				.nome(jogadorEntity.getNome())
 				.dataNascimento(jogadorEntity.getDataNascimento())
-				.idade(jogadorEntity.getIdade())
 				.posicao(jogadorEntity.getPosicao().name())
 				.clube(jogadorEntity.getClube().getNome())
 				.build();
+		
+
+		
 	}
 
 }

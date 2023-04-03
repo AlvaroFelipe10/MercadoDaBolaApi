@@ -1,11 +1,6 @@
 package com.mercadodabola.mercadotransferencia.domain.dtos;
 
-import java.util.List;
-
-import org.springframework.beans.BeanUtils;
-
-import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
-import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
+import java.time.LocalDate;
 
 import lombok.Builder;
 import lombok.Data;
@@ -17,8 +12,7 @@ public class JogadorDto {
 	
 	private Long id;
 	private String nome;
-	private String dataNascimento;
-	private int idade;
+	private LocalDate dataNascimento;
 	private String posicao;
 	private String clube;
 	

@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
+import com.mercadodabola.mercadotransferencia.domain.exception.JogadorNaoEncontradoException;
+import com.mercadodabola.mercadotransferencia.domain.exception.NegocioException;
 import com.mercadodabola.mercadotransferencia.services.JogadorService;
 
 
@@ -42,7 +44,11 @@ public class JogadorController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public JogadorEntity cadastrar(@RequestBody @Valid JogadorEntity jogador) {
-		return jogadorService.salvar(jogador);
+		try {
+			return jogadorService.salvar(jogador);
+		}catch (JogadorNaoEncontradoException e) {
+			throw new NegocioException(e.getMessage());
+		}
 	}
 	
 }

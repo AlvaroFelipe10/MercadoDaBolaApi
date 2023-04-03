@@ -31,6 +31,7 @@ public class ClubeController {
 		return clubeService.listar();
 	}
 	
+	
 	@GetMapping("/{clubeId}")
 	public ResponseEntity<ClubeEntity> buscar(@PathVariable Long clubeId){
 		return clubeService.buscar(clubeId);
