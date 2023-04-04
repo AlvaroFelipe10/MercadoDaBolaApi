@@ -44,11 +44,14 @@ public class JogadorController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public JogadorEntity cadastrar(@RequestBody @Valid JogadorEntity jogador) {
-		try {
+//		try {
 			return jogadorService.salvar(jogador);
-		}catch (JogadorNaoEncontradoException e) {
-			throw new NegocioException(e.getMessage());
-		}
+//		}catch (JogadorNaoEncontradoException e) {
+//			throw new NegocioException(e.getMessage());
+//		}
 	}
+	
+	
+	
 	
 }

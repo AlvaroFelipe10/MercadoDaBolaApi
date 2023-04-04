@@ -1,21 +1,16 @@
 package com.mercadodabola.mercadotransferencia.domain.entities;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonRootName;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -36,9 +31,12 @@ public class ClubeEntity {
 	@Column(nullable = false)
 	private BigDecimal caixa;
 
-	@JsonIgnore
+//	@JsonIgnore
 	//@JsonIgnoreProperties(value="clube", allowSetters = true)
-	@OneToMany(mappedBy = "clube")
-	private List<JogadorEntity> jogadores = new ArrayList<>();
+//	@OneToMany(mappedBy = "clube")
+//	private List<JogadorEntity> jogadores = new ArrayList<>();
 
+	@JsonIgnore
+	@OneToMany(mappedBy = "clube")
+	private  List<ContratoEntity> contrato;
 }
