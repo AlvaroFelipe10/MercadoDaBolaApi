@@ -41,20 +41,16 @@ public class JogadorService {
 
 
 	public JogadorEntity salvar(JogadorEntity jogador) {
-		JogadorDto objeto = null;
-		JogadorDto objetoInstanciado = JogadorDto.builder().build();
 		
-		return null;
 //		Long clubeId = jogador.getClube().getId();
 //		ClubeEntity clube = clubeRepository.findById(clubeId).orElseThrow(() -> new ClubeNaoEncontradoException(
 //				String.format("Não existe um cadastro de clube com o código %d", clubeId)));
 //		jogador.setClube(clube);
-//		if(calculaIdade.isIdadeValida(jogador.getDataNascimento())){
-//			return jogadorRepository.save(jogador);
-//		}else { 
-//			throw new IdadeNaoPermitadaException(calculaIdade.getIdade(jogador.getDataNascimento()));
-//			
-//		}
+		if(calculaIdade.isIdadeValida(jogador.getDataNascimento())){
+			return jogadorRepository.save(jogador);
+		}else { 
+		throw new IdadeNaoPermitadaException(calculaIdade.getIdade(jogador.getDataNascimento()));
+		}
 	}
 
 	public List<JogadorDto> listar() {

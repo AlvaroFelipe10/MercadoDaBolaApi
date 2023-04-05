@@ -18,7 +18,7 @@ public class CalculaIdade {
 
 		Long diferencaDatas = dateAtualMs - dateNascimentoMs;
 		return diferencaDatas / 1000 / 60 / 60 / 24 / 365;
-
+		
 	}
 	
 	public Boolean isIdadeValida(LocalDate dataNascimento) {

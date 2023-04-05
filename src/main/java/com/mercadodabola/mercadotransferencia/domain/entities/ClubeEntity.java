@@ -1,6 +1,7 @@
 package com.mercadodabola.mercadotransferencia.domain.entities;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -32,7 +34,7 @@ public class ClubeEntity {
 	private BigDecimal caixa;
 
 //	@JsonIgnore
-	//@JsonIgnoreProperties(value="clube", allowSetters = true)
+//	@JsonIgnoreProperties(value="clube", allowSetters = true)
 //	@OneToMany(mappedBy = "clube")
 //	private List<JogadorEntity> jogadores = new ArrayList<>();
 

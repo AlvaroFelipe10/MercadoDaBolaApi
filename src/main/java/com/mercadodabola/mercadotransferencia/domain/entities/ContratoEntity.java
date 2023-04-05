@@ -46,6 +46,7 @@ public class ContratoEntity {
 	private BigDecimal salario;
 	
 	@OneToOne
+	@JoinColumn(name = "jogador_id", nullable = false)
 	private JogadorEntity Jogador;
 	
 	@Valid
