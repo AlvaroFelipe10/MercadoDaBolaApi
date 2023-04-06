@@ -1,6 +1,9 @@
 package com.mercadodabola.mercadotransferencia.domain.dtos;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+
+import javax.validation.constraints.NotNull;
 
 import com.mercadodabola.mercadotransferencia.domain.entities.ContratoEntity;
 import com.mercadodabola.mercadotransferencia.domain.util.CalculaIdade;
@@ -14,14 +17,12 @@ import lombok.Data;
 public class JogadorDto {
 	
 	
-	private CalculaIdade idade;
+
 	private Long id;
 	private String nome;
-	private LocalDate dataNascimento;
+	private Long idade;
 	private String posicao;
-	private ContratoEntity contrato;
 	private String multa;
-	private LocalDate dataInicio;
-	private LocalDate dataTermino;
+	private Long TempoContrato;
 	
 }

@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.mercadodabola.mercadotransferencia.domain.util.CalculaTempoContrato;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -32,12 +33,12 @@ public class ContratoEntity {
 	@NotNull
 	@JsonDeserialize(as = LocalDate.class)
 	@Column(nullable = false)
-	private	String dataInicio;
+	private	LocalDate dataInicio;
 	
 	@NotNull
 	@JsonDeserialize(as = LocalDate.class)
 	@Column(nullable = false)
-	private String dataTermino;
+	private LocalDate dataTermino;
 	
 	@Column(nullable = false)
 	private BigDecimal valorMulta;
@@ -48,6 +49,7 @@ public class ContratoEntity {
 	@OneToOne
 	@JoinColumn(name = "jogador_id", nullable = false)
 	private JogadorEntity Jogador;
+	
 	
 	@Valid
 	@NotNull

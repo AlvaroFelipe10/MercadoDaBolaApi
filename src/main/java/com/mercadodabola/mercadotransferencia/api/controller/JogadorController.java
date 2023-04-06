@@ -27,7 +27,6 @@ import com.mercadodabola.mercadotransferencia.services.JogadorService;
 public class JogadorController {
 	
 	
-	
 	@Autowired
 	private JogadorService jogadorService;
 	

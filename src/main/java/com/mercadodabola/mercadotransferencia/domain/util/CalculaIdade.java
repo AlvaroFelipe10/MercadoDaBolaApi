@@ -17,6 +17,7 @@ public class CalculaIdade {
 		Long dateAtualMs = dataAtual.getTime();
 
 		Long diferencaDatas = dateAtualMs - dateNascimentoMs;
+		
 		return diferencaDatas / 1000 / 60 / 60 / 24 / 365;
 		
 	}
@@ -29,5 +30,5 @@ public class CalculaIdade {
 		return true;
 	}
 
-
+	
 }

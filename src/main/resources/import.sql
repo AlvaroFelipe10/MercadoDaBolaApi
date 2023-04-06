@@ -35,32 +35,32 @@ insert into jogador (id, data_nascimento, nome, posicao) values (19, '1993.05.06
 insert into jogador (id, data_nascimento, nome, posicao) values (20, '1987.06.06', 'Cássio Ramos', 'GK');
 
 #CONTRATO FLAMENGO
-insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (1, '21.01.2022', '21.01.2024', 15000, 30000, 1, 1);
-insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (2, '21.03.2022', '21.03.2024', 17000, 35000, 1, 2);
-insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (3, '23.04.2022', '22.04.2024', 10000, 25000, 1, 3);
-insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (4, '24.03.2022', '25.03.2024', 11000, 22000, 1, 4);
-insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (5, '28.03.2022', '26.03.2024', 14000, 29000, 1, 5);
+insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (1, '2022.01.21', '2024.01.21', 15000, 30000, 1, 1);
+insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (2, '2022.01.22', '2024.01.22', 17000, 35000, 1, 2);
+insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (3, '2022.01.23', '2024.01.23', 10000, 25000, 1, 3);
+insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (4, '2022.01.24', '2024.01.24', 11000, 22000, 1, 4);
+insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (5, '2022.01.25', '2024.01.25', 14000, 29000, 1, 5);
 
 #CONTRATO SÃO PAULO 
-insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (6, '21.01.2022', '21.01.2024', 15000, 30000, 2, 6);
-insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (7, '21.03.2022', '21.03.2024', 17000, 35000, 2, 7);
-insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (8, '23.04.2022', '22.04.2024', 10000, 25000, 2, 8);
-insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (9, '24.03.2022', '25.03.2024', 11000, 22000, 2, 9);
-insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (10, '28.03.2022', '26.03.2024', 14000, 29000, 2, 10);
+insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (6, '2022.01.21', '2024.01.21', 15000, 30000, 2, 6);
+insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (7, '2022.01.22', '2024.01.22', 17000, 35000, 2, 7);
+insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (8, '2022.01.23', '2024.01.23', 10000, 25000, 2, 8);
+insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (9, '2022.01.24', '2024.01.24', 11000, 22000, 2, 9);
+insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (10, '2022.01.25', '2024.01.25', 14000, 29000, 2, 10);
 
 #CONTRATO PALMEIRAS
-insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (11, '21.01.2022', '21.01.2024', 15000, 30000, 3, 11);
-insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (12, '21.03.2022', '21.03.2024', 17000, 35000, 3, 12);
-insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (13, '23.04.2022', '22.04.2024', 10000, 25000, 3, 13);
-insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (14, '24.03.2022', '25.03.2024', 11000, 22000, 3, 14);
-insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (15, '28.03.2022', '26.03.2024', 14000, 29000, 3, 15);
+insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (11, '2022.01.21', '2024.01.21', 15000, 30000, 3, 11);
+insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (12, '2022.01.22', '2024.01.22', 17000, 35000, 3, 12);
+insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (13, '2022.01.23', '2024.01.23', 10000, 25000, 3, 13);
+insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (14, '2022.01.24', '2024.01.24', 11000, 22000, 3, 14);
+insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (15, '2022.01.25', '2024.01.25', 14000, 29000, 3, 15);
 
 #CONTRATO CORINTHIANS
-insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (16, '21.01.2022', '21.01.2024', 15000, 30000, 4, 16);
-insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (17, '21.03.2022', '21.03.2024', 17000, 35000, 4, 17);
-insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (18, '23.04.2022', '22.04.2024', 10000, 25000, 4, 18);
-insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (19, '24.03.2022', '25.03.2024', 11000, 22000, 4, 19);
-insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (20, '28.03.2022', '26.03.2024', 14000, 29000, 4, 20);
+insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (16, '2022.01.21', '2024.01.21', 15000, 30000, 4, 16);
+insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (17, '2022.01.22', '2024.01.22', 17000, 35000, 4, 17);
+insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (18, '2022.01.23', '2024.01.23', 10000, 25000, 4, 18);
+insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (19, '2022.01.24', '2024.01.24', 11000, 22000, 4, 19);
+insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (20, '2022.01.25', '2024.01.25', 14000, 29000, 4, 20);
 
 #ATUALIZAÇÃO PARA INSERIR ID
 update jogador set contrato_id = 1 where id = 1;

@@ -1,10 +1,6 @@
 package com.mercadodabola.mercadotransferencia.services;
 
-import java.time.LocalDate;
-import java.time.Year;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,12 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.mercadodabola.mercadotransferencia.domain.converters.JogadorConverter;
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorDto;
-import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
-import com.mercadodabola.mercadotransferencia.domain.exception.ClubeNaoEncontradoException;
 import com.mercadodabola.mercadotransferencia.domain.exception.IdadeNaoPermitadaException;
-import com.mercadodabola.mercadotransferencia.domain.exception.NegocioException;
 import com.mercadodabola.mercadotransferencia.domain.util.CalculaIdade;
+import com.mercadodabola.mercadotransferencia.domain.util.CalculaTempoContrato;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
 import com.mercadodabola.mercadotransferencia.repositories.JogadorRepository;
 
@@ -38,6 +32,9 @@ public class JogadorService {
 
 	@Autowired
 	private CalculaIdade calculaIdade;
+	
+	@Autowired
+	private CalculaTempoContrato calculaTempo;
 
 
 	public JogadorEntity salvar(JogadorEntity jogador) {
