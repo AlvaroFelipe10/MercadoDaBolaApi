@@ -35,7 +35,8 @@ public class JogadorConverterImpl implements JogadorConverter{
 		
 		
 		retorno.setIdade(calculaIdade.getIdade(jogadorEntity.getDataNascimento()));
-		retorno.setTempoContrato(calculaContrato);
+
+		retorno.setTempoContrato(calculaContrato.getTempoRestante(jogadorEntity.getContrato().getDataInicio(),jogadorEntity.getContrato().getDataTermino() ));
 		
 		if(jogadorEntity.getContrato() != null) {
 			retorno.setMulta(valorReal(jogadorEntity.getContrato().getValorMulta()));;

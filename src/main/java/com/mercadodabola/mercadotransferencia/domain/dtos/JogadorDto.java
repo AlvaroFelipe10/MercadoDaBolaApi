@@ -23,6 +23,6 @@ public class JogadorDto {
 	private Long idade;
 	private String posicao;
 	private String multa;
-	private Long TempoContrato;
+	private String TempoContrato;
 	
 }

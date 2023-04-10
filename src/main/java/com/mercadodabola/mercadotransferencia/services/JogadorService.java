@@ -48,7 +48,9 @@ public class JogadorService {
 		}else { 
 		throw new IdadeNaoPermitadaException(calculaIdade.getIdade(jogador.getDataNascimento()));
 		}
-	}
+		
+		}
+	
 
 	public List<JogadorDto> listar() {
 		List<JogadorDto> retorno = new ArrayList<>();

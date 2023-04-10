@@ -35,7 +35,7 @@ insert into jogador (id, data_nascimento, nome, posicao) values (19, '1993.05.06
 insert into jogador (id, data_nascimento, nome, posicao) values (20, '1987.06.06', 'Cássio Ramos', 'GK');
 
 #CONTRATO FLAMENGO
-insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (1, '2022.01.21', '2024.01.21', 15000, 30000, 1, 1);
+insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (1, '2022.01.21', '2023.02.21', 15000, 30000, 1, 1);
 insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (2, '2022.01.22', '2024.01.22', 17000, 35000, 1, 2);
 insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (3, '2022.01.23', '2024.01.23', 10000, 25000, 1, 3);
 insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (4, '2022.01.24', '2024.01.24', 11000, 22000, 1, 4);
