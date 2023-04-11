@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorDto;
+import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorListDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
 import com.mercadodabola.mercadotransferencia.domain.exception.JogadorNaoEncontradoException;
 import com.mercadodabola.mercadotransferencia.domain.exception.NegocioException;
@@ -30,8 +31,9 @@ public class JogadorController {
 	@Autowired
 	private JogadorService jogadorService;
 	
-	@GetMapping
-	public List<JogadorDto> listar(){
+	
+	@GetMapping("/jogadores/por-nome")
+	public List<JogadorListDto> listar(){
 		return jogadorService.listar();
 	}
 	
@@ -39,6 +41,7 @@ public class JogadorController {
 	public ResponseEntity<JogadorDto> buscar(@PathVariable Long jogadorId){
 		return jogadorService.buscar(jogadorId);
 	}
+	
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)

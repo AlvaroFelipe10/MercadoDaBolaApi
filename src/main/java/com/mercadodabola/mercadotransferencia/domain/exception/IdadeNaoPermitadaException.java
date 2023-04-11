@@ -8,7 +8,7 @@ public class IdadeNaoPermitadaException extends NegocioException {
 		super(mensagem);
 	}
 	
-	public IdadeNaoPermitadaException(Long idade) {
+	public IdadeNaoPermitadaException(Integer idade) {
 		this(String.format("Idade não permitada %d", idade));
 	}
 

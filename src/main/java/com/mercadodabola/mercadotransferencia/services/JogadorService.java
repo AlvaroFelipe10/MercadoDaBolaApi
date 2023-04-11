@@ -10,8 +10,11 @@ import org.springframework.stereotype.Service;
 
 import com.mercadodabola.mercadotransferencia.domain.converters.JogadorConverter;
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorDto;
+import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorListDto;
+import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
 import com.mercadodabola.mercadotransferencia.domain.exception.IdadeNaoPermitadaException;
+import com.mercadodabola.mercadotransferencia.domain.exception.PeriodoContratoInvalidoException;
 import com.mercadodabola.mercadotransferencia.domain.util.CalculaIdade;
 import com.mercadodabola.mercadotransferencia.domain.util.CalculaTempoContrato;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
@@ -38,29 +41,32 @@ public class JogadorService {
 
 
 	public JogadorEntity salvar(JogadorEntity jogador) {
-		
+//		
 //		Long clubeId = jogador.getClube().getId();
 //		ClubeEntity clube = clubeRepository.findById(clubeId).orElseThrow(() -> new ClubeNaoEncontradoException(
 //				String.format("Não existe um cadastro de clube com o código %d", clubeId)));
 //		jogador.setClube(clube);
+		
 		if(calculaIdade.isIdadeValida(jogador.getDataNascimento())){
 			return jogadorRepository.save(jogador);
-		}else { 
+		}else  { 
 		throw new IdadeNaoPermitadaException(calculaIdade.getIdade(jogador.getDataNascimento()));
 		}
 		
 		}
 	
-
-	public List<JogadorDto> listar() {
-		List<JogadorDto> retorno = new ArrayList<>();
+	
+	public List<JogadorListDto> listar() {
+		List<JogadorListDto> retorno = new ArrayList<>();
 		List<JogadorEntity> listEntity = jogadorRepository.findAll();
+		
 		listEntity.forEach(jogadorEntity -> {
-			JogadorDto dto = jogadorConverter.toJogadorDto(jogadorEntity);
+			JogadorListDto dto = jogadorConverter.listToJogadorDto(jogadorEntity);
 			retorno.add(dto);
 		});
 		return retorno;
 	}
+	
 
 	public ResponseEntity<JogadorDto> buscar(Long jogadorId) {
 		Optional<JogadorEntity> jogador = jogadorRepository.findById(jogadorId);

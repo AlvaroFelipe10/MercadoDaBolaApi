@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import com.mercadodabola.mercadotransferencia.domain.converters.JogadorConverter;
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorDto;
+import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorListDto;
+import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ContratoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
 import com.mercadodabola.mercadotransferencia.domain.util.CalculaIdade;
@@ -30,7 +32,7 @@ public class JogadorConverterImpl implements JogadorConverter{
 		JogadorDto retorno = JogadorDto.builder()
 									.id(jogadorEntity.getId())
 									.nome(jogadorEntity.getNome())
-									.posicao(jogadorEntity.getPosicao().name())
+									.posicao(jogadorEntity.getPosicao())
 									.build();
 		
 		
@@ -44,15 +46,16 @@ public class JogadorConverterImpl implements JogadorConverter{
 		return retorno;	
 	}
 	
-	
 
-//	private Long calculo(LocalDate dataNascimento) {
-//		CalculaIdade calculaIdade = new CalculaIdade();
-//		calculaIdade.getIdade(dataNascimento);
-//		Long idade = calculaIdade.getIdade(dataNascimento);
-//		return idade;
-//	}
-	
+	public JogadorListDto listToJogadorDto(JogadorEntity jogadorEntity) {
+		JogadorListDto retorno = JogadorListDto.builder()
+				.nome(jogadorEntity.getNome())
+				.posicao(jogadorEntity.getPosicao().name())
+				.build();
+		retorno.setClube(jogadorEntity.getContrato().getClube().getNome());
+		return retorno;
+		
+	}
 
 	private String valorReal(BigDecimal multa) {
 		DecimalFormat decFormat = new DecimalFormat("#,###,##0.00");
