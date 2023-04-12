@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
-import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
 
 @Service
@@ -16,6 +15,8 @@ public class ClubeService {
 
 	@Autowired
 	private ClubeRepository clubesRepository;
+	
+	
 	
 	public List<ClubeEntity> listar(){
 		return clubesRepository.findAll();

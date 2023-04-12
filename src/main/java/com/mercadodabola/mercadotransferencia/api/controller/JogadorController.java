@@ -32,10 +32,11 @@ public class JogadorController {
 	private JogadorService jogadorService;
 	
 	
-	@GetMapping("/jogadores/por-nome")
-	public List<JogadorListDto> listar(){
-		return jogadorService.listar();
+	@GetMapping("/por-nome")
+	public List<JogadorListDto> listar(String nome){
+		return jogadorService.listar(nome);
 	}
+	
 	
 	@GetMapping("/{jogadorId}")
 	public ResponseEntity<JogadorDto> buscar(@PathVariable Long jogadorId){

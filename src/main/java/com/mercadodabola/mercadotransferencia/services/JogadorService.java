@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorListDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
 import com.mercadodabola.mercadotransferencia.domain.exception.IdadeNaoPermitadaException;
+import com.mercadodabola.mercadotransferencia.domain.exception.NegocioException;
 import com.mercadodabola.mercadotransferencia.domain.exception.PeriodoContratoInvalidoException;
 import com.mercadodabola.mercadotransferencia.domain.util.CalculaIdade;
 import com.mercadodabola.mercadotransferencia.domain.util.CalculaTempoContrato;
@@ -32,13 +34,11 @@ public class JogadorService {
 	@Autowired
 	private ClubeRepository clubeRepository;
 
-
 	@Autowired
 	private CalculaIdade calculaIdade;
-	
+
 	@Autowired
 	private CalculaTempoContrato calculaTempo;
-
 
 	public JogadorEntity salvar(JogadorEntity jogador) {
 //		
@@ -46,27 +46,31 @@ public class JogadorService {
 //		ClubeEntity clube = clubeRepository.findById(clubeId).orElseThrow(() -> new ClubeNaoEncontradoException(
 //				String.format("Não existe um cadastro de clube com o código %d", clubeId)));
 //		jogador.setClube(clube);
-		
-		if(calculaIdade.isIdadeValida(jogador.getDataNascimento())){
+
+		if (calculaIdade.isIdadeValida(jogador.getDataNascimento())) {
 			return jogadorRepository.save(jogador);
-		}else  { 
-		throw new IdadeNaoPermitadaException(calculaIdade.getIdade(jogador.getDataNascimento()));
+		} else {
+			throw new IdadeNaoPermitadaException(calculaIdade.getIdade(jogador.getDataNascimento()));
 		}
-		
-		}
-	
-	
-	public List<JogadorListDto> listar() {
+
+	}
+
+	public List<JogadorListDto> listar(String nome) {
+
 		List<JogadorListDto> retorno = new ArrayList<>();
-		List<JogadorEntity> listEntity = jogadorRepository.findAll();
-		
-		listEntity.forEach(jogadorEntity -> {
-			JogadorListDto dto = jogadorConverter.listToJogadorDto(jogadorEntity);
-			retorno.add(dto);
-		});
+
+		if (StringUtils.isEmpty(nome) || nome.length() < 3) {
+			throw new NegocioException("Passar no mínimo 3 letras no nome");
+		} else {
+			List<JogadorEntity> listEntity = jogadorRepository.findTodosByNomeContaining(nome.trim());
+			listEntity.forEach(jogadorEntity -> {
+				JogadorListDto dto = jogadorConverter.listToJogadorDto(jogadorEntity);
+				retorno.add(dto);
+			});
+		}
+
 		return retorno;
 	}
-	
 
 	public ResponseEntity<JogadorDto> buscar(Long jogadorId) {
 		Optional<JogadorEntity> jogador = jogadorRepository.findById(jogadorId);

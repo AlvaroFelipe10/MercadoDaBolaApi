@@ -23,6 +23,7 @@ import com.mercadodabola.mercadotransferencia.domain.enums.Posicoes;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity(name = "jogador")
 public class JogadorEntity {

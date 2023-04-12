@@ -8,5 +8,5 @@ public interface JogadorConverter {
 	public JogadorDto toJogadorDto(JogadorEntity jogadorEntity);
 
 	public JogadorListDto listToJogadorDto(JogadorEntity jogadorEntity);
-
+	
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.mercadodabola.mercadotransferencia.domain.converters.JogadorConverter;
+import com.mercadodabola.mercadotransferencia.domain.dtos.ClubeDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorListDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
@@ -46,6 +47,16 @@ public class JogadorConverterImpl implements JogadorConverter{
 		return retorno;	
 	}
 	
+//	public JogadorListDto listToJogadorDto(String nome) {
+//		JogadorEntity jogadorEntity = new JogadorEntity();
+//		JogadorListDto retorno = JogadorListDto.builder()
+//				.nome(jogadorEntity.getNome())
+//				.posicao(jogadorEntity.getPosicao().name())
+//				.build();
+//		retorno.setClube(jogadorEntity.getContrato().getClube().getNome());
+//		return retorno;
+//		
+//	}
 
 	public JogadorListDto listToJogadorDto(JogadorEntity jogadorEntity) {
 		JogadorListDto retorno = JogadorListDto.builder()
@@ -53,9 +64,10 @@ public class JogadorConverterImpl implements JogadorConverter{
 				.posicao(jogadorEntity.getPosicao().name())
 				.build();
 		retorno.setClube(jogadorEntity.getContrato().getClube().getNome());
-		return retorno;
 		
+		return retorno;
 	}
+	
 
 	private String valorReal(BigDecimal multa) {
 		DecimalFormat decFormat = new DecimalFormat("#,###,##0.00");
