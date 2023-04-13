@@ -3,10 +3,10 @@ package com.mercadodabola.mercadotransferencia.api.controller;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mercadodabola.mercadotransferencia.domain.dtos.ClubeDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
-import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
 import com.mercadodabola.mercadotransferencia.services.ClubeService;
+import com.mercadodabola.mercadotransferencia.services.JogadorService;
 
 @RestController
 @RequestMapping("/clubes")
@@ -27,15 +27,21 @@ public class ClubeController {
 	@Autowired
 	private ClubeService clubeService;
 	
+	@Autowired
+	private JogadorService jogadorService;
+	
 	@GetMapping
 	public List<ClubeEntity> listar(){
 		return clubeService.listar();
 	}
 	
-	
 	@GetMapping("/{clubeId}")
-	public ResponseEntity<ClubeEntity> buscar(@PathVariable Long clubeId){
-		return clubeService.buscar(clubeId);
+	public List<ClubeDto> listaJogador(@PathVariable Long clubeId){
+		return jogadorService.listaJogador(clubeId);
+	
+//	@GetMapping("/{clubeId}")
+//	public ResponseEntity<ClubeDto> listaJogador(@PathVariable Long clubeId){
+//		return clubeService.buscar(clubeId);
 	}
 	
 	@PostMapping

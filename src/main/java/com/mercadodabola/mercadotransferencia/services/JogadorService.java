@@ -10,16 +10,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.mercadodabola.mercadotransferencia.domain.converters.JogadorConverter;
+import com.mercadodabola.mercadotransferencia.domain.dtos.ClubeDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorListDto;
-import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
+import com.mercadodabola.mercadotransferencia.domain.entities.ContratoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
 import com.mercadodabola.mercadotransferencia.domain.exception.IdadeNaoPermitadaException;
 import com.mercadodabola.mercadotransferencia.domain.exception.NegocioException;
-import com.mercadodabola.mercadotransferencia.domain.exception.PeriodoContratoInvalidoException;
 import com.mercadodabola.mercadotransferencia.domain.util.CalculaIdade;
 import com.mercadodabola.mercadotransferencia.domain.util.CalculaTempoContrato;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
+import com.mercadodabola.mercadotransferencia.repositories.ContratoRepository;
 import com.mercadodabola.mercadotransferencia.repositories.JogadorRepository;
 
 @Service
@@ -33,6 +34,9 @@ public class JogadorService {
 
 	@Autowired
 	private ClubeRepository clubeRepository;
+	
+	@Autowired
+	private ContratoRepository contratoRepository;
 
 	@Autowired
 	private CalculaIdade calculaIdade;
@@ -56,9 +60,7 @@ public class JogadorService {
 	}
 
 	public List<JogadorListDto> listar(String nome) {
-
 		List<JogadorListDto> retorno = new ArrayList<>();
-
 		if (StringUtils.isEmpty(nome) || nome.length() < 3) {
 			throw new NegocioException("Passar no mínimo 3 letras no nome");
 		} else {
@@ -68,10 +70,19 @@ public class JogadorService {
 				retorno.add(dto);
 			});
 		}
-
 		return retorno;
 	}
-
+	
+	public List<ClubeDto> listaJogador(Long clubeId){
+		List<ClubeDto> retorno = new ArrayList<>();
+		List<ContratoEntity> listEntity = contratoRepository.findByClubeId(clubeId);
+		listEntity.forEach(contratoEntity -> { ClubeDto dto = jogadorConverter.listToClube(contratoEntity);
+				retorno.add(dto);
+				});
+		
+		return retorno;
+	}
+	
 	public ResponseEntity<JogadorDto> buscar(Long jogadorId) {
 		Optional<JogadorEntity> jogador = jogadorRepository.findById(jogadorId);
 		if (jogador != null) {
@@ -80,4 +91,5 @@ public class JogadorService {
 		return ResponseEntity.notFound().build();
 	}
 
+	
 }

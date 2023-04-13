@@ -9,7 +9,6 @@ import lombok.Data;
 @Data
 public class ClubeDto {
 	
-	
 	private String nomeJogador;
 	private Posicoes posicao;
 	

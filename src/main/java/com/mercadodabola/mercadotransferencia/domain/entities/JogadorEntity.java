@@ -4,6 +4,7 @@ package com.mercadodabola.mercadotransferencia.domain.entities;
 
 import java.time.LocalDate;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -16,13 +17,15 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.stereotype.Component;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.mercadodabola.mercadotransferencia.domain.enums.Posicoes;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
+@Component
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity(name = "jogador")

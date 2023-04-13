@@ -9,32 +9,37 @@ import org.springframework.stereotype.Service;
 
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
+import com.mercadodabola.mercadotransferencia.repositories.ContratoRepository;
 
 @Service
 public class ClubeService {
 
 	@Autowired
-	private ClubeRepository clubesRepository;
+	private ClubeRepository clubeRepository;
 	
+	@Autowired 
+	private ContratoRepository contratoRepository;
 	
 	
 	public List<ClubeEntity> listar(){
-		return clubesRepository.findAll();
+		return clubeRepository.findAll();
 	}
 	
 	public ClubeEntity salvar(ClubeEntity clube) {
-		return clubesRepository.save(clube);
+		return clubeRepository.save(clube);
 	}
 	
-	public ResponseEntity<ClubeEntity> buscar(Long clubeId){
-		Optional<ClubeEntity> clube = clubesRepository.findById(clubeId);
-		
-		if(clube != null) {
-			return ResponseEntity.ok(clube.get());
-		}
-		
-		return ResponseEntity.notFound().build();
-	}
+	
+	
+//	public ResponseEntity<ClubeEntity> buscar(Long clubeId){
+//		Optional<ClubeEntity> clube = clubeRepository.findById(clubeId);
+//	
+//		if(clube != null) {
+//			return ResponseEntity.ok(clube.get());
+//		}
+//		return ResponseEntity.notFound().build();
+//	}
+	
 	
 	
 }

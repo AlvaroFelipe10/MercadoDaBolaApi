@@ -35,8 +35,6 @@ public class JogadorConverterImpl implements JogadorConverter{
 									.nome(jogadorEntity.getNome())
 									.posicao(jogadorEntity.getPosicao())
 									.build();
-		
-		
 		retorno.setIdade(calculaIdade.getIdade(jogadorEntity.getDataNascimento()));
 
 		retorno.setTempoContrato(calculaContrato.getTempoRestante(jogadorEntity.getContrato().getDataInicio(),jogadorEntity.getContrato().getDataTermino() ));
@@ -68,11 +66,21 @@ public class JogadorConverterImpl implements JogadorConverter{
 		return retorno;
 	}
 	
+	public ClubeDto listToClube(ContratoEntity contratoEntity) {
+		ClubeDto retorno = ClubeDto.builder()
+				.nomeJogador(contratoEntity.getJogador().getNome())
+				.posicao(contratoEntity.getJogador().getPosicao())
+				.build();
+		return retorno;
+	}
 
 	private String valorReal(BigDecimal multa) {
 		DecimalFormat decFormat = new DecimalFormat("#,###,##0.00");
 		return decFormat.format(multa);
 		
 	}
+
+	
+	
 
 }

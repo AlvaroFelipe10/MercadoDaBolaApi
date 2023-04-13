@@ -8,4 +8,5 @@ import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 @Repository
 public interface ClubeRepository extends JpaRepository<ClubeEntity, Long>{
 
+	
 }
