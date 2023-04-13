@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Builder
 @Data
-public class ClubeDto {
+public class ListaJogadorPorClubeIdDto {
 	
 	private String nomeJogador;
 	private Posicoes posicao;

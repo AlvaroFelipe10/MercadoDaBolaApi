@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.mercadodabola.mercadotransferencia.domain.converters.JogadorConverter;
-import com.mercadodabola.mercadotransferencia.domain.dtos.ClubeDto;
+import com.mercadodabola.mercadotransferencia.domain.dtos.ListaJogadorPorClubeIdDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorListDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
@@ -66,10 +66,10 @@ public class JogadorConverterImpl implements JogadorConverter{
 		return retorno;
 	}
 	
-	public ClubeDto listToClube(ContratoEntity contratoEntity) {
-		ClubeDto retorno = ClubeDto.builder()
-				.nomeJogador(contratoEntity.getJogador().getNome())
-				.posicao(contratoEntity.getJogador().getPosicao())
+	public ListaJogadorPorClubeIdDto listToJogadorPorIdClube(JogadorEntity jogadorEntity) {
+		ListaJogadorPorClubeIdDto retorno = ListaJogadorPorClubeIdDto.builder()
+				.nomeJogador(jogadorEntity.getNome())
+				.posicao(jogadorEntity.getPosicao())
 				.build();
 		return retorno;
 	}

@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.mercadodabola.mercadotransferencia.domain.converters.JogadorConverter;
-import com.mercadodabola.mercadotransferencia.domain.dtos.ClubeDto;
+import com.mercadodabola.mercadotransferencia.domain.dtos.ListaJogadorPorClubeIdDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorListDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.ContratoEntity;
@@ -34,7 +34,7 @@ public class JogadorService {
 
 	@Autowired
 	private ClubeRepository clubeRepository;
-	
+
 	@Autowired
 	private ContratoRepository contratoRepository;
 
@@ -72,16 +72,17 @@ public class JogadorService {
 		}
 		return retorno;
 	}
-	
-	public List<ClubeDto> listaJogador(Long clubeId){
-		List<ClubeDto> retorno = new ArrayList<>();
+
+	public List<ListaJogadorPorClubeIdDto> listaJogadorPorIdClube(Long clubeId) {
+		List<ListaJogadorPorClubeIdDto> retorno = new ArrayList<>();
 		List<ContratoEntity> listEntity = contratoRepository.findByClubeId(clubeId);
-		listEntity.forEach(contratoEntity -> { ClubeDto dto = jogadorConverter.listToClube(contratoEntity);
-				retorno.add(dto);
-				});
-		
+		listEntity.forEach(contratoEntity -> {
+			ListaJogadorPorClubeIdDto dto = jogadorConverter.listToJogadorPorIdClube(contratoEntity.getJogador());
+			retorno.add(dto);
+		});
 		return retorno;
 	}
+	
 	
 	public ResponseEntity<JogadorDto> buscar(Long jogadorId) {
 		Optional<JogadorEntity> jogador = jogadorRepository.findById(jogadorId);
@@ -91,5 +92,4 @@ public class JogadorService {
 		return ResponseEntity.notFound().build();
 	}
 
-	
 }

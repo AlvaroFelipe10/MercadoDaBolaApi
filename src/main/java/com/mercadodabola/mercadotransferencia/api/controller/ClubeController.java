@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mercadodabola.mercadotransferencia.domain.dtos.ClubeDto;
+import com.mercadodabola.mercadotransferencia.domain.dtos.ListaJogadorPorClubeIdDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.services.ClubeService;
 import com.mercadodabola.mercadotransferencia.services.JogadorService;
@@ -36,8 +36,8 @@ public class ClubeController {
 	}
 	
 	@GetMapping("/{clubeId}")
-	public List<ClubeDto> listaJogador(@PathVariable Long clubeId){
-		return jogadorService.listaJogador(clubeId);
+	public List<ListaJogadorPorClubeIdDto> listaJogador(@PathVariable Long clubeId){
+		return jogadorService.listaJogadorPorIdClube(clubeId);
 	
 //	@GetMapping("/{clubeId}")
 //	public ResponseEntity<ClubeDto> listaJogador(@PathVariable Long clubeId){
