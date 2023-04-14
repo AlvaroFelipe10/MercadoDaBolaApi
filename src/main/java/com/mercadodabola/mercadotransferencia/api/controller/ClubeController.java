@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mercadodabola.mercadotransferencia.domain.dtos.ListaJogadorPorClubeIdDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
+import com.mercadodabola.mercadotransferencia.domain.exception.ClubeNaoEncontradoException;
 import com.mercadodabola.mercadotransferencia.services.ClubeService;
 import com.mercadodabola.mercadotransferencia.services.JogadorService;
 
@@ -36,13 +38,10 @@ public class ClubeController {
 	}
 	
 	@GetMapping("/{clubeId}")
-	public List<ListaJogadorPorClubeIdDto> listaJogador(@PathVariable Long clubeId){
+	public List<ListaJogadorPorClubeIdDto> listaJogador(@PathVariable  Long clubeId){
 		return jogadorService.listaJogadorPorIdClube(clubeId);
-	
-//	@GetMapping("/{clubeId}")
-//	public ResponseEntity<ClubeDto> listaJogador(@PathVariable Long clubeId){
-//		return clubeService.buscar(clubeId);
 	}
+	
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)

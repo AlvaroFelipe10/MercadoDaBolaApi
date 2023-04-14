@@ -13,8 +13,10 @@ import com.mercadodabola.mercadotransferencia.domain.converters.JogadorConverter
 import com.mercadodabola.mercadotransferencia.domain.dtos.ListaJogadorPorClubeIdDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorListDto;
+import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ContratoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
+import com.mercadodabola.mercadotransferencia.domain.exception.ClubeNaoEncontradoException;
 import com.mercadodabola.mercadotransferencia.domain.exception.IdadeNaoPermitadaException;
 import com.mercadodabola.mercadotransferencia.domain.exception.NegocioException;
 import com.mercadodabola.mercadotransferencia.domain.util.CalculaIdade;
@@ -76,12 +78,15 @@ public class JogadorService {
 	public List<ListaJogadorPorClubeIdDto> listaJogadorPorIdClube(Long clubeId) {
 		List<ListaJogadorPorClubeIdDto> retorno = new ArrayList<>();
 		List<ContratoEntity> listEntity = contratoRepository.findByClubeId(clubeId);
+		ClubeEntity clube = clubeRepository.findById(clubeId).orElseThrow(() -> new ClubeNaoEncontradoException(
+				String.format("Não existe um cadastro de clube com o código %d", clubeId)));
+	
 		listEntity.forEach(contratoEntity -> {
 			ListaJogadorPorClubeIdDto dto = jogadorConverter.listToJogadorPorIdClube(contratoEntity.getJogador());
 			retorno.add(dto);
 		});
 		return retorno;
-	}
+		}
 	
 	
 	public ResponseEntity<JogadorDto> buscar(Long jogadorId) {
@@ -92,4 +97,5 @@ public class JogadorService {
 		return ResponseEntity.notFound().build();
 	}
 
+	
 }

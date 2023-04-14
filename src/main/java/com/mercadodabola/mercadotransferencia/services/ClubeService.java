@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
+import com.mercadodabola.mercadotransferencia.domain.exception.ClubeNaoEncontradoException;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ContratoRepository;
 
@@ -30,15 +31,14 @@ public class ClubeService {
 	}
 	
 	
+	public ResponseEntity<ClubeEntity> buscar(Long clubeId){
+		Optional<ClubeEntity> clube = clubeRepository.findById(clubeId);
 	
-//	public ResponseEntity<ClubeEntity> buscar(Long clubeId){
-//		Optional<ClubeEntity> clube = clubeRepository.findById(clubeId);
-//	
-//		if(clube != null) {
-//			return ResponseEntity.ok(clube.get());
-//		}
-//		return ResponseEntity.notFound().build();
-//	}
+		if(clube != null) {
+			return ResponseEntity.ok(clube.get());
+		}
+		return ResponseEntity.notFound().build();
+	}
 	
 	
 	
