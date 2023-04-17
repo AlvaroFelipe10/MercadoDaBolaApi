@@ -15,6 +15,8 @@ import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.stereotype.Component;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.mercadodabola.mercadotransferencia.domain.util.CalculaTempoContrato;
 

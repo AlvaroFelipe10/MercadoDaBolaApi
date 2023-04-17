@@ -37,11 +37,11 @@ public class JogadorEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
+	//@NotBlank
 	@Column(nullable = false)
 	private String nome;
 
-	@NotNull
+	//@NotNull
 	@JsonDeserialize(as = LocalDate.class)
 	@Column(nullable = false)
 	private LocalDate dataNascimento;

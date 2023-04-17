@@ -1,22 +1,27 @@
 package com.mercadodabola.mercadotransferencia.services;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.mercadodabola.mercadotransferencia.domain.converters.JogadorConverter;
 import com.mercadodabola.mercadotransferencia.domain.dtos.ListaJogadorPorClubeIdDto;
+import com.mercadodabola.mercadotransferencia.domain.dtos.TransferenciaJogadorDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorListDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ContratoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
 import com.mercadodabola.mercadotransferencia.domain.exception.ClubeNaoEncontradoException;
+import com.mercadodabola.mercadotransferencia.domain.exception.ContratoNaoEncontradoException;
 import com.mercadodabola.mercadotransferencia.domain.exception.IdadeNaoPermitadaException;
 import com.mercadodabola.mercadotransferencia.domain.exception.NegocioException;
 import com.mercadodabola.mercadotransferencia.domain.util.CalculaIdade;
@@ -39,20 +44,32 @@ public class JogadorService {
 
 	@Autowired
 	private ContratoRepository contratoRepository;
+	
+	@Autowired
+	private ContratoService contratoService;
 
 	@Autowired
 	private CalculaIdade calculaIdade;
 
 	@Autowired
 	private CalculaTempoContrato calculaTempo;
+	
+	private BigDecimal valorTransferencia;
+	
+	public String valorRealTransf(BigDecimal valorTransferencia) {
+		DecimalFormat decFormat = new DecimalFormat("#,###,##0.00");
+		return decFormat.format(valorTransferencia);
+	}
 
 	public JogadorEntity salvar(JogadorEntity jogador) {
-//		
 //		Long clubeId = jogador.getClube().getId();
 //		ClubeEntity clube = clubeRepository.findById(clubeId).orElseThrow(() -> new ClubeNaoEncontradoException(
 //				String.format("Não existe um cadastro de clube com o código %d", clubeId)));
 //		jogador.setClube(clube);
-
+		Long contratoId = jogador.getContrato().getId();
+		ContratoEntity contratoEntity = (contratoService.buscarOuFalhar(contratoId)
+				.orElseThrow(() -> new ContratoNaoEncontradoException(String.format("Não existe um cadastro de contrato com o id %d", contratoId))));
+		
 		if (calculaIdade.isIdadeValida(jogador.getDataNascimento())) {
 			return jogadorRepository.save(jogador);
 		} else {
@@ -96,6 +113,10 @@ public class JogadorService {
 		}
 		return ResponseEntity.notFound().build();
 	}
-
+	
+	
+	
+			
+	
 	
 }

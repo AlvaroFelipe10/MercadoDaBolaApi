@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.mercadodabola.mercadotransferencia.domain.converters.JogadorConverter;
 import com.mercadodabola.mercadotransferencia.domain.dtos.ListaJogadorPorClubeIdDto;
+import com.mercadodabola.mercadotransferencia.domain.dtos.TransferenciaJogadorDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorListDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
@@ -27,6 +28,9 @@ public class JogadorConverterImpl implements JogadorConverter{
 	
 	@Autowired
 	private CalculaTempoContrato calculaContrato;
+	
+	
+	private BigDecimal valorTransferencia;
 	
 	
 	public JogadorDto toJogadorDto(JogadorEntity jogadorEntity) {
@@ -80,7 +84,11 @@ public class JogadorConverterImpl implements JogadorConverter{
 		
 	}
 
-	
-	
+
+	public String valorRealTransf(BigDecimal valorTransferencia) {
+		DecimalFormat decFormat = new DecimalFormat("#,###,##0.00");
+		return decFormat.format(valorTransferencia);
+	}
+
 
 }
