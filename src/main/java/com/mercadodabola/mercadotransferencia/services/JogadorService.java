@@ -54,21 +54,14 @@ public class JogadorService {
 	@Autowired
 	private CalculaTempoContrato calculaTempo;
 	
-	private BigDecimal valorTransferencia;
-	
-	public String valorRealTransf(BigDecimal valorTransferencia) {
-		DecimalFormat decFormat = new DecimalFormat("#,###,##0.00");
-		return decFormat.format(valorTransferencia);
-	}
-
 	public JogadorEntity salvar(JogadorEntity jogador) {
 //		Long clubeId = jogador.getClube().getId();
 //		ClubeEntity clube = clubeRepository.findById(clubeId).orElseThrow(() -> new ClubeNaoEncontradoException(
 //				String.format("Não existe um cadastro de clube com o código %d", clubeId)));
 //		jogador.setClube(clube);
-		Long contratoId = jogador.getContrato().getId();
-		ContratoEntity contratoEntity = (contratoService.buscarOuFalhar(contratoId)
-				.orElseThrow(() -> new ContratoNaoEncontradoException(String.format("Não existe um cadastro de contrato com o id %d", contratoId))));
+//		Long contratoId = jogador.getContrato().getId();
+//		ContratoEntity contratoEntity = (contratoService.buscarOuFalhar(contratoId)
+//				.orElseThrow(() -> new ContratoNaoEncontradoException(String.format("Não existe um cadastro de contrato com o id %d", contratoId))));
 		
 		if (calculaIdade.isIdadeValida(jogador.getDataNascimento())) {
 			return jogadorRepository.save(jogador);

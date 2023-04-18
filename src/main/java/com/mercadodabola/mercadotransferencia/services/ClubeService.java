@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
-import com.mercadodabola.mercadotransferencia.domain.exception.ClubeNaoEncontradoException;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ContratoRepository;
 
@@ -29,6 +28,8 @@ public class ClubeService {
 	public ClubeEntity salvar(ClubeEntity clube) {
 		return clubeRepository.save(clube);
 	}
+	
+	
 	
 	
 	public ResponseEntity<ClubeEntity> buscar(Long clubeId){

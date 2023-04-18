@@ -15,10 +15,7 @@ import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.stereotype.Component;
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.mercadodabola.mercadotransferencia.domain.util.CalculaTempoContrato;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -50,7 +47,7 @@ public class ContratoEntity {
 	
 	@OneToOne
 	@JoinColumn(name = "jogador_id", nullable = false)
-	private JogadorEntity Jogador;
+	private JogadorEntity jogador;
 	
 	
 	@Valid

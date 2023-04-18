@@ -5,6 +5,7 @@ package com.mercadodabola.mercadotransferencia.domain.entities;
 import java.time.LocalDate;
 
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -25,6 +26,7 @@ import com.mercadodabola.mercadotransferencia.domain.enums.Posicoes;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
 @Component
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
@@ -37,11 +39,11 @@ public class JogadorEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	//@NotBlank
+	@NotBlank
 	@Column(nullable = false)
 	private String nome;
 
-	//@NotNull
+	@NotNull
 	@JsonDeserialize(as = LocalDate.class)
 	@Column(nullable = false)
 	private LocalDate dataNascimento;

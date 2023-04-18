@@ -28,10 +28,7 @@ public class JogadorConverterImpl implements JogadorConverter{
 	
 	@Autowired
 	private CalculaTempoContrato calculaContrato;
-	
-	
-	private BigDecimal valorTransferencia;
-	
+		
 	
 	public JogadorDto toJogadorDto(JogadorEntity jogadorEntity) {
 		JogadorDto retorno = JogadorDto.builder()
@@ -82,12 +79,6 @@ public class JogadorConverterImpl implements JogadorConverter{
 		DecimalFormat decFormat = new DecimalFormat("#,###,##0.00");
 		return decFormat.format(multa);
 		
-	}
-
-
-	public String valorRealTransf(BigDecimal valorTransferencia) {
-		DecimalFormat decFormat = new DecimalFormat("#,###,##0.00");
-		return decFormat.format(valorTransferencia);
 	}
 
 
