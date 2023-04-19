@@ -31,32 +31,35 @@ public class ContratoService {
 	private ClubeRepository clubeRepository;
 
 	public void transferir(TransferenciaJogadorDto transferenciaJogadorDto) {
-
 		ContratoEntity contratoEntity = contratoRepository.findByJogadorId(transferenciaJogadorDto.getJogadorId());
+		JogadorEntity jogadorEntity = jogadorRepository.findById(transferenciaJogadorDto.getJogadorId()).get();
+		ContratoEntity contratoNovo = null;
+		
 		if (contratoEntity == null) {
-//				throw new NegocioException(MSG_CADASTRO_NAO_ENCONTRADO);
+			contratoNovo = inserirContrato(transferenciaJogadorDto);
+			
 		} else {
 			if (transferenciaJogadorDto.getValorDaTransferencia().compareTo(contratoEntity.getValorMulta()) == 1) {
-				JogadorEntity jogadorEntity = jogadorRepository.findById(transferenciaJogadorDto.getJogadorId()).get();
 				jogadorEntity.setContrato(null);
 				jogadorRepository.save(jogadorEntity);
 				Long contratoId = contratoEntity.getId();
 				contratoRepository.deleteById(contratoId);
-				
-				ContratoEntity contratoNovo = inserirContrato(transferenciaJogadorDto);
-				jogadorEntity.setContrato(contratoNovo);
-				jogadorRepository.save(jogadorEntity);
+				contratoNovo = inserirContrato(transferenciaJogadorDto);
 			}
 		}
-
+		jogadorEntity.setContrato(contratoNovo);
+		jogadorRepository.save(jogadorEntity);
 	}
-	
+	 
 	private ContratoEntity inserirContrato(TransferenciaJogadorDto transferenciaJogadorDto) {
 		ContratoEntity contratoEntity = new ContratoEntity();
 		JogadorEntity jogadorEntity = jogadorRepository.findById(transferenciaJogadorDto.getJogadorId()).get();
-		ClubeEntity clubeEntity = clubeRepository.findById(transferenciaJogadorDto.getClubeDestinoId()).get();
-		
-		contratoEntity.setClube(clubeEntity);
+		ClubeEntity clubeDestino = clubeRepository.findById(transferenciaJogadorDto.getClubeDestinoId()).get();
+		ClubeEntity clubeOrigem = clubeRepository.findById(transferenciaJogadorDto.getClubeOrigemId()).get();
+		contratoEntity.setClube(clubeDestino);
+		contratoEntity.setClube(clubeOrigem);
+		clubeDestino.setCaixa(clubeDestino.getCaixa().add(transferenciaJogadorDto.getValorDaTransferencia()));
+		clubeOrigem.setCaixa(clubeOrigem.getCaixa().subtract(transferenciaJogadorDto.getValorDaTransferencia()));
 		contratoEntity.setDataInicio(transferenciaJogadorDto.getDataInicio());
 		contratoEntity.setDataTermino(transferenciaJogadorDto.getDataTermino());
 		contratoEntity.setJogador(jogadorEntity);
