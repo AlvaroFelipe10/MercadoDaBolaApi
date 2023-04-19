@@ -42,6 +42,10 @@ public class ContratoService {
 				jogadorRepository.save(jogadorEntity);
 				Long contratoId = contratoEntity.getId();
 				contratoRepository.deleteById(contratoId);
+				
+				ContratoEntity contratoNovo = inserirContrato(transferenciaJogadorDto);
+				jogadorEntity.setContrato(contratoNovo);
+				jogadorRepository.save(jogadorEntity);
 			}
 		}
 
@@ -49,15 +53,16 @@ public class ContratoService {
 	
 	private ContratoEntity inserirContrato(TransferenciaJogadorDto transferenciaJogadorDto) {
 		ContratoEntity contratoEntity = new ContratoEntity();
+		JogadorEntity jogadorEntity = jogadorRepository.findById(transferenciaJogadorDto.getJogadorId()).get();
 		ClubeEntity clubeEntity = clubeRepository.findById(transferenciaJogadorDto.getClubeDestinoId()).get();
 		
 		contratoEntity.setClube(clubeEntity);
 		contratoEntity.setDataInicio(transferenciaJogadorDto.getDataInicio());
 		contratoEntity.setDataTermino(transferenciaJogadorDto.getDataTermino());
-		contratoEntity.setJogador();
-		
-		
-		return null;
+		contratoEntity.setJogador(jogadorEntity);
+		contratoEntity.setSalario(transferenciaJogadorDto.getSalario());
+		contratoEntity.setValorMulta(transferenciaJogadorDto.getMulta());
+		return contratoRepository.save(contratoEntity);
 	}
 	
 	
