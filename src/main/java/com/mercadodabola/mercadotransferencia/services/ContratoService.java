@@ -9,7 +9,6 @@ import com.mercadodabola.mercadotransferencia.domain.dtos.TransferenciaJogadorDt
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ContratoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
-import com.mercadodabola.mercadotransferencia.domain.exception.ClubeNaoEncontradoException;
 import com.mercadodabola.mercadotransferencia.domain.exception.ContratoNaoEncontradoException;
 import com.mercadodabola.mercadotransferencia.domain.exception.JogadorNaoEncontradoException;
 import com.mercadodabola.mercadotransferencia.domain.exception.NegocioException;
@@ -23,8 +22,12 @@ public class ContratoService {
 	private static final String MSG_CONTRATO_NAO_ENCONTRADO = "Não existe um cadastro de contrato com id %d";
 
 	private static final String MSG_CADASTRO_NAO_ENCONTRADO = "O jogador não tem nenhum contrato vigente";
-	
+
 	private static final String MSG_JOGADOR_NAO_ENCONTRADO = "O jogador com id %d não foi encontrado";
+
+	private static final String MSG_LIMITE_MAXIMO_CONTRATOS = "Não podemos fazer essa transferencia, pois o clube ja atigiu seu limite de 23 jogadores";
+	
+	private static final String MSG_REGRA_MULTA_TRANSFERENCIA = "Não foi posivel realizar a transferência pois o valor da multa é maior que o valor da transferência";
 
 	@Autowired
 	private ContratoRepository contratoRepository;
@@ -36,36 +39,58 @@ public class ContratoService {
 	private ClubeRepository clubeRepository;
 
 	public TransferenciaJogadorDto transferir(TransferenciaJogadorDto transferenciaJogadorDto) {
-		Long jogadorId = transferenciaJogadorDto.getJogadorId();
-		JogadorEntity jogador = jogadorRepository.findById(jogadorId).orElseThrow(() -> new JogadorNaoEncontradoException(String.format(MSG_JOGADOR_NAO_ENCONTRADO, jogadorId)));
-		ContratoEntity contratoEntity = contratoRepository.findByJogadorId(transferenciaJogadorDto.getJogadorId());
-		JogadorEntity jogadorEntity = jogadorRepository.findById(transferenciaJogadorDto.getJogadorId()).get();
-		
-		ContratoEntity contratoNovo = null;
-		
-		if (contratoEntity == null) {
-			contratoNovo = inserirContrato(transferenciaJogadorDto, contratoEntity);
 
-		} else {
-			if (transferenciaJogadorDto.getValorDaTransferencia().compareTo(contratoEntity.getValorMulta()) == 1) {
+		this.validaContratosMaximosEmUmClube(transferenciaJogadorDto);
+
+		JogadorEntity jogadorEntity = this.validaSeJogadorExiste(transferenciaJogadorDto);
+
+		ContratoEntity contratoEntity = contratoRepository.findByJogadorId(transferenciaJogadorDto.getJogadorId());
+
+		if (contratoEntity != null) {
+			if (this.validaSeTransferenciaMaiorQueMulta(transferenciaJogadorDto, contratoEntity)) {
 				jogadorEntity.setContrato(null);
 				jogadorRepository.save(jogadorEntity);
-				Long contratoId = contratoEntity.getId();
-				contratoRepository.deleteById(contratoId);
-				contratoNovo = inserirContrato(transferenciaJogadorDto, contratoEntity);
+				contratoRepository.deleteById(contratoEntity.getId());
 			}
 		}
+
+		ContratoEntity contratoNovo = inserirContrato(transferenciaJogadorDto, contratoEntity, jogadorEntity);
 		jogadorEntity.setContrato(contratoNovo);
 		jogadorRepository.save(jogadorEntity);
 		return transferenciaJogadorDto;
+
+	}
+
+	private boolean validaSeTransferenciaMaiorQueMulta(TransferenciaJogadorDto transferenciaJogadorDto,
+			ContratoEntity contratoEntity) {
+		if (transferenciaJogadorDto.getValorDaTransferencia().compareTo(contratoEntity.getValorMulta()) == -1) {
+			throw new NegocioException(MSG_REGRA_MULTA_TRANSFERENCIA);
+		}
+		return true;
+	}
+
+	private void validaContratosMaximosEmUmClube(TransferenciaJogadorDto transferenciaJogadorDto) {
+
+		int qtdContratosClube = contratoRepository.countByClubeId(transferenciaJogadorDto.getClubeDestinoId());
+
+		if (qtdContratosClube > 23) {
+			throw new NegocioException(MSG_LIMITE_MAXIMO_CONTRATOS);
+		}
+	}
+
+	private JogadorEntity validaSeJogadorExiste(TransferenciaJogadorDto transferenciaJogadorDto) {
+		return jogadorRepository.findById(transferenciaJogadorDto.getJogadorId())
+				.orElseThrow(() -> new JogadorNaoEncontradoException(
+						String.format(MSG_JOGADOR_NAO_ENCONTRADO, transferenciaJogadorDto.getJogadorId())));
 	}
 
 	private ContratoEntity inserirContrato(TransferenciaJogadorDto transferenciaJogadorDto,
-			ContratoEntity contratoEntity) {
+											ContratoEntity contratoEntity, JogadorEntity jogadorEntity) {
+		
 		ContratoEntity contratoNovo = new ContratoEntity();
-		JogadorEntity jogadorEntity = jogadorRepository.findById(transferenciaJogadorDto.getJogadorId()).get();
+		
 		ClubeEntity clubeDestino = clubeRepository.findById(transferenciaJogadorDto.getClubeDestinoId()).get();
-//		ClubeEntity clubeOrigem = clubeRepository.findById(contratoNovo.getClube().getId()).get();
+		
 		contratoNovo.setClube(clubeDestino);
 		clubeDestino.setCaixa(clubeDestino.getCaixa().subtract(transferenciaJogadorDto.getValorDaTransferencia()));
 		contratoNovo.setDataInicio(transferenciaJogadorDto.getDataInicio());
@@ -74,11 +99,11 @@ public class ContratoService {
 		contratoNovo.setSalario(transferenciaJogadorDto.getSalario());
 		contratoNovo.setValorMulta(transferenciaJogadorDto.getMulta());
 		if (contratoEntity != null) {
-			ClubeEntity clubeOrigem = clubeRepository.findById(contratoEntity.getClube().getId()).get(); 
+			ClubeEntity clubeOrigem = clubeRepository.findById(contratoEntity.getClube().getId()).get();
 			clubeOrigem.setCaixa(clubeOrigem.getCaixa().add(transferenciaJogadorDto.getValorDaTransferencia()));
+			this.clubeRepository.save(clubeOrigem);
 		}
-		
-		
+
 		return contratoRepository.save(contratoNovo);
 	}
 

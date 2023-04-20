@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -28,9 +29,6 @@ public class ClubeService {
 	public ClubeEntity salvar(ClubeEntity clube) {
 		return clubeRepository.save(clube);
 	}
-	
-	
-	
 	
 	public ResponseEntity<ClubeEntity> buscar(Long clubeId){
 		Optional<ClubeEntity> clube = clubeRepository.findById(clubeId);

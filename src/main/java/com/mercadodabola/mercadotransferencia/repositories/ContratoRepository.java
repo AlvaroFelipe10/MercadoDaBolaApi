@@ -15,4 +15,6 @@ public interface ContratoRepository extends JpaRepository <ContratoEntity, Long>
 	
 	ContratoEntity findByJogadorId(Long jogadorId);
 	
+	int countByClubeId(Long clubeId);
+	
 }
