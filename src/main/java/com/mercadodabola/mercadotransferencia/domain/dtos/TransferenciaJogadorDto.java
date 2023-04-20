@@ -20,7 +20,6 @@ public class TransferenciaJogadorDto {
 	//@JsonDeserialize(using = LocalDateDeserializer.class)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate dataTermino;
-	private Long clubeOrigemId;
 	private Long clubeDestinoId;
 	private Long jogadorId;
 	private BigDecimal multa;

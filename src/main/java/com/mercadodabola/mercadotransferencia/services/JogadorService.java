@@ -23,6 +23,7 @@ import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
 import com.mercadodabola.mercadotransferencia.domain.exception.ClubeNaoEncontradoException;
 import com.mercadodabola.mercadotransferencia.domain.exception.ContratoNaoEncontradoException;
 import com.mercadodabola.mercadotransferencia.domain.exception.IdadeNaoPermitadaException;
+import com.mercadodabola.mercadotransferencia.domain.exception.JogadorNaoEncontradoException;
 import com.mercadodabola.mercadotransferencia.domain.exception.NegocioException;
 import com.mercadodabola.mercadotransferencia.domain.util.CalculaIdade;
 import com.mercadodabola.mercadotransferencia.domain.util.CalculaTempoContrato;
@@ -54,6 +55,9 @@ public class JogadorService {
 	@Autowired
 	private CalculaTempoContrato calculaTempo;
 	
+	private static final String MSG_JOGADOR_NAO_ENCONTRADO
+    = "Não existe um cadastro de jogador com código %d";
+	
 	public JogadorEntity salvar(JogadorEntity jogador) {
 //		Long clubeId = jogador.getClube().getId();
 //		ClubeEntity clube = clubeRepository.findById(clubeId).orElseThrow(() -> new ClubeNaoEncontradoException(
@@ -62,6 +66,7 @@ public class JogadorService {
 //		Long contratoId = jogador.getContrato().getId();
 //		ContratoEntity contratoEntity = (contratoService.buscarOuFalhar(contratoId)
 //				.orElseThrow(() -> new ContratoNaoEncontradoException(String.format("Não existe um cadastro de contrato com o id %d", contratoId))));
+		
 		
 		if (calculaIdade.isIdadeValida(jogador.getDataNascimento())) {
 			return jogadorRepository.save(jogador);
@@ -106,10 +111,6 @@ public class JogadorService {
 		}
 		return ResponseEntity.notFound().build();
 	}
-	
-	
-	
-			
-	
+		
 	
 }
