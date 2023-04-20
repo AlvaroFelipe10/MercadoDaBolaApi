@@ -12,6 +12,7 @@ import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
 import com.mercadodabola.mercadotransferencia.domain.exception.ClubeNaoEncontradoException;
 import com.mercadodabola.mercadotransferencia.domain.exception.ContratoNaoEncontradoException;
 import com.mercadodabola.mercadotransferencia.domain.exception.JogadorNaoEncontradoException;
+import com.mercadodabola.mercadotransferencia.domain.exception.NegocioException;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ContratoRepository;
 import com.mercadodabola.mercadotransferencia.repositories.JogadorRepository;
@@ -34,12 +35,11 @@ public class ContratoService {
 	@Autowired
 	private ClubeRepository clubeRepository;
 
-	public void transferir(TransferenciaJogadorDto transferenciaJogadorDto) {
+	public TransferenciaJogadorDto transferir(TransferenciaJogadorDto transferenciaJogadorDto) {
 		Long jogadorId = transferenciaJogadorDto.getJogadorId();
 		JogadorEntity jogador = jogadorRepository.findById(jogadorId).orElseThrow(() -> new JogadorNaoEncontradoException(String.format(MSG_JOGADOR_NAO_ENCONTRADO, jogadorId)));
 		ContratoEntity contratoEntity = contratoRepository.findByJogadorId(transferenciaJogadorDto.getJogadorId());
 		JogadorEntity jogadorEntity = jogadorRepository.findById(transferenciaJogadorDto.getJogadorId()).get();
-		
 		
 		ContratoEntity contratoNovo = null;
 		
@@ -57,6 +57,7 @@ public class ContratoService {
 		}
 		jogadorEntity.setContrato(contratoNovo);
 		jogadorRepository.save(jogadorEntity);
+		return transferenciaJogadorDto;
 	}
 
 	private ContratoEntity inserirContrato(TransferenciaJogadorDto transferenciaJogadorDto,
@@ -73,9 +74,11 @@ public class ContratoService {
 		contratoNovo.setSalario(transferenciaJogadorDto.getSalario());
 		contratoNovo.setValorMulta(transferenciaJogadorDto.getMulta());
 		if (contratoEntity != null) {
-			ClubeEntity clubeOrigem = clubeRepository.findById(contratoEntity.getClube().getId()).get();
+			ClubeEntity clubeOrigem = clubeRepository.findById(contratoEntity.getClube().getId()).get(); 
 			clubeOrigem.setCaixa(clubeOrigem.getCaixa().add(transferenciaJogadorDto.getValorDaTransferencia()));
 		}
+		
+		
 		return contratoRepository.save(contratoNovo);
 	}
 
