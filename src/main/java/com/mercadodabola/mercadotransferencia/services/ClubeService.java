@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.mercadodabola.mercadotransferencia.domain.dtos.AtualizacaoDeCaixaDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ContratoRepository;
@@ -30,9 +30,17 @@ public class ClubeService {
 		return clubeRepository.save(clube);
 	}
 	
+	public ClubeEntity atualizarCaixa(AtualizacaoDeCaixaDto atualizarCaixa) {
+		ClubeEntity clubeEntity = clubeRepository.findById(atualizarCaixa.getClubeId()).get();
+		clubeEntity.setCaixa(clubeEntity.getCaixa().add(atualizarCaixa.getFaturamentoBilheteria()));
+		clubeEntity.setCaixa(clubeEntity.getCaixa().add(atualizarCaixa.getFaturamentoPatrocinio()));
+			return clubeRepository.save(clubeEntity);
+			
+	}
+	
+	
 	public ResponseEntity<ClubeEntity> buscar(Long clubeId){
 		Optional<ClubeEntity> clube = clubeRepository.findById(clubeId);
-	
 		if(clube != null) {
 			return ResponseEntity.ok(clube.get());
 		}
