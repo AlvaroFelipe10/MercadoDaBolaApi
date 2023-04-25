@@ -107,6 +107,9 @@ public class ContratoService {
 		return contratoRepository.save(contratoNovo);
 	}
 	
+	public List<ContratoEntity> listar(){
+		return contratoRepository.porOrdemSalario();
+	}
 	
 	public Optional<ContratoEntity> buscarOuFalhar(Long contratoId) {
 		return Optional.ofNullable(contratoRepository.findById(contratoId).orElseThrow(

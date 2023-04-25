@@ -89,6 +89,8 @@ public class JogadorService {
 		}
 		return retorno;
 	}
+	
+	
 
 	public List<ListaJogadorPorClubeIdDto> listaJogadorPorIdClube(Long clubeId) {
 		List<ListaJogadorPorClubeIdDto> retorno = new ArrayList<>();

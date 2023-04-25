@@ -39,6 +39,7 @@ public class JogadorController {
 	public List<JogadorListDto> listar(String nome){
 		return jogadorService.listar(nome);
 	}
+
 	
 	
 	@GetMapping("/{jogadorId}")

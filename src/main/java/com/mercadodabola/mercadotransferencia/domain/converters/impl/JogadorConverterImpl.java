@@ -63,6 +63,7 @@ public class JogadorConverterImpl implements JogadorConverter{
 				.posicao(jogadorEntity.getPosicao().name())
 				.build();
 		retorno.setClube(jogadorEntity.getContrato().getClube().getNome());
+		retorno.setSalario(jogadorEntity.getContrato().getSalario());
 		
 		return retorno;
 	}

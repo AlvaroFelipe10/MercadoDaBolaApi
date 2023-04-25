@@ -19,6 +19,9 @@ public interface ContratoRepository extends JpaRepository <ContratoEntity, Long>
 	
 	int countByClubeId(Long clubeId);
 	
+	@Query(value = "SELECT * FROM contrato order by salario DESC LIMIT 10", nativeQuery = true)
+	List<ContratoEntity> porOrdemSalario();
+	
 	@Query(value = "SELECT sum(salario) FROM contrato WHERE clube_id", nativeQuery = true)
 	BigDecimal obterSalarioTotal(Long clubeId);
 	
