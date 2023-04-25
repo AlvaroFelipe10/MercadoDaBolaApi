@@ -99,6 +99,7 @@ public class JogadorService {
 		listEntity.forEach(contratoEntity -> {
 			ListaJogadorPorClubeIdDto dto = jogadorConverter.listToJogadorPorIdClube(contratoEntity.getJogador());
 			retorno.add(dto);
+
 		});
 		return retorno;
 		}

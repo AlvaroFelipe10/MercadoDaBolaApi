@@ -17,4 +17,5 @@ public class AtualizacaoDeCaixaDto {
 	private BigDecimal faturamentoPatrocinio;
 
 
+
 }

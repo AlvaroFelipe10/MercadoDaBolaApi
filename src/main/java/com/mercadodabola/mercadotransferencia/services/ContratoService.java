@@ -1,5 +1,8 @@
 package com.mercadodabola.mercadotransferencia.services;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,11 +89,8 @@ public class ContratoService {
 
 	private ContratoEntity inserirContrato(TransferenciaJogadorDto transferenciaJogadorDto,
 											ContratoEntity contratoEntity, JogadorEntity jogadorEntity) {
-		
 		ContratoEntity contratoNovo = new ContratoEntity();
-		
 		ClubeEntity clubeDestino = clubeRepository.findById(transferenciaJogadorDto.getClubeDestinoId()).get();
-		
 		contratoNovo.setClube(clubeDestino);
 		clubeDestino.setCaixa(clubeDestino.getCaixa().subtract(transferenciaJogadorDto.getValorDaTransferencia()));
 		contratoNovo.setDataInicio(transferenciaJogadorDto.getDataInicio());
@@ -106,7 +106,8 @@ public class ContratoService {
 
 		return contratoRepository.save(contratoNovo);
 	}
-
+	
+	
 	public Optional<ContratoEntity> buscarOuFalhar(Long contratoId) {
 		return Optional.ofNullable(contratoRepository.findById(contratoId).orElseThrow(
 				() -> new ContratoNaoEncontradoException(String.format(MSG_CONTRATO_NAO_ENCONTRADO, contratoId))));

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mercadodabola.mercadotransferencia.domain.dtos.AtualizacaoDeCaixaDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.ListaJogadorPorClubeIdDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
+import com.mercadodabola.mercadotransferencia.domain.entities.ContratoEntity;
 import com.mercadodabola.mercadotransferencia.services.ClubeService;
 import com.mercadodabola.mercadotransferencia.services.JogadorService;
 

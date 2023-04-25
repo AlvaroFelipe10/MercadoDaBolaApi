@@ -1,8 +1,10 @@
 package com.mercadodabola.mercadotransferencia.repositories;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.mercadodabola.mercadotransferencia.domain.entities.ContratoEntity;
@@ -16,5 +18,9 @@ public interface ContratoRepository extends JpaRepository <ContratoEntity, Long>
 	ContratoEntity findByJogadorId(Long jogadorId);
 	
 	int countByClubeId(Long clubeId);
+	
+	@Query(value = "SELECT sum(salario) FROM contrato WHERE clube_id", nativeQuery = true)
+	BigDecimal obterSalarioTotal(Long clubeId);
+	
 	
 }
