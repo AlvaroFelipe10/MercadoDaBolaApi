@@ -17,4 +17,5 @@ public interface JogadorRepository extends JpaRepository<JogadorEntity, Long> {
 	JogadorEntity findByContratoId(Long contratoId);
 	
 	
+	
 }

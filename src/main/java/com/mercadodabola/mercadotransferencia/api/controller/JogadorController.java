@@ -41,7 +41,6 @@ public class JogadorController {
 	}
 
 	
-	
 	@GetMapping("/{jogadorId}")
 	public ResponseEntity<JogadorDto> buscar(@PathVariable Long jogadorId){
 		return jogadorService.buscar(jogadorId);

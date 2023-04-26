@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorListDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.ContratoEntity;
+import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
 import com.mercadodabola.mercadotransferencia.repositories.ContratoRepository;
 import com.mercadodabola.mercadotransferencia.services.ContratoService;
 
@@ -26,10 +28,10 @@ public class ContratoController {
 	private ContratoService contratoService;
 	
 	@GetMapping("/por-salario")
-	public List<ContratoEntity> listar(){
-		return contratoService.listar();
+	public List<JogadorListDto> listar(){
+		return contratoService.listarPorOrdemSalario();
 	}
-
+	
 	@DeleteMapping
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable long contratoId) {

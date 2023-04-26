@@ -1,6 +1,5 @@
 package com.mercadodabola.mercadotransferencia.services;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mercadodabola.mercadotransferencia.domain.converters.impl.JogadorConverterImpl;
+import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorListDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.TransferenciaJogadorDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ContratoEntity;
@@ -40,6 +41,9 @@ public class ContratoService {
 
 	@Autowired
 	private ClubeRepository clubeRepository;
+	
+	@Autowired 
+	private JogadorConverterImpl jogadorConverter;
 
 	public TransferenciaJogadorDto transferir(TransferenciaJogadorDto transferenciaJogadorDto) {
 
@@ -107,8 +111,14 @@ public class ContratoService {
 		return contratoRepository.save(contratoNovo);
 	}
 	
-	public List<ContratoEntity> listar(){
-		return contratoRepository.porOrdemSalario();
+	public List<JogadorListDto> listarPorOrdemSalario(){
+		List<JogadorListDto> retorno = new ArrayList<>();
+		List<ContratoEntity> contratoEntity = contratoRepository.porOrdemSalario();
+		contratoEntity.forEach(contrato -> {
+			JogadorListDto dto = jogadorConverter.listToJogadorDto(contrato.getJogador());
+			retorno.add(dto);
+		});
+		return retorno;
 	}
 	
 	public Optional<ContratoEntity> buscarOuFalhar(Long contratoId) {
