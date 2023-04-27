@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.mercadodabola.mercadotransferencia.domain.converters.impl.JogadorConverterImpl;
@@ -111,15 +115,42 @@ public class ContratoService {
 		return contratoRepository.save(contratoNovo);
 	}
 	
-	public List<JogadorListDto> listarPorOrdemSalario(){
+	public List<JogadorListDto> listarPorOrdemSalarioMaisAlto(){
 		List<JogadorListDto> retorno = new ArrayList<>();
-		List<ContratoEntity> contratoEntity = contratoRepository.porOrdemSalario();
+		List<ContratoEntity> contratoEntity = contratoRepository.porOrdemSalarioMaior();
 		contratoEntity.forEach(contrato -> {
 			JogadorListDto dto = jogadorConverter.listToJogadorDto(contrato.getJogador());
 			retorno.add(dto);
 		});
 		return retorno;
 	}
+	
+	public List<JogadorListDto> listarPorOrdemSalarioMaisBaixo(){
+		List<JogadorListDto> retorno = new ArrayList<>();
+		List<ContratoEntity> contratoEntity = contratoRepository.porOrdemSalarioMenor();
+		contratoEntity.forEach(contrato -> {
+			JogadorListDto dto = jogadorConverter.listToJogadorDto(contrato.getJogador());
+			retorno.add(dto);
+		});
+		return retorno;
+	}
+	
+	public List<JogadorListDto> listarPorOrdemSalario(String order){
+		List<JogadorListDto> retorno = new ArrayList<>();
+		
+		Sort sort = (order.equals("desc")) ? Sort.by("salario").descending() : Sort.by("salario").ascending();
+		
+		Pageable sortedBySalario = 
+				  PageRequest.of(0, 10, sort);
+		Page<ContratoEntity> listEntity = contratoRepository.findAll(sortedBySalario);
+			listEntity.forEach(contrato -> { 
+			JogadorListDto dto = jogadorConverter.listToJogadorDto(contrato.getJogador());
+		retorno.add(dto);
+		});
+		
+		return retorno ;
+	}
+	
 	
 	public Optional<ContratoEntity> buscarOuFalhar(Long contratoId) {
 		return Optional.ofNullable(contratoRepository.findById(contratoId).orElseThrow(

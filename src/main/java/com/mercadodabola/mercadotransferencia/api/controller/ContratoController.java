@@ -1,5 +1,6 @@
 package com.mercadodabola.mercadotransferencia.api.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorListDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.ContratoEntity;
-import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
 import com.mercadodabola.mercadotransferencia.repositories.ContratoRepository;
 import com.mercadodabola.mercadotransferencia.services.ContratoService;
 
@@ -27,9 +27,19 @@ public class ContratoController {
 	@Autowired
 	private ContratoService contratoService;
 	
-	@GetMapping("/por-salario")
-	public List<JogadorListDto> listar(){
-		return contratoService.listarPorOrdemSalario();
+	@GetMapping("/por-salario-maior")
+	public List<JogadorListDto> listarPorOrdemSalarioMaisAlto(){
+		return contratoService.listarPorOrdemSalarioMaisAlto();
+	}
+	
+	@GetMapping("/por-salario-menor")
+	public List<JogadorListDto> listarPorOrdemSalarioMaisBaixo(){
+		return contratoService.listarPorOrdemSalarioMaisBaixo();
+	}
+	
+	@GetMapping("listar-todos")
+	public List<JogadorListDto> listarPorOrdemSalario(String order){
+		return contratoService.listarPorOrdemSalario(order);
 	}
 	
 	@DeleteMapping

@@ -3,6 +3,7 @@ package com.mercadodabola.mercadotransferencia.services;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -88,6 +89,10 @@ public class JogadorService {
 			});
 		}
 		return retorno;
+	}
+	
+	public List<JogadorEntity> listarTodos(){
+		return jogadorRepository.findAll();
 	}
 	
 	public List<ListaJogadorPorClubeIdDto> listaJogadorPorIdClube(Long clubeId) {

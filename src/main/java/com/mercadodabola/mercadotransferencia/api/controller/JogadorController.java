@@ -40,6 +40,10 @@ public class JogadorController {
 		return jogadorService.listar(nome);
 	}
 
+	@GetMapping("/listar-todos")
+	public List<JogadorEntity> listarTodos(){
+		return jogadorService.listarTodos();
+	}
 	
 	@GetMapping("/{jogadorId}")
 	public ResponseEntity<JogadorDto> buscar(@PathVariable Long jogadorId){
