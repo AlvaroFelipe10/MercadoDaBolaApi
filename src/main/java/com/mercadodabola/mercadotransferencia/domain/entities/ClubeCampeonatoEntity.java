@@ -16,7 +16,7 @@ public class ClubeCampeonatoEntity {
 	@EmbeddedId
     private ClubeCampeonatoId id = new ClubeCampeonatoId();
 	
-	
+//	
 //	@OneToOne
 //	@JoinColumn(name = "clube_id", nullable = false)
 //	private ClubeEntity clubeId;

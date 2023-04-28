@@ -48,6 +48,6 @@ public class ClubeEntity {
 	private  List<ContratoEntity> contrato;
 	
 	
-	@OneToOne
+	@OneToOne(mappedBy = "clube")
 	private EstadioEntity estadio;
 }
