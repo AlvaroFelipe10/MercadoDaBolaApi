@@ -147,7 +147,6 @@ public class ContratoService {
 			JogadorListDto dto = jogadorConverter.listToJogadorDto(contrato.getJogador());
 		retorno.add(dto);
 		});
-		
 		return retorno ;
 	}
 	

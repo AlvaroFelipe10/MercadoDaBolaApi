@@ -92,7 +92,7 @@ public class JogadorService {
 	}
 	
 	public List<JogadorEntity> listarTodos(){
-		return jogadorRepository.findAll();
+		return jogadorRepository.findAll(); 
 	}
 	
 	public List<ListaJogadorPorClubeIdDto> listaJogadorPorIdClube(Long clubeId) {

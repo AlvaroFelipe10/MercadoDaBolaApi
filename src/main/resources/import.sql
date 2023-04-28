@@ -62,6 +62,7 @@ insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube
 insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (19, '2022.01.24', '2024.01.24', 11000, 22000, 4, 19);
 insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (20, '2022.01.25', '2024.01.25', 14000, 29000, 4, 20);
 
+
 #ATUALIZAÇÃO PARA INSERIR ID
 update jogador set contrato_id = 1 where id = 1;
 update jogador set contrato_id = 2 where id = 2;
