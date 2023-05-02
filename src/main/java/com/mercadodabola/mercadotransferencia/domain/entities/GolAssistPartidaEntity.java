@@ -33,8 +33,7 @@ public class GolAssistPartidaEntity {
 	
 	@JsonIgnore
 	@OneToOne
-	private  PartidaEntity partida;
-	
+	private  PartidaEntity partidaId;
 	
 	@OneToOne
 	@JoinColumn(name = "jogador_id", nullable = false)

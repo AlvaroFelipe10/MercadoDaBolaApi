@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mercadodabola.mercadotransferencia.domain.dtos.PartidaDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.PartidaEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.PartidaId;
 import com.mercadodabola.mercadotransferencia.services.PartidaService;
@@ -25,7 +26,7 @@ public class PartidaController {
 	private PartidaService partidaService;
 	
 	@GetMapping
-	public List<PartidaEntity> listar(){
+	public List<PartidaDto> listar(){
 		return partidaService.listar();
 	}
 	
