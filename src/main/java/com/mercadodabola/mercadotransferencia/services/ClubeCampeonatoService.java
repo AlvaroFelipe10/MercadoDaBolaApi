@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoEntity;
+import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoId;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeCampeonatoRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
 

@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mercadodabola.mercadotransferencia.domain.entities.CampeonatoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoEntity;
-import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoId;
+import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.services.ClubeCampeonatoService;
 
 @RestController
@@ -31,7 +32,7 @@ public class ClubeCampeonatoController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ClubeCampeonatoEntity cadastrar(@RequestBody @Valid ClubeCampeonatoEntity clubeCampeonato, ClubeCampeonatoId clubeCampeonatoId) {
+	public ClubeCampeonatoEntity cadastrar(@RequestBody @Valid ClubeCampeonatoEntity clubeCampeonato) {
 		return clubeCampeonatoService.salvar(clubeCampeonato);
 	}
 }

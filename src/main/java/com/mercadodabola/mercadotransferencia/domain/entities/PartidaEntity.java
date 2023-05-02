@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -21,7 +23,8 @@ public class PartidaEntity {
 	private int golsMandante;
 	
 	private int golsVisitante;
-
+	
+	@JsonDeserialize(as = LocalDateTime.class)
 	private LocalDateTime dataHoraPartida;
 	
 	private BigDecimal publico;

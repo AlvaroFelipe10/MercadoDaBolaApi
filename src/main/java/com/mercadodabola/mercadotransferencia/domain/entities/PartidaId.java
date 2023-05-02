@@ -16,7 +16,6 @@ import lombok.EqualsAndHashCode;
 public class PartidaId implements Serializable{
 	
 	
-	
 	@ManyToOne @JoinColumn(name = "mandante_id")
 	private ClubeEntity mandanteId;
 	

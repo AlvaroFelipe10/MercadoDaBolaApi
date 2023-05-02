@@ -17,6 +17,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -47,7 +48,7 @@ public class ClubeEntity {
 	@OneToMany(mappedBy = "clube")
 	private  List<ContratoEntity> contrato;
 	
-	
+	@JsonIgnoreProperties({"estadioId", "clube"})
 	@OneToOne(mappedBy = "clube")
 	private EstadioEntity estadio;
 }
