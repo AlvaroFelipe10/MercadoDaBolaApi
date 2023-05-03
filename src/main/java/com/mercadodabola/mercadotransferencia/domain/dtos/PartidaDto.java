@@ -1,7 +1,7 @@
 package com.mercadodabola.mercadotransferencia.domain.dtos;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.List;
 
 import lombok.Builder;
 import lombok.Data;
@@ -11,12 +11,12 @@ import lombok.Data;
 public class PartidaDto {
 	
 	private Integer rodada;
-	private String mandante;
-	private String visitante;
-	private Integer golsMandante;
-	private Integer golsVisitante;
+	private Long mandanteId;
+	private Long visitanteId;
+	private Long campeonatoId;
 	private BigDecimal publico;
 	private BigDecimal renda;
 	private String dataEHora;
+	private List<GolAssistenciaDto> golAssistencia;
 
 }

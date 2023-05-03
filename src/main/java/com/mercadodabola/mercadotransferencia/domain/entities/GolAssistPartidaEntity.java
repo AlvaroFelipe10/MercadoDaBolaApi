@@ -33,13 +33,13 @@ public class GolAssistPartidaEntity {
 	
 	@JsonIgnore
 	@OneToOne
-	private  PartidaEntity partidaId;
+	private  PartidaEntity partida;
 	
 	@OneToOne
 	@JoinColumn(name = "jogador_id", nullable = false)
 	private JogadorEntity jogadorId;
 	
-	private LocalDateTime minutoSegundos;
+	private String minutoSegundos;
 	
 	private TipoGolAssist golAssist;
 	

@@ -25,14 +25,11 @@ public class PartidaController {
 	@Autowired
 	private PartidaService partidaService;
 	
-	@GetMapping
-	public List<PartidaDto> listar(){
-		return partidaService.listar();
-	}
+	
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public PartidaEntity cadastroDePartida(@RequestBody @Valid PartidaEntity partidaEntity) {
-		return partidaService.salvar(partidaEntity);
+	public PartidaEntity cadastroDePartida(@RequestBody @Valid PartidaDto partidaDto) {
+		return partidaService.cadastroPartida(partidaDto);
 	}
 }

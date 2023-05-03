@@ -17,13 +17,13 @@ public class PartidaId implements Serializable{
 	
 	
 	@ManyToOne @JoinColumn(name = "mandante_id")
-	private ClubeEntity mandanteId;
+	private ClubeEntity mandante;
 	
 	@ManyToOne @JoinColumn(name = "visitante_id")
-	private ClubeEntity visitanteId;
+	private ClubeEntity visitante;
 	
 	@ManyToOne @JoinColumn(name = "campeonato_id")
-	private CampeonatoEntity campeonatoId;
+	private CampeonatoEntity campeonato;
 
 	
 }

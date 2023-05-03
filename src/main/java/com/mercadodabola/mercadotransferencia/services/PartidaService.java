@@ -1,5 +1,6 @@
 package com.mercadodabola.mercadotransferencia.services;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,25 +22,15 @@ public class PartidaService {
 	@Autowired 
 	private ClubeRepository clubeRepository;
 	
-	@Autowired
-	private PartidaConverter partidaConverter;
-	
-	public List<PartidaDto> listar(){
-		List<PartidaDto> retorno = new ArrayList<>();
-		List<PartidaEntity> listEntity = partidaRepository.findAll();
-		listEntity.forEach(partidaEntity -> {
-			PartidaDto dto = partidaConverter.listPartida(partidaEntity);
-			retorno.add(dto);
-		});
-		
-		return retorno ;
-	}
 	
 	public PartidaEntity salvar(PartidaEntity partidaEntity) {
-		
-		
 		return partidaRepository.save(partidaEntity);		
 	}
 	
+	public PartidaEntity cadastroPartida(PartidaDto partidaDto) {
+		
+		return null;
+		
+	}
 	
 }
