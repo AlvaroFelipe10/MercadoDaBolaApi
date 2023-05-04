@@ -1,7 +1,13 @@
 package com.mercadodabola.mercadotransferencia.domain.dtos;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
+
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Builder;
 import lombok.Data;
@@ -16,7 +22,9 @@ public class PartidaDto {
 	private Long campeonatoId;
 	private BigDecimal publico;
 	private BigDecimal renda;
-	private String dataEHora;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+	private LocalDateTime dataEHora;
+	@Enumerated(EnumType.STRING)
 	private List<GolAssistenciaDto> golAssistencia;
 
 }

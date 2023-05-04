@@ -46,6 +46,7 @@ public class ClubeService {
 		contratoRepository.obterSalarioTotal(clubeEntity.getId());
 		clubeEntity.setCaixa(clubeEntity.getCaixa().subtract(contratoRepository.obterSalarioTotal(clubeEntity.getId())));
 		
+		
 			return clubeRepository.save(clubeEntity);
 	}
 	

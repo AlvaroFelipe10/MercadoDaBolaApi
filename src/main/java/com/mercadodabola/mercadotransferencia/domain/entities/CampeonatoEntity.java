@@ -30,5 +30,5 @@ public class CampeonatoEntity {
 	
 	private String nomeCampeonato;
 	
-	private Long quantidadeClubes;
+	 
 }

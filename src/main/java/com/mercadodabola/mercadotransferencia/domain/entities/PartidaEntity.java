@@ -23,10 +23,10 @@ public class PartidaEntity {
 	@EmbeddedId
 	private PartidaId id = new PartidaId();
 	
-	private int golsMandante;
+	private Long golsMandante;
 	
-	private int golsVisitante;
-
+	private Long golsVisitante;
+	@JsonDeserialize(as = LocalDateTime.class)
 	private LocalDateTime dataHoraPartida;
 	
 	private BigDecimal publico;
