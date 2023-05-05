@@ -53,14 +53,10 @@ public class PartidaService {
 		partidaEntity.setRenda(partidaDto.getRenda());
 		partidaEntity.setGolsMandante(qtdGols(partidaDto.getGolAssistencia(), MandanteOuVisitante.MANDANTE));
 		partidaEntity.setGolsVisitante(qtdGols(partidaDto.getGolAssistencia(), MandanteOuVisitante.VISITANTE));
-		partidaRepository.verificaPartida(partidaId.getMandante().getId(), partidaId.getVisitante().getId());
-		
 		
 		return partidaEntity;
 		
 	}
-	
-	
 	
 		private Long qtdGols(List<GolAssistenciaDto> golsAssistencia, MandanteOuVisitante mandanteouVisitante) {
 			return CollectionUtils.isEmpty(golsAssistencia) ? 0L

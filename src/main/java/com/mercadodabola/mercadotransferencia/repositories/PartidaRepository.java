@@ -12,6 +12,7 @@ import com.mercadodabola.mercadotransferencia.domain.entities.PartidaEntity;
 @Repository
 public interface PartidaRepository  extends JpaRepository<PartidaEntity, Long> {
 	
-	@Query(value = "SELECT * FROM partida WHERE (mandante_id   or visitante_id ) AND campeonato_id = 1 AND numero_rodada ",  nativeQuery = true)
-	List<PartidaEntity> verificaPartida(Long mandanteId, Long visitanteId, Long campeonatoId, Long numero_rodada);
+	@Query(value = "SELECT * FROM partida WHERE (mandante_id = :mandanteId or visitante_id = :visitanteId ) AND campeonato_id = :campeonatoId AND numero_rodada = :numeroRodada ",  nativeQuery = true)
+	int countByVerificaPartidaId(Long mandanteId, Long visitanteId, Long campeonatoId, Integer numeroRodada);
+	
 }
