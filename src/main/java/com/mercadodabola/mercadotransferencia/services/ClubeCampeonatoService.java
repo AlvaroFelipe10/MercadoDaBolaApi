@@ -4,10 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
+import com.mercadodabola.mercadotransferencia.domain.entities.CampeonatoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoEntity;
-import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoId;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeCampeonatoRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
 
@@ -26,8 +25,8 @@ public class ClubeCampeonatoService {
 	}
 	
 	public ClubeCampeonatoEntity salvar(ClubeCampeonatoEntity clubeCampeonato) {
-		
 		return clubeCampeonatoRepository.save(clubeCampeonato);
 	}
+	
 	
 }

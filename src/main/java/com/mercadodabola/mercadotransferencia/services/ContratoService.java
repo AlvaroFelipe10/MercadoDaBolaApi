@@ -81,9 +81,7 @@ public class ContratoService {
 	}
 
 	private void validaContratosMaximosEmUmClube(TransferenciaJogadorDto transferenciaJogadorDto) {
-
 		int qtdContratosClube = contratoRepository.countByClubeId(transferenciaJogadorDto.getClubeDestinoId());
-
 		if (qtdContratosClube > 23) {
 			throw new NegocioException(MSG_LIMITE_MAXIMO_CONTRATOS);
 		}

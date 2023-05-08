@@ -16,7 +16,7 @@ import lombok.Data;
 @Data
 public class PartidaDto {
 	
-	private Integer rodada;
+	private int rodada;
 	private Long mandanteId;
 	private Long visitanteId;
 	private Long campeonatoId;

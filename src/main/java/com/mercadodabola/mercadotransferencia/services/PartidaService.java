@@ -14,6 +14,7 @@ import com.mercadodabola.mercadotransferencia.domain.entities.PartidaEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.PartidaId;
 import com.mercadodabola.mercadotransferencia.domain.enums.MandanteOuVisitante;
 import com.mercadodabola.mercadotransferencia.domain.enums.TipoGolAssist;
+import com.mercadodabola.mercadotransferencia.domain.exception.NegocioException;
 import com.mercadodabola.mercadotransferencia.repositories.CampeonatoRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
 import com.mercadodabola.mercadotransferencia.repositories.PartidaRepository;
@@ -30,6 +31,7 @@ public class PartidaService {
 	@Autowired
 	private CampeonatoRepository campeonatoRepository;
 	
+	private static final String MSG_CLUBE_JOGOU = "Um dos clubes ja jogou essa rodada";
 	
 	public PartidaEntity salvar(PartidaEntity partidaEntity) {
 		return partidaRepository.save(partidaEntity);		
@@ -53,7 +55,7 @@ public class PartidaService {
 		partidaEntity.setRenda(partidaDto.getRenda());
 		partidaEntity.setGolsMandante(qtdGols(partidaDto.getGolAssistencia(), MandanteOuVisitante.MANDANTE));
 		partidaEntity.setGolsVisitante(qtdGols(partidaDto.getGolAssistencia(), MandanteOuVisitante.VISITANTE));
-		
+		this.verficaPartida(partidaDto.getMandanteId(), partidaDto.getVisitanteId(), partidaDto.getCampeonatoId(), partidaDto.getRodada());
 		return partidaEntity;
 		
 	}
@@ -66,8 +68,14 @@ public class PartidaService {
 								&& gol.getMandanteOuVisitante()== mandanteouVisitante)
 						.count();
 		}
-		
-		
+
+		private void verficaPartida(Long mandanteId, Long visitanteId, Long campeonatoId, Integer numeroRodada) {
+			List<PartidaEntity> verificarPartida = partidaRepository.VerificaPartida(mandanteId, visitanteId, campeonatoId, numeroRodada);
+				if (!CollectionUtils.isEmpty(verificarPartida)) {
+					throw new NegocioException(MSG_CLUBE_JOGOU);
+				} 
+			}
+		}
 		
 //	private Long qtdGolsVisitanteSemStream(List<GolAssistenciaDto> golsAssistencia) {
 //		Long qtdGols = 0L;
@@ -85,4 +93,4 @@ public class PartidaService {
 //		return qtdGols;
 //	}
 		
-}
+
