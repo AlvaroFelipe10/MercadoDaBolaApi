@@ -26,7 +26,6 @@ public class PartidaController {
 	private PartidaService partidaService;
 	
 	
-	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public PartidaEntity cadastroDePartida(@RequestBody @Valid PartidaDto partidaDto) {

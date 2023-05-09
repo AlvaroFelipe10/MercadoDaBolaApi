@@ -9,6 +9,7 @@ import org.springframework.util.CollectionUtils;
 import com.mercadodabola.mercadotransferencia.domain.dtos.GolAssistenciaDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.PartidaDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.CampeonatoEntity;
+import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.PartidaEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.PartidaId;
@@ -16,6 +17,7 @@ import com.mercadodabola.mercadotransferencia.domain.enums.MandanteOuVisitante;
 import com.mercadodabola.mercadotransferencia.domain.enums.TipoGolAssist;
 import com.mercadodabola.mercadotransferencia.domain.exception.NegocioException;
 import com.mercadodabola.mercadotransferencia.repositories.CampeonatoRepository;
+import com.mercadodabola.mercadotransferencia.repositories.ClubeCampeonatoRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
 import com.mercadodabola.mercadotransferencia.repositories.PartidaRepository;
 
@@ -31,16 +33,24 @@ public class PartidaService {
 	@Autowired
 	private CampeonatoRepository campeonatoRepository;
 	
+	@Autowired 
+	private ClubeCampeonatoRepository clubeCampeonatoRepository;
+	
 	private static final String MSG_CLUBE_JOGOU = "Um dos clubes ja jogou essa rodada";
 	
 	public PartidaEntity salvar(PartidaEntity partidaEntity) {
 		return partidaRepository.save(partidaEntity);		
 	}
 	
+	public List<PartidaEntity> listar(){
+		return partidaRepository.findAll();
+	}
+	
 	public PartidaEntity cadastroPartida(PartidaDto partidaDto) {
 		ClubeEntity mandante = clubeRepository.findById(partidaDto.getMandanteId()).get();
 		CampeonatoEntity campeonato = campeonatoRepository.findById(partidaDto.getCampeonatoId()).get();
 		ClubeEntity visitante = clubeRepository.findById(partidaDto.getVisitanteId()).get();
+		ClubeCampeonatoEntity clubeCampeonato = clubeCampeonatoRepository.findById(partidaDto.getMandanteId()).get();
 		
 		PartidaId partidaId = new PartidaId();
 		partidaId.setVisitante(visitante);
@@ -56,6 +66,7 @@ public class PartidaService {
 		partidaEntity.setGolsMandante(qtdGols(partidaDto.getGolAssistencia(), MandanteOuVisitante.MANDANTE));
 		partidaEntity.setGolsVisitante(qtdGols(partidaDto.getGolAssistencia(), MandanteOuVisitante.VISITANTE));
 		this.verficaPartida(partidaDto.getMandanteId(), partidaDto.getVisitanteId(), partidaDto.getCampeonatoId(), partidaDto.getRodada());
+		this.verificaRodada(campeonato, clubeCampeonato, partidaDto);
 		return partidaEntity;
 		
 	}
@@ -75,6 +86,17 @@ public class PartidaService {
 					throw new NegocioException(MSG_CLUBE_JOGOU);
 				} 
 			}
+		
+
+		private void verificaRodada (CampeonatoEntity campeonatoEntity, ClubeCampeonatoEntity clubeCampeonatoEntity, PartidaDto partidaDto) {
+			 CampeonatoEntity campeonatoId = campeonatoRepository.findById(partidaDto.getCampeonatoId()).get();
+			 long tipoCampeonato = campeonatoEntity.getTipoDeCampeonato().valorTipoCampeonato;
+			 long quantidadeRodadas = campeonatoId.getQuantidadeClubes() * tipoCampeonato;
+			 long rodadaAtual = quantidadeRodadas - clubeCampeonatoEntity.getRodadasRestantes();
+			 
+			 
+			 
+		}
 		}
 		
 //	private Long qtdGolsVisitanteSemStream(List<GolAssistenciaDto> golsAssistencia) {

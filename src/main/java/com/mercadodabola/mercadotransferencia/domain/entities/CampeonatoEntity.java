@@ -27,6 +27,7 @@ public class CampeonatoEntity {
 	@Enumerated(EnumType.STRING)
 	private TipoDeCampeonato tipoDeCampeonato;
 	
+	private Long quantidadeClubes;
 	
 	private String nomeCampeonato;
 	
