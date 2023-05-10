@@ -37,6 +37,7 @@ public class PartidaService {
 	private ClubeCampeonatoRepository clubeCampeonatoRepository;
 	
 	private static final String MSG_CLUBE_JOGOU = "Um dos clubes ja jogou essa rodada";
+	private static final String MSG_RODADA_INVALIDA = "Essa rodada está invalida, verifique a sequência das rodadas";
 	
 	public PartidaEntity salvar(PartidaEntity partidaEntity) {
 		return partidaRepository.save(partidaEntity);		
@@ -50,7 +51,6 @@ public class PartidaService {
 		ClubeEntity mandante = clubeRepository.findById(partidaDto.getMandanteId()).get();
 		CampeonatoEntity campeonato = campeonatoRepository.findById(partidaDto.getCampeonatoId()).get();
 		ClubeEntity visitante = clubeRepository.findById(partidaDto.getVisitanteId()).get();
-		ClubeCampeonatoEntity clubeCampeonato = clubeCampeonatoRepository.findById(partidaDto.getMandanteId()).get();
 		
 		PartidaId partidaId = new PartidaId();
 		partidaId.setVisitante(visitante);
@@ -66,7 +66,7 @@ public class PartidaService {
 		partidaEntity.setGolsMandante(qtdGols(partidaDto.getGolAssistencia(), MandanteOuVisitante.MANDANTE));
 		partidaEntity.setGolsVisitante(qtdGols(partidaDto.getGolAssistencia(), MandanteOuVisitante.VISITANTE));
 		this.verficaPartida(partidaDto.getMandanteId(), partidaDto.getVisitanteId(), partidaDto.getCampeonatoId(), partidaDto.getRodada());
-		this.verificaRodada(campeonato, clubeCampeonato, partidaDto);
+		this.verificaRodadaValida(campeonato, partidaDto);
 		return partidaEntity;
 		
 	}
@@ -87,15 +87,18 @@ public class PartidaService {
 				} 
 			}
 		
-
-		private void verificaRodada (CampeonatoEntity campeonatoEntity, ClubeCampeonatoEntity clubeCampeonatoEntity, PartidaDto partidaDto) {
+		
+		private void verificaRodadaValida (CampeonatoEntity campeonatoEntity, PartidaDto partidaDto) {
 			 CampeonatoEntity campeonatoId = campeonatoRepository.findById(partidaDto.getCampeonatoId()).get();
-			 long tipoCampeonato = campeonatoEntity.getTipoDeCampeonato().valorTipoCampeonato;
-			 long quantidadeRodadas = campeonatoId.getQuantidadeClubes() * tipoCampeonato;
-			 long rodadaAtual = quantidadeRodadas - clubeCampeonatoEntity.getRodadasRestantes();
+			 ClubeCampeonatoEntity clubeCampeonato = clubeCampeonatoRepository.verificaRodadaMandante(partidaDto.getMandanteId(), partidaDto.getCampeonatoId());
+			 ClubeCampeonatoEntity clube = clubeCampeonatoRepository.verificaRodadaVisitante(partidaDto.getVisitanteId(), partidaDto.getCampeonatoId()); 
 			 
-			 
-			 
+			 long quantidadeRodadas = campeonatoId.getQuantidadeClubes() * campeonatoEntity.getTipoDeCampeonato().valorTipoCampeonato - campeonatoEntity.getTipoDeCampeonato().valorTipoCampeonato ;
+			 long rodadaAtual = quantidadeRodadas - clubeCampeonato.getRodadasRestantes();
+			 if (rodadaAtual != partidaDto.getRodada()) {
+				 throw new NegocioException(MSG_RODADA_INVALIDA);
+				// PEGAR PELO REPOSITORY DO CLUBECAMPEONATO
+			 }
 		}
 		}
 		
