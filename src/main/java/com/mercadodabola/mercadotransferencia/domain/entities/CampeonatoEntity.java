@@ -1,5 +1,7 @@
 package com.mercadodabola.mercadotransferencia.domain.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -8,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.mercadodabola.mercadotransferencia.domain.dtos.GolAssistenciaDto;
 import com.mercadodabola.mercadotransferencia.domain.enums.TipoDeCampeonato;
 
 import lombok.Data;
@@ -27,7 +30,8 @@ public class CampeonatoEntity {
 	@Enumerated(EnumType.STRING)
 	private TipoDeCampeonato tipoDeCampeonato;
 	
-	private Long quantidadeClubes;
+
+	private int quantidadeClubes;
 	
 	private String nomeCampeonato;
 	

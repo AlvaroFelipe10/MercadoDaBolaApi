@@ -1,13 +1,13 @@
 package com.mercadodabola.mercadotransferencia.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mercadodabola.mercadotransferencia.domain.dtos.CampeonatoDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.CampeonatoEntity;
-import com.mercadodabola.mercadotransferencia.domain.enums.TipoDeCampeonato;
+import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.exception.CampeonatoNaoEncontradoException;
 import com.mercadodabola.mercadotransferencia.repositories.CampeonatoRepository;
 
@@ -30,5 +30,14 @@ public class CampeonatoService {
 				.orElseThrow(() -> new CampeonatoNaoEncontradoException(String.format("Não existe um cadastro de campeonato com o id %d", campeonatoId)));
 	}
 	
+	public CampeonatoEntity cadastrarCampeonato(CampeonatoDto campeonatoDto) {
+		CampeonatoEntity campeonatoEntity = new CampeonatoEntity();
+		campeonatoEntity.setNomeCampeonato(campeonatoDto.getNomeDoCampeonato());
+		campeonatoEntity.setQuantidadeClubes(campeonatoDto.getClubesCadastrados().size());
+		campeonatoEntity.setTipoDeCampeonato(campeonatoDto.getTipoDeCampeonato());
+		
+		return campeonatoRepository.save(campeonatoEntity);
+		
+	}
 	
 }
