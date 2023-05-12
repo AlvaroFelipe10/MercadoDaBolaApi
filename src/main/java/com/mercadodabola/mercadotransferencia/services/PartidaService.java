@@ -84,7 +84,8 @@ public class PartidaService {
 			throw new NegocioException(MSG_CLUBE_JOGOU);
 		}
 	}
-
+	
+	
 	private void verificaRodadaValida(CampeonatoEntity campeonatoEntity, PartidaDto partidaDto) {
 		CampeonatoEntity campeonatoId = campeonatoRepository.findById(partidaDto.getCampeonatoId()).get();
 		ClubeCampeonatoEntity clubeCampeonato = clubeCampeonatoRepository

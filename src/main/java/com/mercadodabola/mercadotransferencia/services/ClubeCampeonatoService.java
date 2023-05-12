@@ -1,7 +1,6 @@
 package com.mercadodabola.mercadotransferencia.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +8,8 @@ import org.springframework.stereotype.Service;
 import com.mercadodabola.mercadotransferencia.domain.dtos.PartidaDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.CampeonatoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoEntity;
-import com.mercadodabola.mercadotransferencia.domain.exception.NegocioException;
+import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
+import com.mercadodabola.mercadotransferencia.domain.entities.PartidaEntity;
 import com.mercadodabola.mercadotransferencia.repositories.CampeonatoRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeCampeonatoRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
@@ -26,6 +26,9 @@ public class ClubeCampeonatoService {
 	@Autowired 
 	private CampeonatoRepository campeonatoRepository;
 	
+	@Autowired
+	private PartidaService partidaService;
+	
 	
 	public List<ClubeCampeonatoEntity> listar(){
 		return clubeCampeonatoRepository.findAll();
@@ -35,6 +38,25 @@ public class ClubeCampeonatoService {
 		return clubeCampeonatoRepository.save(clubeCampeonato);
 	}
 	
-
+	public ClubeCampeonatoEntity cadastrarClubeCampeonato(CampeonatoEntity campeonatoEntity, ClubeEntity clubeEntity, PartidaEntity partidaEntity) {
+		ClubeCampeonatoEntity clubeCampeonato = new ClubeCampeonatoEntity();
+		
+		
+		long quantidadeRodadas = campeonatoEntity.getQuantidadeClubes()
+				* campeonatoEntity.getTipoDeCampeonato().valorTipoCampeonato
+				- campeonatoEntity.getTipoDeCampeonato().valorTipoCampeonato;
+		
+		
+		if(partidaEntity.getGolsMandante() > partidaEntity.getGolsVisitante()) {
+			clubeCampeonato.setPontos(+ 3);
+		} if(partidaEntity.getGolsMandante() < partidaEntity.getGolsVisitante()) {
+			clubeCampeonato.setPontos(0);
+		} if(partidaEntity.getGolsMandante() == partidaEntity.getGolsVisitante())
+			clubeCampeonato.setPontos(+ 1);
+		
+		return clubeCampeonato;
+		 
+		
+	}
 	
 }

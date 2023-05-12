@@ -26,7 +26,7 @@ public class ClubeCampeonatoEntity {
 //	@JoinColumn(name = "campeonato_id", nullable = false)
 //	private CampeonatoEntity campeonatoId;
 	
-	private Long rodadasRestantes;
+	private int rodadasRestantes;
 	
-	private Long pontos;
+	private int pontos;
 }
