@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mercadodabola.mercadotransferencia.domain.dtos.CampeonatoDto;
+import com.mercadodabola.mercadotransferencia.domain.dtos.ListaJogadorPorClubeIdDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.CampeonatoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
@@ -23,6 +24,11 @@ public class CampeonatoService {
 	@Autowired 
 	private ClubeRepository clubeRepository;
 	
+	@Autowired 
+	private ClubeCampeonatoService clubeCampeonato;
+	
+	CampeonatoEntity campeonatoEntity;
+	
 	public List<CampeonatoEntity> listar(){
 		return campeonatoRepository.findAll();
 	}
@@ -37,11 +43,22 @@ public class CampeonatoService {
 	}
 	
 	public CampeonatoEntity cadastrarCampeonato(CampeonatoDto campeonatoDto) {
-		CampeonatoEntity campeonatoEntity = new CampeonatoEntity();
+		campeonatoEntity = new CampeonatoEntity();
 		campeonatoEntity.setNomeCampeonato(campeonatoDto.getNomeDoCampeonato());
 		campeonatoEntity.setQuantidadeClubes(campeonatoDto.getClubesCadastrados().size());
 		campeonatoEntity.setTipoDeCampeonato(campeonatoDto.getTipoDeCampeonato());	 
-		return campeonatoRepository.save(campeonatoEntity);
+		
+		campeonatoEntity = campeonatoRepository.save(campeonatoEntity);
+		
+		campeonatoDto.getClubesCadastrados().forEach(clube -> {
+						ClubeCampeonatoEntity dto = clubeCampeonato.cadastrarClubeCampeonato(campeonatoEntity, clube);
+						
+						
+			
+			//chamarmeumetodoPassandoEssesParametros(clube.getId(), campeonatoEntity.getCampeonatoId());
+		});
+		
+		return campeonatoEntity;
 		
 	}
 	

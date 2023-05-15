@@ -32,7 +32,7 @@ public class ClubeCampeonatoController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ClubeCampeonatoEntity cadastrarClubeCampeonato(@RequestBody @Valid ClubeCampeonatoEntity clubeCampeonato) {
+	public ClubeCampeonatoEntity cadastrar(@RequestBody @Valid ClubeCampeonatoEntity clubeCampeonato) {
 		return clubeCampeonatoService.salvar(clubeCampeonato);
 	}
 }
