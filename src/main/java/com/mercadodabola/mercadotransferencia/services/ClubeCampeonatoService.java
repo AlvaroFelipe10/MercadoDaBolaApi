@@ -49,9 +49,7 @@ public class ClubeCampeonatoService {
 				* campeonatoEntity.getTipoDeCampeonato().valorTipoCampeonato
 				- campeonatoEntity.getTipoDeCampeonato().valorTipoCampeonato;
 		clubeCampeonato.setRodadasRestantes(quantidadeRodadas);
-		
 		clubeCampeonato.setId(clubeCampeonatoId);
-		
 		
 //		
 //		if(partidaEntity.getGolsMandante() > partidaEntity.getGolsVisitante()) {

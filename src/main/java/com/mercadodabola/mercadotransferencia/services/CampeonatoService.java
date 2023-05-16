@@ -53,8 +53,7 @@ public class CampeonatoService {
 		campeonatoDto.getClubesCadastrados().forEach(clube -> {
 						ClubeCampeonatoEntity dto = clubeCampeonato.cadastrarClubeCampeonato(campeonatoEntity, clube);
 						
-						
-			
+	
 			//chamarmeumetodoPassandoEssesParametros(clube.getId(), campeonatoEntity.getCampeonatoId());
 		});
 		
