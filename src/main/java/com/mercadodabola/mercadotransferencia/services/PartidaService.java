@@ -111,15 +111,13 @@ public class PartidaService {
 	private void somarPontosMandante(PartidaEntity partidaEntity, PartidaDto partidaDto) {
 		ClubeCampeonatoEntity clubeCampeonato = new ClubeCampeonatoEntity();
 		ClubeCampeonatoEntity mandante = clubeCampeonatoRepository.verificaRodadaMandante(partidaDto.getMandanteId(), partidaDto.getCampeonatoId());
-		//ClubeCampeonatoEntity visitante = clubeCampeonatoRepository.verificaRodadaVisitante(partidaDto.getVisitanteId(), partidaDto.getCampeonatoId());
 		CampeonatoEntity campeonato = campeonatoRepository.findById(partidaDto.getCampeonatoId()).get();
 		ClubeCampeonatoId clubeCampeonatoId = new ClubeCampeonatoId();
 		clubeCampeonatoId.setCampeonatoId(campeonato);
 		clubeCampeonatoId.setClubeId(mandante.getId().getClubeId());
 		clubeCampeonato.setId(clubeCampeonatoId);
-		clubeCampeonato.setRodadasRestantes(mandante.getRodadasRestantes());
+		clubeCampeonato.setRodadasRestantes(mandante.getRodadasRestantes() -1);
 		if(partidaEntity.getGolsMandante() > partidaEntity.getGolsVisitante()) {
-		//	mandante.setPontos(mandante.getPontos() + 3);
 			clubeCampeonato.setPontos(clubeCampeonato.getPontos() + 3);
 		} else if(partidaEntity.getGolsMandante() < partidaEntity.getGolsVisitante()) {
 			mandante.setPontos(0);
@@ -130,16 +128,14 @@ public class PartidaService {
 	
 	private void somarPontosVisitante(PartidaEntity partidaEntity, PartidaDto partidaDto) {
 		ClubeCampeonatoEntity clubeCampeonato = new ClubeCampeonatoEntity();
-		//ClubeCampeonatoEntity mandante = clubeCampeonatoRepository.verificaRodadaMandante(partidaDto.getMandanteId(), partidaDto.getCampeonatoId());
 		ClubeCampeonatoEntity visitante = clubeCampeonatoRepository.verificaRodadaVisitante(partidaDto.getVisitanteId(), partidaDto.getCampeonatoId());
 		CampeonatoEntity campeonato = campeonatoRepository.findById(partidaDto.getCampeonatoId()).get();
 		ClubeCampeonatoId clubeCampeonatoId = new ClubeCampeonatoId();
 		clubeCampeonatoId.setCampeonatoId(campeonato);
 		clubeCampeonatoId.setClubeId(visitante.getId().getClubeId());
 		clubeCampeonato.setId(clubeCampeonatoId);
-		clubeCampeonato.setRodadasRestantes(visitante.getRodadasRestantes());
+		clubeCampeonato.setRodadasRestantes(visitante.getRodadasRestantes() -1);
 		if(partidaEntity.getGolsVisitante() > partidaEntity.getGolsMandante()) {
-		//	mandante.setPontos(mandante.getPontos() + 3);
 			clubeCampeonato.setPontos(clubeCampeonato.getPontos() + 3);
 		} else if(partidaEntity.getGolsVisitante() < partidaEntity.getGolsMandante()) {
 			visitante.setPontos(0);
