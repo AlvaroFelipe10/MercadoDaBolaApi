@@ -1,13 +1,12 @@
 package com.mercadodabola.mercadotransferencia.domain.entities;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-
-import org.springframework.stereotype.Component;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
@@ -34,4 +33,7 @@ public class PartidaEntity {
 	private BigDecimal renda;
 	
 	private int numeroRodada;
+	
+	@OneToMany
+	private List<GolAssistPartidaEntity> golAssistencia;
 }

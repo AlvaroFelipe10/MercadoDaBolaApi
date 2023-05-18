@@ -58,8 +58,6 @@ public class ClubeCampeonatoService {
 //			clubeCampeonato.setPontos(0);
 //		} if(partidaEntity.getGolsMandante() == partidaEntity.getGolsVisitante())
 //			clubeCampeonato.setPontos(+ 1);
-		
-		
 		return clubeCampeonatoRepository.save(clubeCampeonato);
 		 
 		
