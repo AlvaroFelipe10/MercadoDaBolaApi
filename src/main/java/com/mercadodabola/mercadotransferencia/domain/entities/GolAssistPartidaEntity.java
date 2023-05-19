@@ -26,9 +26,8 @@ public class GolAssistPartidaEntity {
 	
 	//private PartidaEntity partida;
 	 
-	@OneToOne
-	@JoinColumn(name = "jogador_id", nullable = false)
-	private JogadorEntity jogadorId;
+	
+	private long jogadorId;
 	
 	private String minutoSegundos;
 	

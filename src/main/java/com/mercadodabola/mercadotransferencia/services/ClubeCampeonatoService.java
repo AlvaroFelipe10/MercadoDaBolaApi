@@ -9,26 +9,14 @@ import com.mercadodabola.mercadotransferencia.domain.entities.CampeonatoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoId;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
-import com.mercadodabola.mercadotransferencia.domain.entities.PartidaEntity;
-import com.mercadodabola.mercadotransferencia.repositories.CampeonatoRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeCampeonatoRepository;
-import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
 
 @Service
 public class ClubeCampeonatoService {
 	
 	@Autowired
 	private ClubeCampeonatoRepository clubeCampeonatoRepository;
-	
-	@Autowired 
-	private ClubeRepository clubeRepository;
-	
-	@Autowired 
-	private CampeonatoRepository campeonatoRepository;
-	
-	@Autowired
-	private PartidaService partidaService;
-	
+		
 	
 	public List<ClubeCampeonatoEntity> listar(){
 		return clubeCampeonatoRepository.findAll();
@@ -40,7 +28,6 @@ public class ClubeCampeonatoService {
 	
 	public ClubeCampeonatoEntity cadastrarClubeCampeonato(CampeonatoEntity campeonatoEntity, ClubeEntity clubeEntity) {
 		ClubeCampeonatoEntity clubeCampeonato = new ClubeCampeonatoEntity();
-		
 		ClubeCampeonatoId clubeCampeonatoId = new ClubeCampeonatoId();
 		clubeCampeonatoId.setCampeonatoId(campeonatoEntity);
 		clubeCampeonatoId.setClubeId(clubeEntity);

@@ -12,6 +12,7 @@ import com.mercadodabola.mercadotransferencia.domain.entities.CampeonatoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoId;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
+import com.mercadodabola.mercadotransferencia.domain.entities.GolAssistPartidaEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.PartidaEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.PartidaId;
 import com.mercadodabola.mercadotransferencia.domain.enums.MandanteOuVisitante;
@@ -20,6 +21,7 @@ import com.mercadodabola.mercadotransferencia.domain.exception.NegocioException;
 import com.mercadodabola.mercadotransferencia.repositories.CampeonatoRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeCampeonatoRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
+import com.mercadodabola.mercadotransferencia.repositories.GolAssistPartidaRepository;
 import com.mercadodabola.mercadotransferencia.repositories.PartidaRepository;
 
 @Service
@@ -36,7 +38,12 @@ public class PartidaService {
 
 	@Autowired
 	private ClubeCampeonatoRepository clubeCampeonatoRepository;
+	
+	@Autowired
+	private GolAssistPartidaRepository golAssistRepository;
 
+	
+	
 	private static final String MSG_CLUBE_JOGOU = "Um dos clubes ja jogou essa rodada";
 	private static final String MSG_RODADA_INVALIDA = "Essa rodada está invalida, verifique a sequência das rodadas";
 
@@ -52,7 +59,10 @@ public class PartidaService {
 		ClubeEntity mandante = clubeRepository.findById(partidaDto.getMandanteId()).get();
 		CampeonatoEntity campeonato = campeonatoRepository.findById(partidaDto.getCampeonatoId()).get();
 		ClubeEntity visitante = clubeRepository.findById(partidaDto.getVisitanteId()).get();
-
+	
+		
+	
+		
 		PartidaId partidaId = new PartidaId();
 		partidaId.setVisitante(visitante);
 		partidaId.setMandante(mandante);
@@ -75,11 +85,13 @@ public class PartidaService {
 		
 		return partidaRepository.save(partidaEntity);
 	}
+	
 
 	private Long qtdGols(List<GolAssistenciaDto> golsAssistencia, MandanteOuVisitante mandanteouVisitante) {
 		return CollectionUtils.isEmpty(golsAssistencia) ? 0L
 				: golsAssistencia.stream().filter(gol -> gol.getTipoLance() == TipoGolAssist.GOL
 						&& gol.getMandanteOuVisitante() == mandanteouVisitante).count();
+		
 	}
 
 	private void verficaPartida(Long mandanteId, Long visitanteId, Long campeonatoId, Integer numeroRodada) {
