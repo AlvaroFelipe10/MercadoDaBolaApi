@@ -1,5 +1,6 @@
 package com.mercadodabola.mercadotransferencia.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,10 +60,10 @@ public class PartidaService {
 		ClubeEntity mandante = clubeRepository.findById(partidaDto.getMandanteId()).get();
 		CampeonatoEntity campeonato = campeonatoRepository.findById(partidaDto.getCampeonatoId()).get();
 		ClubeEntity visitante = clubeRepository.findById(partidaDto.getVisitanteId()).get();
-	
+		List <GolAssistPartidaEntity> golAssist = new ArrayList<>();
 		
-	
-		
+		partidaDto.getGolAssistencia().forEach(jogadorGol -> {GolAssistPartidaEntity dto = });
+				
 		PartidaId partidaId = new PartidaId();
 		partidaId.setVisitante(visitante);
 		partidaId.setMandante(mandante);
@@ -81,8 +82,8 @@ public class PartidaService {
 		this.verificaRodadaValida(campeonato, partidaDto);
 		this.somarPontosMandante(partidaEntity, partidaDto);
 		this.somarPontosVisitante(partidaEntity, partidaDto);
-		
-		
+		golAssistRepository.save(golAssist);
+				
 		return partidaRepository.save(partidaEntity);
 	}
 	

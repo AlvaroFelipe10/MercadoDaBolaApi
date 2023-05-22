@@ -8,4 +8,5 @@ import com.mercadodabola.mercadotransferencia.domain.entities.GolAssistPartidaEn
 @Repository
 public interface GolAssistPartidaRepository extends JpaRepository<GolAssistPartidaEntity, Long>{
 
+	
 }

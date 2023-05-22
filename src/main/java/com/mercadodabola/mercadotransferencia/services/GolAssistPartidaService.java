@@ -21,7 +21,7 @@ public class GolAssistPartidaService {
 		GolAssistPartidaEntity golAssist = new GolAssistPartidaEntity();
 		golAssist.setJogadorId(golAssistDto.getIdJogador());
 		golAssist.setMinutoSegundos(golAssist.getMinutoSegundos());
-		golAssist.setGolAssist(golAssistDto.getTipoLance());
+		golAssist.setGolAssistPartidaId(null);
 		golAssistRepository.save(golAssist);
 	}
 	

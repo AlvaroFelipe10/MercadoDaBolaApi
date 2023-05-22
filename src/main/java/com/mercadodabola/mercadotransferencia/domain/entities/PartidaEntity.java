@@ -8,6 +8,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import lombok.Data;
@@ -34,6 +35,7 @@ public class PartidaEntity {
 	
 	private int numeroRodada;
 	
+	@JsonIgnore
 	@OneToMany
 	private List<GolAssistPartidaEntity> golAssistencia;
 }
