@@ -25,6 +25,6 @@ public class PartidaDto {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
 	private LocalDateTime dataEHora;
 	@Enumerated(EnumType.STRING)
-	private List<GolAssistenciaDto> golAssistencia;
+	private GolAssistenciaDto golAssistencia;
 
 }

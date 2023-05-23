@@ -12,7 +12,7 @@ public class GolAssistenciaDto {
 
 	
 	private String minutoSegundo;
-	private Long idJogador;
+	private long idJogador;
 	private TipoGolAssist tipoLance;
 	private MandanteOuVisitante mandanteOuVisitante;
 }

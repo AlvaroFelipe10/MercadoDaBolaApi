@@ -1,6 +1,5 @@
 package com.mercadodabola.mercadotransferencia.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import com.mercadodabola.mercadotransferencia.domain.entities.CampeonatoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoId;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
-import com.mercadodabola.mercadotransferencia.domain.entities.GolAssistPartidaEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.PartidaEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.PartidaId;
 import com.mercadodabola.mercadotransferencia.domain.enums.MandanteOuVisitante;
@@ -42,7 +40,6 @@ public class PartidaService {
 	
 	@Autowired
 	private GolAssistPartidaRepository golAssistRepository;
-
 	
 	
 	private static final String MSG_CLUBE_JOGOU = "Um dos clubes ja jogou essa rodada";
@@ -60,10 +57,7 @@ public class PartidaService {
 		ClubeEntity mandante = clubeRepository.findById(partidaDto.getMandanteId()).get();
 		CampeonatoEntity campeonato = campeonatoRepository.findById(partidaDto.getCampeonatoId()).get();
 		ClubeEntity visitante = clubeRepository.findById(partidaDto.getVisitanteId()).get();
-		List <GolAssistPartidaEntity> golAssist = new ArrayList<>();
 		
-		partidaDto.getGolAssistencia().forEach(jogadorGol -> {GolAssistPartidaEntity dto = });
-				
 		PartidaId partidaId = new PartidaId();
 		partidaId.setVisitante(visitante);
 		partidaId.setMandante(mandante);
@@ -82,10 +76,10 @@ public class PartidaService {
 		this.verificaRodadaValida(campeonato, partidaDto);
 		this.somarPontosMandante(partidaEntity, partidaDto);
 		this.somarPontosVisitante(partidaEntity, partidaDto);
-		golAssistRepository.save(golAssist);
-				
+		
 		return partidaRepository.save(partidaEntity);
 	}
+	
 	
 
 	private Long qtdGols(List<GolAssistenciaDto> golsAssistencia, MandanteOuVisitante mandanteouVisitante) {
@@ -176,5 +170,10 @@ public class PartidaService {
 //		}
 //		return qtdGols;
 //	}
-		
+/*
+ * List<GolAssistPartidaEntity> golAssistEntity = new ArrayList<>();
+ * List<GolAssistenciaDto> golAssist = partidaDto.getGolAssistencia();
+ * golAssist.forEach(golAssistPartidaEntity -> { GolAssistPartidaEntity dto =
+ * golAssistConv.listGolAssistenciaDto(); golAssist.add(dto); });
+ */
 
