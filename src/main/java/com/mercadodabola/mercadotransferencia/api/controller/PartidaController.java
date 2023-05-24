@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mercadodabola.mercadotransferencia.domain.dtos.GolAssistenciaDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.PartidaDto;
-import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.PartidaEntity;
 import com.mercadodabola.mercadotransferencia.services.PartidaService;
 

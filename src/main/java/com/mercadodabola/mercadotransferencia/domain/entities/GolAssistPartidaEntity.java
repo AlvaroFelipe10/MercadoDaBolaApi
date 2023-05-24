@@ -26,15 +26,16 @@ public class GolAssistPartidaEntity  {
 	private Long golAssistPartidaId;
 	
 //	@ManyToOne
-//	private PartidaEntity partidaId;
-	
-	@ManyToOne
-	@JoinColumn(name = "jogador_id", nullable = false)
-	private JogadorEntity jogador ;
+//	@JoinColumn(name = "partida_id", nullable = false)
+//	private PartidaEntity partida;
+//	
+//	@ManyToOne
+//	@JoinColumn(name = "jogador_id", nullable = false )
+	private long idJogador;
 	
 	private String minutoSegundos;
 	
 	@Enumerated(EnumType.STRING)
-	private TipoGolAssist tipoGolAssist;
+	private TipoGolAssist tipoLance;
 	
 }

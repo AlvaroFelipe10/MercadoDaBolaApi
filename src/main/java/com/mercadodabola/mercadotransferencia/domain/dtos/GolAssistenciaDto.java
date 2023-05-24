@@ -10,8 +10,9 @@ import lombok.Data;
 @Data
 public class GolAssistenciaDto {
 
-	
+	private long golAssistPartidaId;
 	private String minutoSegundo;
+	
 	private long idJogador;
 	private TipoGolAssist tipoLance;
 	private MandanteOuVisitante mandanteOuVisitante;
