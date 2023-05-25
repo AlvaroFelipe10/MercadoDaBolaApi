@@ -14,6 +14,7 @@ import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoEnt
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoId;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.GolAssistPartidaEntity;
+import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.PartidaEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.PartidaId;
 import com.mercadodabola.mercadotransferencia.domain.enums.MandanteOuVisitante;
@@ -89,6 +90,7 @@ public class PartidaService {
 	
 	public void cadastroDeGolAssist(PartidaDto partidaDto){
 		List<GolAssistPartidaEntity> golAssistPartidaEntity = new ArrayList<>();
+		
 		partidaDto.getGolAssistencia().forEach(golAssistDto -> {
 			GolAssistPartidaEntity dto = golAssistService.cadastrar(golAssistDto);
 			golAssistPartidaEntity.add(dto);

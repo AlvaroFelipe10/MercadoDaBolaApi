@@ -1,5 +1,7 @@
 package com.mercadodabola.mercadotransferencia.domain.dtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
 import com.mercadodabola.mercadotransferencia.domain.enums.MandanteOuVisitante;
 import com.mercadodabola.mercadotransferencia.domain.enums.TipoGolAssist;
 

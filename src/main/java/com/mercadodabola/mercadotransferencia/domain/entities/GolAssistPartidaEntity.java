@@ -1,5 +1,7 @@
 package com.mercadodabola.mercadotransferencia.domain.entities;
 
+import java.util.Optional;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -29,9 +31,11 @@ public class GolAssistPartidaEntity  {
 //	@JoinColumn(name = "partida_id", nullable = false)
 //	private PartidaEntity partida;
 //	
-//	@ManyToOne
-//	@JoinColumn(name = "jogador_id", nullable = false )
-	private long idJogador;
+	private long partidaId;
+	
+	@ManyToOne
+	@JoinColumn(name = "jogador_id", nullable = false )
+	private JogadorEntity idJogador;
 	
 	private String minutoSegundos;
 	
