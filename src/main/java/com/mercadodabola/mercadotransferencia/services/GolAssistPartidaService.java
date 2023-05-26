@@ -28,9 +28,6 @@ public class GolAssistPartidaService {
 	public GolAssistPartidaEntity cadastrar(GolAssistenciaDto golAssistenciaDto) {
 		GolAssistPartidaEntity golAssistPartidaEntity = new GolAssistPartidaEntity();
 		JogadorEntity jogadorEntity = jogadorRepository.findById(golAssistenciaDto.getIdJogador()).get();
-		golAssistPartidaEntity.setGolAssistPartidaId(golAssistenciaDto.getGolAssistPartidaId());
-		golAssistPartidaEntity.setPartidaId(golAssistenciaDto.getGolAssistPartidaId());
-		golAssistPartidaEntity.setIdJogador(jogadorEntity);
 		golAssistPartidaEntity.setMinutoSegundos(golAssistenciaDto.getMinutoSegundo());
 		golAssistPartidaEntity.setTipoLance(golAssistenciaDto.getTipoLance());
 		

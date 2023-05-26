@@ -35,7 +35,7 @@ public class PartidaEntity {
 	
 	private int numeroRodada;
 	
-	@JsonIgnore
-	@OneToMany
-	private List<GolAssistPartidaEntity> golAssistencia;
+//	@JsonIgnore
+//	@OneToMany
+//	private List<GolAssistPartidaEntity> golAssistencia;
 }

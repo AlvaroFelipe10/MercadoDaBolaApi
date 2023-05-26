@@ -1,15 +1,9 @@
 package com.mercadodabola.mercadotransferencia.domain.entities;
 
-import java.util.Optional;
-
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import com.mercadodabola.mercadotransferencia.domain.enums.TipoGolAssist;
 
@@ -22,20 +16,20 @@ import lombok.EqualsAndHashCode;
 @Entity(name = "gol_assist_partida")
 public class GolAssistPartidaEntity  {
 
-	@EqualsAndHashCode.Include
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long golAssistPartidaId;
+	@EmbeddedId
+	private GolAssistPartidaEntityId id = new GolAssistPartidaEntityId();
 	
 //	@ManyToOne
 //	@JoinColumn(name = "partida_id", nullable = false)
 //	private PartidaEntity partida;
 //	
-	private long partidaId;
-	
-	@ManyToOne
-	@JoinColumn(name = "jogador_id", nullable = false )
-	private JogadorEntity idJogador;
+//	@ManyToOne(cascade=CascadeType.ALL) 
+//	@JoinColumn(name = "fk_partida",nullable=false)
+//	private PartidaEntity partidaId;
+//	
+//	@ManyToOne
+//	@JoinColumn(name = "jogador_id", nullable = false )
+//	private JogadorEntity idJogador;
 	
 	private String minutoSegundos;
 	
