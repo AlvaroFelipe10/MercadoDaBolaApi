@@ -16,6 +16,7 @@ import lombok.Data;
 @Data
 public class PartidaDto {
 	
+	private Long partidaId;
 	private int rodada;
 	private Long mandanteId;
 	private Long visitanteId;

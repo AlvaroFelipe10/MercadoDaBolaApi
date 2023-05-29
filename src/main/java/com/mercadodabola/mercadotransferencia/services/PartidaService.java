@@ -14,9 +14,9 @@ import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoEnt
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoId;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.GolAssistPartidaEntity;
+import com.mercadodabola.mercadotransferencia.domain.entities.GolAssistPartidaEntityId;
 import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.PartidaEntity;
-import com.mercadodabola.mercadotransferencia.domain.entities.PartidaId;
 import com.mercadodabola.mercadotransferencia.domain.enums.MandanteOuVisitante;
 import com.mercadodabola.mercadotransferencia.domain.enums.TipoGolAssist;
 import com.mercadodabola.mercadotransferencia.domain.exception.NegocioException;
@@ -24,6 +24,7 @@ import com.mercadodabola.mercadotransferencia.repositories.CampeonatoRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeCampeonatoRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
 import com.mercadodabola.mercadotransferencia.repositories.GolAssistPartidaRepository;
+import com.mercadodabola.mercadotransferencia.repositories.JogadorRepository;
 import com.mercadodabola.mercadotransferencia.repositories.PartidaRepository;
 
 @Service
@@ -47,6 +48,9 @@ public class PartidaService {
 	@Autowired
 	private GolAssistPartidaService golAssistService;
 	
+	@Autowired
+	private JogadorRepository jogadorRepository;
+	
 	
 	private static final String MSG_CLUBE_JOGOU = "Um dos clubes ja jogou essa rodada";
 	private static final String MSG_RODADA_INVALIDA = "Essa rodada está invalida, verifique a sequência das rodadas";
@@ -63,15 +67,11 @@ public class PartidaService {
 		ClubeEntity mandante = clubeRepository.findById(partidaDto.getMandanteId()).get();
 		CampeonatoEntity campeonato = campeonatoRepository.findById(partidaDto.getCampeonatoId()).get();
 		ClubeEntity visitante = clubeRepository.findById(partidaDto.getVisitanteId()).get();
-		List<GolAssistPartidaEntity> golAssistPartidaEntity = new ArrayList<>();
 		
-		PartidaId partidaId = new PartidaId();
-		partidaId.setVisitante(visitante);
-		partidaId.setMandante(mandante);
-		partidaId.setCampeonato(campeonato);
-
 		PartidaEntity partidaEntity = new PartidaEntity();
-		partidaEntity.setId(partidaId);
+		partidaEntity.setMandante(mandante);
+		partidaEntity.setVisitante(visitante);
+		partidaEntity.setCampeonato(campeonato);
 		partidaEntity.setNumeroRodada(partidaDto.getRodada());
 		partidaEntity.setDataHoraPartida(partidaDto.getDataEHora());
 		partidaEntity.setPublico(partidaDto.getPublico());
@@ -83,21 +83,23 @@ public class PartidaService {
 		this.verificaRodadaValida(campeonato, partidaDto);
 		this.somarPontosMandante(partidaEntity, partidaDto);
 		this.somarPontosVisitante(partidaEntity, partidaDto);
-		this.cadastroDeGolAssist(partidaDto);
-		
+	//	this.cadastroDeGolAssist(partidaDto);
+	
 		return partidaRepository.save(partidaEntity);
 	}
 	
-	public void cadastroDeGolAssist(PartidaDto partidaDto){
-		List<GolAssistPartidaEntity> golAssistPartidaEntity = new ArrayList<>();
-		
-		partidaDto.getGolAssistencia().forEach(golAssistDto -> {
-			GolAssistPartidaEntity dto = golAssistService.cadastrar(golAssistDto);
-			golAssistPartidaEntity.add(dto);
-		});
-		
-	}
-
+//	public void cadastroDeGolAssist(PartidaDto partidaDto){
+//		List<GolAssistPartidaEntity> golAssistPartidaEntity = new ArrayList<>();
+//		
+//		partidaDto.getGolAssistencia().forEach(golAssistDto -> {
+//			GolAssistPartidaEntity dto = golAssistService.cadastrar(golAssistDto, partidaDto);
+//			golAssistPartidaEntity.add(dto);
+//		});
+//		
+//	}
+	
+	
+	
 	private Long qtdGols(List<GolAssistenciaDto> golsAssistencia, MandanteOuVisitante mandanteouVisitante) {
 		return CollectionUtils.isEmpty(golsAssistencia) ? 0L
 				: golsAssistencia.stream().filter(gol -> gol.getTipoLance() == TipoGolAssist.GOL
