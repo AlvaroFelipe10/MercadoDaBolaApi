@@ -37,8 +37,6 @@ public class ClubeCampeonatoService {
 				- campeonatoEntity.getTipoDeCampeonato().valorTipoCampeonato;
 		clubeCampeonato.setRodadasRestantes(quantidadeRodadas);
 		clubeCampeonato.setId(clubeCampeonatoId);
-		
-//		
 //		if(partidaEntity.getGolsMandante() > partidaEntity.getGolsVisitante()) {
 //			clubeCampeonato.setPontos(+ 3);
 //		} if(partidaEntity.getGolsMandante() < partidaEntity.getGolsVisitante()) {

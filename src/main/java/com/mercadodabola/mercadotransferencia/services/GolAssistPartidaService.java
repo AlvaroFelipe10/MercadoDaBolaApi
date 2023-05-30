@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mercadodabola.mercadotransferencia.domain.dtos.GolAssistenciaDto;
-import com.mercadodabola.mercadotransferencia.domain.dtos.PartidaDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.GolAssistPartidaEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.GolAssistPartidaEntityId;
 import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
@@ -29,20 +28,23 @@ public class GolAssistPartidaService {
 		return golAssistRepository.save(golAssist);
 	}
 
-	public GolAssistPartidaEntity cadastrar(GolAssistenciaDto golAssistenciaDto, PartidaDto partidaDto) {
+	public GolAssistPartidaEntity cadastrar(GolAssistenciaDto golAssistDto, PartidaEntity partida) {
 		GolAssistPartidaEntity golAssistPartidaEntity = new GolAssistPartidaEntity();
 		GolAssistPartidaEntityId golAssistPartidaEntityId = new GolAssistPartidaEntityId();
-		PartidaEntity partidaEntity = partidaRepository.findById(partidaDto.getPartidaId()).get();
-		JogadorEntity jogadorEntity = jogadorRepository.findById(golAssistenciaDto.getIdJogador()).get();
-		golAssistPartidaEntity.setMinutoSegundos(golAssistenciaDto.getMinutoSegundo());
-		golAssistPartidaEntity.setTipoLance(golAssistenciaDto.getTipoLance());
+		JogadorEntity jogador = jogadorRepository.findById(golAssistDto.getIdJogador()).get();
 		
-		golAssistPartidaEntityId.setIdJogador(jogadorEntity);
-		golAssistPartidaEntityId.setPartida(partidaEntity);
+		golAssistPartidaEntity.setMinutoSegundos(golAssistDto.getMinutoSegundo());
+		golAssistPartidaEntity.setTipoLance(golAssistDto.getTipoLance());
+		
+		golAssistPartidaEntityId.setIdJogador(jogador);
+		golAssistPartidaEntityId.setPartida(partida);
+		
+		golAssistPartidaEntity.setId(golAssistPartidaEntityId);
 		
 		return golAssistRepository.save(golAssistPartidaEntity);
 		
 	}
+	
 	
 
 		
