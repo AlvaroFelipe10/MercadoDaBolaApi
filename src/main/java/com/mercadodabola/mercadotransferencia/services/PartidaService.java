@@ -67,6 +67,7 @@ public class PartidaService {
 		ClubeEntity visitante = clubeRepository.findById(partidaDto.getVisitanteId()).get();
 
 		PartidaEntity partidaEntity = new PartidaEntity();
+		partidaEntity.setId(partidaDto.getPartidaId());
 		partidaEntity.setMandante(mandante);
 		partidaEntity.setVisitante(visitante);
 		partidaEntity.setCampeonato(campeonato);
@@ -81,18 +82,19 @@ public class PartidaService {
 		this.verificaRodadaValida(campeonato, partidaDto);
 		this.somarPontosMandante(partidaEntity, partidaDto);
 		this.somarPontosVisitante(partidaEntity, partidaDto);
-		this.cadastroDeGolAssist(partidaDto, partidaEntity);
+		
+		partidaRepository.save(partidaEntity);
+		this.cadastroDeGolAssist(partidaDto);
 	
 		return partidaRepository.save(partidaEntity);
 	}
 
-	public void cadastroDeGolAssist(PartidaDto partidaDto, PartidaEntity partida) {
+	public void cadastroDeGolAssist(PartidaDto partidaDto) {
 		List<GolAssistPartidaEntity> golAssistPartidaEntity = new ArrayList<>();
 		partidaDto.getGolAssistencia().forEach(golAssistDto -> {
-			GolAssistPartidaEntity dto = golAssistService.cadastrar(golAssistDto, partida);
+			GolAssistPartidaEntity dto = golAssistService.cadastrar(golAssistDto, partidaDto);
 			golAssistPartidaEntity.add(dto);
 		});
-		
 	}
 
 	private Long qtdGols(List<GolAssistenciaDto> golsAssistencia, MandanteOuVisitante mandanteouVisitante) {
