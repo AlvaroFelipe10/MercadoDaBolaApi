@@ -90,6 +90,7 @@ public class PartidaService {
 		this.verificaRodadaValida(campeonato, partidaDto);
 		this.somarPontosMandante(partidaEntity, partidaDto);
 		this.somarPontosVisitante(partidaEntity, partidaDto);
+		this.somarDinheiroCaixa(partidaDto);
 		partidaRepository.save(partidaEntity);
 		this.cadastroDeGolAssist(partidaDto);
 	
@@ -146,6 +147,12 @@ public class PartidaService {
 //		golAssistRepository.save(golAssistPartidaEntity);
 //
 //	}
+	
+	private void somarDinheiroCaixa(PartidaDto partidaDto) {
+		ClubeEntity clubeEntity = clubeRepository.findById(partidaDto.getMandanteId()).get();
+		clubeEntity.setCaixa(clubeEntity.getCaixa().add(partidaDto.getRenda()));
+		clubeRepository.save(clubeEntity);
+	}
 
 	private void somarPontosMandante(PartidaEntity partidaEntity, PartidaDto partidaDto) {
 		ClubeCampeonatoEntity clubeCampeonato = new ClubeCampeonatoEntity();
