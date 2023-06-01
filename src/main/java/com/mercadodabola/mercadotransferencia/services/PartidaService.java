@@ -18,6 +18,8 @@ import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.PartidaEntity;
 import com.mercadodabola.mercadotransferencia.domain.enums.MandanteOuVisitante;
 import com.mercadodabola.mercadotransferencia.domain.enums.TipoGolAssist;
+import com.mercadodabola.mercadotransferencia.domain.exception.CampeonatoNaoEncontradoException;
+import com.mercadodabola.mercadotransferencia.domain.exception.ClubeNaoEncontradoException;
 import com.mercadodabola.mercadotransferencia.domain.exception.NegocioException;
 import com.mercadodabola.mercadotransferencia.repositories.CampeonatoRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeCampeonatoRepository;
@@ -52,7 +54,10 @@ public class PartidaService {
 
 	private static final String MSG_CLUBE_JOGOU = "Um dos clubes ja jogou essa rodada";
 	private static final String MSG_RODADA_INVALIDA = "Essa rodada está invalida, verifique a sequência das rodadas";
-
+	private static final String MSG_CAMPEONATO_INVALIDO = "Não temos um cadastro deste campeonato";
+	private static final String MSG_MANDANTE_INVALIDO =  "Não temos um cadastro deste mandante, verifique o cadastro de clubes neste campeonato";
+	private static final String MSG_VISITANTE_INVALIDO = "Não temos um cadastro deste visitante, verifique o cadastro de clubes neste campeonato";
+	
 	public PartidaEntity salvar(PartidaEntity partidaEntity) {
 		return partidaRepository.save(partidaEntity);
 	}
@@ -62,9 +67,12 @@ public class PartidaService {
 	}
 
 	public PartidaEntity cadastroPartida(PartidaDto partidaDto) {
-		ClubeEntity mandante = clubeRepository.findById(partidaDto.getMandanteId()).get();
-		CampeonatoEntity campeonato = campeonatoRepository.findById(partidaDto.getCampeonatoId()).get();
-		ClubeEntity visitante = clubeRepository.findById(partidaDto.getVisitanteId()).get();
+		ClubeEntity mandante = clubeRepository.findById(partidaDto.getMandanteId())
+				.orElseThrow(() -> new ClubeNaoEncontradoException(MSG_MANDANTE_INVALIDO));
+		CampeonatoEntity campeonato = campeonatoRepository.findById(partidaDto.getCampeonatoId())
+				.orElseThrow(() -> new CampeonatoNaoEncontradoException(MSG_CAMPEONATO_INVALIDO));
+		ClubeEntity visitante = clubeRepository.findById(partidaDto.getVisitanteId())
+				.orElseThrow(() -> new ClubeNaoEncontradoException(MSG_VISITANTE_INVALIDO));;
 
 		PartidaEntity partidaEntity = new PartidaEntity();
 		partidaEntity.setId(partidaDto.getPartidaId());
@@ -82,7 +90,6 @@ public class PartidaService {
 		this.verificaRodadaValida(campeonato, partidaDto);
 		this.somarPontosMandante(partidaEntity, partidaDto);
 		this.somarPontosVisitante(partidaEntity, partidaDto);
-		
 		partidaRepository.save(partidaEntity);
 		this.cadastroDeGolAssist(partidaDto);
 	

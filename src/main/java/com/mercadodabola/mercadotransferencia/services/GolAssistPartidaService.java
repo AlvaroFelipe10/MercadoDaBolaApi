@@ -9,6 +9,8 @@ import com.mercadodabola.mercadotransferencia.domain.entities.GolAssistPartidaEn
 import com.mercadodabola.mercadotransferencia.domain.entities.GolAssistPartidaEntityId;
 import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.PartidaEntity;
+import com.mercadodabola.mercadotransferencia.domain.exception.ClubeNaoEncontradoException;
+import com.mercadodabola.mercadotransferencia.domain.exception.JogadorNaoEncontradoException;
 import com.mercadodabola.mercadotransferencia.repositories.GolAssistPartidaRepository;
 import com.mercadodabola.mercadotransferencia.repositories.JogadorRepository;
 import com.mercadodabola.mercadotransferencia.repositories.PartidaRepository;
@@ -32,7 +34,9 @@ public class GolAssistPartidaService {
 	public GolAssistPartidaEntity cadastrar(GolAssistenciaDto golAssistDto, PartidaDto partidaDto) {
 		GolAssistPartidaEntity golAssistPartidaEntity = new GolAssistPartidaEntity();
 		GolAssistPartidaEntityId golAssistPartidaEntityId = new GolAssistPartidaEntityId();
-		JogadorEntity jogador = jogadorRepository.findById(golAssistDto.getIdJogador()).get();
+		JogadorEntity jogador = jogadorRepository.findById(golAssistDto.getIdJogador())
+				.orElseThrow((() -> new JogadorNaoEncontradoException(
+						String.format("Não existe um cadastro de jogador com este Id"))));
 		PartidaEntity partida = partidaRepository.findById(partidaDto.getPartidaId()).get();
 		
 		golAssistPartidaEntity.setMinutoSegundos(golAssistDto.getMinutoSegundo());
