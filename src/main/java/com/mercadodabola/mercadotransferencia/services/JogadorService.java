@@ -100,14 +100,13 @@ public class JogadorService {
 		List<ContratoEntity> listEntity = contratoRepository.findByClubeId(clubeId);
 		ClubeEntity clube = clubeRepository.findById(clubeId).orElseThrow(() -> new ClubeNaoEncontradoException(
 				String.format("Não existe um cadastro de clube com o código %d", clubeId)));
-	
 		listEntity.forEach(contratoEntity -> {
 			ListaJogadorPorClubeIdDto dto = jogadorConverter.listToJogadorPorIdClube(contratoEntity.getJogador());
 			retorno.add(dto);
-
 		});
 		return retorno;
 		}
+	
 	
 	
 	public ResponseEntity<JogadorDto> buscar(Long jogadorId) {

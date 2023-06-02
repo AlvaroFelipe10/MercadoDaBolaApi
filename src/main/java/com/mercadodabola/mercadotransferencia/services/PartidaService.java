@@ -141,7 +141,6 @@ public class PartidaService {
 //		GolAssistPartidaEntityId golAssistPartidaEntityId = new GolAssistPartidaEntityId();
 //		GolAssistPartidaEntity golAssistPartidaEntity = new GolAssistPartidaEntity();
 //		
-//
 //		golAssistPartidaEntityId.setPartida(partidaEntity);
 //		golAssistPartidaEntity.setId(golAssistPartidaEntityId);
 //		golAssistRepository.save(golAssistPartidaEntity);

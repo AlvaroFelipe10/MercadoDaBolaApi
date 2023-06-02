@@ -59,6 +59,6 @@ public class ClubeService {
 		return ResponseEntity.notFound().build();
 	}
 	
-	
+	 
 	
 }
