@@ -3,7 +3,6 @@ package com.mercadodabola.mercadotransferencia.domain.entities;
 
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,9 +12,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -72,4 +69,7 @@ public class JogadorEntity {
 //			inverseJoinColumns = @JoinColumn(name = "jogador_id"))
 //	private List<JogadorEntity> jogadores = new ArrayList<>();
 
+//	@JsonIgnore
+//	@OneToMany
+//	private List<GolAssistPartidaEntity> golAssistencia;
 }

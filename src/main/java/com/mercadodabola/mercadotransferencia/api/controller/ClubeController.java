@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mercadodabola.mercadotransferencia.domain.dtos.AtualizacaoDeCaixaDto;
+import com.mercadodabola.mercadotransferencia.domain.dtos.ClubeDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.ListaJogadorPorClubeIdDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
-import com.mercadodabola.mercadotransferencia.domain.entities.ContratoEntity;
 import com.mercadodabola.mercadotransferencia.services.ClubeService;
 import com.mercadodabola.mercadotransferencia.services.JogadorService;
 
@@ -37,9 +37,14 @@ public class ClubeController {
 		return clubeService.listar();
 	}
 	
+//	@GetMapping("/{clubeId}")
+//	public List<ListaJogadorPorClubeIdDto> listaJogador(@PathVariable  Long clubeId){
+//		return jogadorService.listaJogadorPorIdClube(clubeId);
+//	}
+	
 	@GetMapping("/{clubeId}")
-	public List<ListaJogadorPorClubeIdDto> listaJogador(@PathVariable  Long clubeId){
-		return jogadorService.listaJogadorPorIdClube(clubeId);
+	public List<ClubeDto> listaGolAssistencia(@PathVariable Long clubeId){
+		return clubeService.listaGolAssistencia(clubeId);
 	}
 	
 	@PutMapping("/atualizacaoCaixa")

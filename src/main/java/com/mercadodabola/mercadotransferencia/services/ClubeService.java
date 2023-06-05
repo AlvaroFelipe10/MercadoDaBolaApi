@@ -1,20 +1,21 @@
 package com.mercadodabola.mercadotransferencia.services;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import org.hibernate.query.criteria.internal.expression.function.AggregationFunction.SUM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.mercadodabola.mercadotransferencia.domain.converters.ClubeConverter;
 import com.mercadodabola.mercadotransferencia.domain.converters.JogadorConverter;
 import com.mercadodabola.mercadotransferencia.domain.dtos.AtualizacaoDeCaixaDto;
+import com.mercadodabola.mercadotransferencia.domain.dtos.ClubeDto;
+import com.mercadodabola.mercadotransferencia.domain.dtos.ListaJogadorPorClubeIdDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ContratoEntity;
+import com.mercadodabola.mercadotransferencia.domain.exception.ClubeNaoEncontradoException;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ContratoRepository;
 
@@ -29,6 +30,9 @@ public class ClubeService {
 	
 	@Autowired
 	private JogadorConverter jogadorConverter;
+	
+	@Autowired 
+	private ClubeConverter clubeConverter;
 	
 
 	public List<ClubeEntity> listar(){
@@ -54,11 +58,21 @@ public class ClubeService {
 	public ResponseEntity<ClubeEntity> buscar(Long clubeId){
 		Optional<ClubeEntity> clube = clubeRepository.findById(clubeId);
 		if(clube != null) {
-			return ResponseEntity.ok(clube.get());
+			return ResponseEntity.ok(clube.get()); 
 		}
 		return ResponseEntity.notFound().build();
 	}
 	
+	public List<ClubeDto> listaGolAssistencia(Long clubeId) {
+		List<ClubeDto> retorno =  new ArrayList<>();
+		List<ContratoEntity> contrato = contratoRepository.findByClubeId(clubeId);
+		ClubeEntity clube = clubeRepository.findById(clubeId).get();
+		contrato.forEach(contratoEntity -> {
+			ClubeDto dto = clubeConverter.listaGolAssistencia(contratoEntity.getJogador());
+			retorno.add(dto);
+		});
+		return retorno;
+	}
 	 
 	
 }

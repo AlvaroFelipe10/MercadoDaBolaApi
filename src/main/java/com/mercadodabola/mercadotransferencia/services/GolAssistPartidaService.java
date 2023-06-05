@@ -5,12 +5,13 @@ import org.springframework.stereotype.Service;
 
 import com.mercadodabola.mercadotransferencia.domain.dtos.GolAssistenciaDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.PartidaDto;
+import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.GolAssistPartidaEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.GolAssistPartidaEntityId;
 import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.PartidaEntity;
-import com.mercadodabola.mercadotransferencia.domain.exception.ClubeNaoEncontradoException;
 import com.mercadodabola.mercadotransferencia.domain.exception.JogadorNaoEncontradoException;
+import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
 import com.mercadodabola.mercadotransferencia.repositories.GolAssistPartidaRepository;
 import com.mercadodabola.mercadotransferencia.repositories.JogadorRepository;
 import com.mercadodabola.mercadotransferencia.repositories.PartidaRepository;
@@ -27,6 +28,9 @@ public class GolAssistPartidaService {
 	@Autowired
 	private PartidaRepository partidaRepository;
 	
+	@Autowired
+	private ClubeRepository clubeRepository;
+	
 	public GolAssistPartidaEntity salvar(GolAssistPartidaEntity golAssist) {
 		return golAssistRepository.save(golAssist);
 	}
@@ -38,19 +42,24 @@ public class GolAssistPartidaService {
 				.orElseThrow((() -> new JogadorNaoEncontradoException(
 						String.format("Não existe um cadastro de jogador com este Id"))));
 		PartidaEntity partida = partidaRepository.findById(partidaDto.getPartidaId()).get();
+		ClubeEntity clube = clubeRepository.findById(golAssistDto.getIdClube()).get();
 		
 		golAssistPartidaEntity.setMinutoSegundos(golAssistDto.getMinutoSegundo());
 		golAssistPartidaEntity.setTipoLance(golAssistDto.getTipoLance());
 		
 		golAssistPartidaEntityId.setIdJogador(jogador);
 		golAssistPartidaEntityId.setPartida(partida);
+		golAssistPartidaEntityId.setClube(clube);
 		
 		golAssistPartidaEntity.setId(golAssistPartidaEntityId);
-		 
 		return golAssistRepository.save(golAssistPartidaEntity);
 		
 	}
 	
+	public long quantidadeGolAssistencia (GolAssistPartidaEntity golAssist) {
+		long qtdGols = null;
+		long qtdAssistencias = null;
+	}
 	
 
 		

@@ -23,4 +23,7 @@ public class GolAssistPartidaEntityId implements Serializable{
 	@JoinColumn(name = "jogador_id")
 	private JogadorEntity idJogador;
 
+	@ManyToOne 
+	@JoinColumn(name = "clube_id")
+	private ClubeEntity clube;
 }
