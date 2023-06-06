@@ -15,6 +15,7 @@ import com.mercadodabola.mercadotransferencia.domain.dtos.ClubeDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.ListaJogadorPorClubeIdDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ContratoEntity;
+import com.mercadodabola.mercadotransferencia.domain.enums.TipoGolAssist;
 import com.mercadodabola.mercadotransferencia.domain.exception.ClubeNaoEncontradoException;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ContratoRepository;
@@ -73,6 +74,5 @@ public class ClubeService {
 		});
 		return retorno;
 	}
-	 
 	
 }

@@ -1,8 +1,5 @@
 package com.mercadodabola.mercadotransferencia.domain.dtos;
 
-import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
-import com.mercadodabola.mercadotransferencia.domain.enums.Posicoes;
-
 import lombok.Builder;
 import lombok.Data;
 

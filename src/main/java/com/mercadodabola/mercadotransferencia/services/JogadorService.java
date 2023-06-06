@@ -46,7 +46,7 @@ public class JogadorService {
 
 	@Autowired
 	private ContratoRepository contratoRepository;
-	
+
 	@Autowired
 	private ContratoService contratoService;
 
@@ -55,10 +55,9 @@ public class JogadorService {
 
 	@Autowired
 	private CalculaTempoContrato calculaTempo;
-	
-	private static final String MSG_JOGADOR_NAO_ENCONTRADO
-    = "Não existe um cadastro de jogador com código %d";
-	
+
+	private static final String MSG_JOGADOR_NAO_ENCONTRADO = "Não existe um cadastro de jogador com código %d";
+
 	public JogadorEntity salvar(JogadorEntity jogador) {
 //		Long clubeId = jogador.getClube().getId();
 //		ClubeEntity clube = clubeRepository.findById(clubeId).orElseThrow(() -> new ClubeNaoEncontradoException(
@@ -67,8 +66,7 @@ public class JogadorService {
 //		Long contratoId = jogador.getContrato().getId();
 //		ContratoEntity contratoEntity = (contratoService.buscarOuFalhar(contratoId)
 //				.orElseThrow(() -> new ContratoNaoEncontradoException(String.format("Não existe um cadastro de contrato com o id %d", contratoId))));
-		
-		
+
 		if (calculaIdade.isIdadeValida(jogador.getDataNascimento())) {
 			return jogadorRepository.save(jogador);
 		} else {
@@ -90,11 +88,11 @@ public class JogadorService {
 		}
 		return retorno;
 	}
-	
-	public List<JogadorEntity> listarTodos(){
-		return jogadorRepository.findAll(); 
+
+	public List<JogadorEntity> listarTodos() {
+		return jogadorRepository.findAll();
 	}
-	
+
 	public List<ListaJogadorPorClubeIdDto> listaJogadorPorIdClube(Long clubeId) {
 		List<ListaJogadorPorClubeIdDto> retorno = new ArrayList<>();
 		List<ContratoEntity> listEntity = contratoRepository.findByClubeId(clubeId);
@@ -105,10 +103,8 @@ public class JogadorService {
 			retorno.add(dto);
 		});
 		return retorno;
-		}
-	
-	
-	
+	}
+
 	public ResponseEntity<JogadorDto> buscar(Long jogadorId) {
 		Optional<JogadorEntity> jogador = jogadorRepository.findById(jogadorId);
 		if (jogador != null) {
@@ -116,6 +112,5 @@ public class JogadorService {
 		}
 		return ResponseEntity.notFound().build();
 	}
-		
-	
+
 }

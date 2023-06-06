@@ -56,10 +56,6 @@ public class GolAssistPartidaService {
 		
 	}
 	
-	public long quantidadeGolAssistencia (GolAssistPartidaEntity golAssist) {
-		long qtdGols = null;
-		long qtdAssistencias = null;
-	}
 	
 
 		

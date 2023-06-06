@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import com.mercadodabola.mercadotransferencia.domain.converters.ClubeConverter;
 import com.mercadodabola.mercadotransferencia.domain.dtos.ClubeDto;
+import com.mercadodabola.mercadotransferencia.domain.entities.GolAssistPartidaEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
 
 @Component
@@ -19,5 +20,6 @@ public class ClubeConverterImpl implements ClubeConverter {
 		
 		return retorno;
 	}
+
 
 }
