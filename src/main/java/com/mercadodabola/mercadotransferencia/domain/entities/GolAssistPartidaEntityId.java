@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 @Embeddable
 public class GolAssistPartidaEntityId implements Serializable{
 	
-	
+	 
 	@ManyToOne
 	@JoinColumn(name = "partida_id")	
 	private PartidaEntity partida;

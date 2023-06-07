@@ -30,7 +30,6 @@ public class GolAssistPartidaEntity  {
 //	@ManyToOne
 //	@JoinColumn(name = "jogador_id", nullable = false )
 //	private JogadorEntity idJogador;
-	
 	private String minutoSegundos;
 	
 	@Enumerated(EnumType.STRING)

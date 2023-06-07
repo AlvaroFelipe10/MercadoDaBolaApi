@@ -14,8 +14,6 @@ public class ClubeConverterImpl implements ClubeConverter {
 	public ClubeDto listaGolAssistencia(JogadorEntity jogadorEntity) {
 		ClubeDto retorno = ClubeDto.builder()
 				.nome(jogadorEntity.getNome())
-				.gols(null)
-				.assistencias(null)
 				.build();
 		
 		return retorno;

@@ -7,14 +7,17 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import com.mercadodabola.mercadotransferencia.domain.converters.ClubeConverter;
 import com.mercadodabola.mercadotransferencia.domain.converters.JogadorConverter;
 import com.mercadodabola.mercadotransferencia.domain.dtos.AtualizacaoDeCaixaDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.ClubeDto;
+import com.mercadodabola.mercadotransferencia.domain.dtos.GolAssistenciaDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.ListaJogadorPorClubeIdDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ContratoEntity;
+import com.mercadodabola.mercadotransferencia.domain.enums.MandanteOuVisitante;
 import com.mercadodabola.mercadotransferencia.domain.enums.TipoGolAssist;
 import com.mercadodabola.mercadotransferencia.domain.exception.ClubeNaoEncontradoException;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
@@ -72,7 +75,7 @@ public class ClubeService {
 			ClubeDto dto = clubeConverter.listaGolAssistencia(contratoEntity.getJogador());
 			retorno.add(dto);
 		});
+		
 		return retorno;
 	}
-	
 }

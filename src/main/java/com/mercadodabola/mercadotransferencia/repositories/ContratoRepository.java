@@ -32,4 +32,5 @@ public interface ContratoRepository extends JpaRepository <ContratoEntity, Long>
 	BigDecimal obterSalarioTotal(Long clubeId);
 	
 	
+	
 }
