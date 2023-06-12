@@ -1,5 +1,10 @@
 package com.mercadodabola.mercadotransferencia.domain.dtos;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
+import com.mercadodabola.mercadotransferencia.domain.enums.TipoGolAssist;
+
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,8 +15,11 @@ public class ClubeDto {
 	
 	private String nome;
 	
-	private Long gols;
+	@Enumerated(EnumType.STRING)
+	private TipoGolAssist tipoGolAssist;
 	
-	private Long assistencias;
+//	private Long gols;
+//	
+//	private Long assistencias;
 
 }

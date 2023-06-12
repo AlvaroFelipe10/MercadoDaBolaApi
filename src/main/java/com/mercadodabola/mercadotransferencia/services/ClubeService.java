@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import com.mercadodabola.mercadotransferencia.domain.converters.ClubeConverter;
 import com.mercadodabola.mercadotransferencia.domain.converters.JogadorConverter;
 import com.mercadodabola.mercadotransferencia.domain.dtos.AtualizacaoDeCaixaDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.ClubeDto;
@@ -22,6 +21,7 @@ import com.mercadodabola.mercadotransferencia.domain.enums.TipoGolAssist;
 import com.mercadodabola.mercadotransferencia.domain.exception.ClubeNaoEncontradoException;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ContratoRepository;
+import com.mercadodabola.mercadotransferencia.repositories.GolAssistPartidaRepository;
 
 @Service
 public class ClubeService {
@@ -36,7 +36,7 @@ public class ClubeService {
 	private JogadorConverter jogadorConverter;
 	
 	@Autowired 
-	private ClubeConverter clubeConverter;
+	private GolAssistPartidaRepository golAssistRepository;
 	
 
 	public List<ClubeEntity> listar(){
@@ -68,14 +68,19 @@ public class ClubeService {
 	}
 	
 	public List<ClubeDto> listaGolAssistencia(Long clubeId) {
-		List<ClubeDto> retorno =  new ArrayList<>();
-		List<ContratoEntity> contrato = contratoRepository.findByClubeId(clubeId);
+		List<ClubeDto> retorno = new ArrayList<>();
 		ClubeEntity clube = clubeRepository.findById(clubeId).get();
-		contrato.forEach(contratoEntity -> {
-			ClubeDto dto = clubeConverter.listaGolAssistencia(contratoEntity.getJogador());
-			retorno.add(dto);
-		});
 		
-		return retorno;
+		
+		
+//		List<ClubeDto> retorno =  new ArrayList<>();
+//		List<ContratoEntity> contrato = contratoRepository.findByClubeId(clubeId);
+//		ClubeEntity clube = clubeRepository.findById(clubeId).get();
+//		contrato.forEach(contratoEntity -> {
+//			ClubeDto dto = golAssistRepository.verificaGols(null, 0);
+//			retorno.add(dto);
+//		});
+		
+//		return retorno;
 	}
 }

@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -52,7 +51,7 @@ public class PartidaEntity {
 	
 	private int numeroRodada;
 	
-//	@JsonIgnore
-//	@OneToMany
-//	private List<GolAssistPartidaEntity> golAssistencia;
+	@JsonIgnore
+	@OneToMany
+	private List<GolAssistPartidaEntity> golAssistencia;
 }

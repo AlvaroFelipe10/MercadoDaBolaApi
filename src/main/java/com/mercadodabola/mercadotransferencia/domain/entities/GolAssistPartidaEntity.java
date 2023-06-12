@@ -4,6 +4,8 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.mercadodabola.mercadotransferencia.domain.enums.TipoGolAssist;
 
@@ -30,7 +32,14 @@ public class GolAssistPartidaEntity  {
 //	@ManyToOne
 //	@JoinColumn(name = "jogador_id", nullable = false )
 //	private JogadorEntity idJogador;
-	private String minutoSegundos;
+	
+	@ManyToOne
+	@JoinColumn(name = "partida_id")
+	private PartidaEntity partida;
+	
+	@ManyToOne 
+	@JoinColumn(name = "clube_id")
+	private ClubeEntity clube;
 	
 	@Enumerated(EnumType.STRING)
 	private TipoGolAssist tipoLance;

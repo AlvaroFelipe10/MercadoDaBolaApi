@@ -14,16 +14,11 @@ import lombok.EqualsAndHashCode;
 @Embeddable
 public class GolAssistPartidaEntityId implements Serializable{
 	
-	 
-	@ManyToOne
-	@JoinColumn(name = "partida_id")	
-	private PartidaEntity partida;
 	
 	@ManyToOne
 	@JoinColumn(name = "jogador_id")
 	private JogadorEntity idJogador;
 
-	@ManyToOne 
-	@JoinColumn(name = "clube_id")
-	private ClubeEntity clube;
+	
+	private String minutoSegundos;
 }
