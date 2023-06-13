@@ -37,9 +37,11 @@ public class GolAssistPartidaEntity  {
 	@JoinColumn(name = "partida_id")
 	private PartidaEntity partida;
 	
-	@ManyToOne 
-	@JoinColumn(name = "clube_id")
-	private ClubeEntity clube;
+	@ManyToOne
+	@JoinColumn(name = "jogador_id")
+	private JogadorEntity idJogador;
+	
+	
 	
 	@Enumerated(EnumType.STRING)
 	private TipoGolAssist tipoLance;

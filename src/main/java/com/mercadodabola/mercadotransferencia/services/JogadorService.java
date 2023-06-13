@@ -16,10 +16,12 @@ import org.springframework.stereotype.Service;
 import com.mercadodabola.mercadotransferencia.domain.converters.JogadorConverter;
 import com.mercadodabola.mercadotransferencia.domain.dtos.ListaJogadorPorClubeIdDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.TransferenciaJogadorDto;
+import com.mercadodabola.mercadotransferencia.domain.dtos.ClubeDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorListDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ContratoEntity;
+import com.mercadodabola.mercadotransferencia.domain.entities.GolAssistPartidaEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
 import com.mercadodabola.mercadotransferencia.domain.exception.ClubeNaoEncontradoException;
 import com.mercadodabola.mercadotransferencia.domain.exception.ContratoNaoEncontradoException;
@@ -30,6 +32,7 @@ import com.mercadodabola.mercadotransferencia.domain.util.CalculaIdade;
 import com.mercadodabola.mercadotransferencia.domain.util.CalculaTempoContrato;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ContratoRepository;
+import com.mercadodabola.mercadotransferencia.repositories.GolAssistPartidaRepository;
 import com.mercadodabola.mercadotransferencia.repositories.JogadorRepository;
 
 @Service
@@ -55,6 +58,9 @@ public class JogadorService {
 
 	@Autowired
 	private CalculaTempoContrato calculaTempo;
+	
+	@Autowired
+	private GolAssistPartidaRepository golAssistRepository;
 
 	private static final String MSG_JOGADOR_NAO_ENCONTRADO = "Não existe um cadastro de jogador com código %d";
 
@@ -104,7 +110,17 @@ public class JogadorService {
 		});
 		return retorno;
 	}
-
+	
+//	public List<ClubeDto> listaGolAssistencia(long clubeId){
+//		List<ClubeDto> retorno = new ArrayList<>();
+//		List<GolAssistPartidaEntity> listEntity = golAssistRepository.verificaGols();
+//		listEntity.forEach(golAssistPartidaEntity -> {
+//			ClubeDto dto = jogadorConverter.listaGolAssistencia(golAssistPartidaEntity.getId().getIdJogador());
+//			retorno.add(dto);
+//		});
+//		return retorno;
+//	}
+	
 	public ResponseEntity<JogadorDto> buscar(Long jogadorId) {
 		Optional<JogadorEntity> jogador = jogadorRepository.findById(jogadorId);
 		if (jogador != null) {

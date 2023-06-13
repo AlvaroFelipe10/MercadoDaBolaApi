@@ -42,10 +42,10 @@ public class ClubeController {
 //		return jogadorService.listaJogadorPorIdClube(clubeId);
 //	}
 	
-	@GetMapping("/{clubeId}")
-	public List<ClubeDto> listaGolAssistencia(@PathVariable Long clubeId){
-		return clubeService.listaGolAssistencia(clubeId);
-	}
+//	@GetMapping("/{clubeId}")
+//	public List<ClubeDto> listaGolAssistencia(@PathVariable Long clubeId){
+//		return jogadorService.listaGolAssistencia(clubeId);
+//	}
 	
 	@PutMapping("/atualizacaoCaixa")
 	public ClubeEntity atualizacaoCaixa(@Valid @RequestBody AtualizacaoDeCaixaDto atualizaCaixa) {

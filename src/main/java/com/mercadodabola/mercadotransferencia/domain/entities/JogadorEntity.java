@@ -69,7 +69,7 @@ public class JogadorEntity {
 //			inverseJoinColumns = @JoinColumn(name = "jogador_id"))
 //	private List<JogadorEntity> jogadores = new ArrayList<>();
 
-//	@JsonIgnore
-//	@OneToMany
-//	private List<GolAssistPartidaEntity> golAssistencia;
+	@JsonIgnore
+	@OneToMany
+	private List<GolAssistPartidaEntity> golAssistencia;
 }

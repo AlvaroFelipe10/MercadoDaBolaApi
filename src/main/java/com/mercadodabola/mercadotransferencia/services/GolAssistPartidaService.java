@@ -44,15 +44,14 @@ public class GolAssistPartidaService {
 		PartidaEntity partida = partidaRepository.findById(partidaDto.getPartidaId()).get();
 		ClubeEntity clube = clubeRepository.findById(golAssistDto.getIdClube()).get();
 		
-		//golAssistPartidaEntity.setMinutoSegundos(golAssistDto.getMinutoSegundo());
+		
 		golAssistPartidaEntity.setTipoLance(golAssistDto.getTipoLance());
 		golAssistPartidaEntity.setPartida(partida);
-		golAssistPartidaEntity.setClube(clube);
+		golAssistPartidaEntity.setIdJogador(jogador);
 		
 		golAssistPartidaEntityId.setMinutoSegundos(golAssistDto.getMinutoSegundo());
-		golAssistPartidaEntityId.setIdJogador(jogador);
-	//	golAssistPartidaEntityId.setPartida(partida);
-	//	golAssistPartidaEntityId.setClube(clube);
+		golAssistPartidaEntityId.setClube(clube);
+
 		
 		golAssistPartidaEntity.setId(golAssistPartidaEntityId);
 		return golAssistRepository.save(golAssistPartidaEntity);
