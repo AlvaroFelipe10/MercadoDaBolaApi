@@ -7,6 +7,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mercadodabola.mercadotransferencia.domain.enums.TipoGolAssist;
 
 import lombok.Data;
@@ -33,6 +34,7 @@ public class GolAssistPartidaEntity  {
 //	@JoinColumn(name = "jogador_id", nullable = false )
 //	private JogadorEntity idJogador;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "partida_id")
 	private PartidaEntity partida;
@@ -40,7 +42,6 @@ public class GolAssistPartidaEntity  {
 	@ManyToOne
 	@JoinColumn(name = "jogador_id")
 	private JogadorEntity idJogador;
-	
 	
 	
 	@Enumerated(EnumType.STRING)

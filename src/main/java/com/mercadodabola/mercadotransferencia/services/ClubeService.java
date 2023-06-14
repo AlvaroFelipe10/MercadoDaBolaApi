@@ -12,6 +12,7 @@ import com.mercadodabola.mercadotransferencia.domain.converters.ClubeConverter;
 import com.mercadodabola.mercadotransferencia.domain.converters.JogadorConverter;
 import com.mercadodabola.mercadotransferencia.domain.dtos.AtualizacaoDeCaixaDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.ClubeDto;
+import com.mercadodabola.mercadotransferencia.domain.dtos.GolAssistenciaDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ContratoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.GolAssistPartidaEntity;
@@ -62,7 +63,6 @@ public class ClubeService {
 			return clubeRepository.save(clubeEntity);
 	}
 	
-		
 	public ResponseEntity<ClubeEntity> buscar(Long clubeId){
 		Optional<ClubeEntity> clube = clubeRepository.findById(clubeId);
 		if(clube != null) {
@@ -71,20 +71,11 @@ public class ClubeService {
 		return ResponseEntity.notFound().build();
 	}
 	
+//	public List<ClubeDto> listaClubeGolAssistencia(Long clubeId){
+		List<ClubeDto> retorno = new ArrayList<>();
+		
+		
+	}
+	
 	
 
-	
-
-//	public List<ClubeDto> listaGolAssistencia(Long clubeId) {
-//		List<ClubeDto> retorno =  new ArrayList<>();
-//		List<ContratoEntity> contrato = contratoRepository.findByClubeId(clubeId);
-//		ClubeEntity clube = clubeRepository.findById(clubeId).get();
-//		contrato.forEach(contratoEntity -> {
-//			ClubeDto dto = clubeConverter.listaGolAssistencia(contratoEntity.getJogador());
-//			retorno.add(dto);
-//		});
-//	
-//		return retorno;
-//	}
-	
-}

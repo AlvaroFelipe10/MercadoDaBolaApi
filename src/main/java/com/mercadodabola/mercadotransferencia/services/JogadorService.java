@@ -111,16 +111,6 @@ public class JogadorService {
 		return retorno;
 	}
 	
-//	public List<ClubeDto> listaGolAssistencia(long clubeId){
-//		List<ClubeDto> retorno = new ArrayList<>();
-//		List<GolAssistPartidaEntity> listEntity = golAssistRepository.verificaGols();
-//		listEntity.forEach(golAssistPartidaEntity -> {
-//			ClubeDto dto = jogadorConverter.listaGolAssistencia(golAssistPartidaEntity.getId().getIdJogador());
-//			retorno.add(dto);
-//		});
-//		return retorno;
-//	}
-	
 	public ResponseEntity<JogadorDto> buscar(Long jogadorId) {
 		Optional<JogadorEntity> jogador = jogadorRepository.findById(jogadorId);
 		if (jogador != null) {

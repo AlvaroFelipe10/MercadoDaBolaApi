@@ -79,12 +79,5 @@ public class JogadorConverterImpl implements JogadorConverter{
 		
 	}
 
-	public ClubeDto listaGolAssistencia(JogadorEntity jogadorEntity) {
-		ClubeDto retorno = ClubeDto.builder()
-				.nome(jogadorEntity.getNome())
-				.build();
-		return retorno;
-	}
-
 
 }

@@ -1,7 +1,6 @@
 package com.mercadodabola.mercadotransferencia.domain.converters;
 
 
-import com.mercadodabola.mercadotransferencia.domain.dtos.ClubeDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorListDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.ListaJogadorPorClubeIdDto;
@@ -14,6 +13,5 @@ public interface JogadorConverter {
 	
 	public ListaJogadorPorClubeIdDto listToJogadorPorIdClube(JogadorEntity jogadorEntity);
 	
-	public ClubeDto listaGolAssistencia(JogadorEntity jogadorEntity);
-	
+
 }

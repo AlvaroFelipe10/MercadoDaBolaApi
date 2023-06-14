@@ -44,7 +44,7 @@ public class ClubeController {
 	
 //	@GetMapping("/{clubeId}")
 //	public List<ClubeDto> listaGolAssistencia(@PathVariable Long clubeId){
-//		return jogadorService.listaGolAssistencia(clubeId);
+//		return clubeService.listaGolAssistencia(clubeId);
 //	}
 	
 	@PutMapping("/atualizacaoCaixa")

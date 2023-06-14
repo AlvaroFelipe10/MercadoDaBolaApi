@@ -1,9 +1,15 @@
 package com.mercadodabola.mercadotransferencia.services;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mercadodabola.mercadotransferencia.domain.converters.GolsAssistenciasConverter;
 import com.mercadodabola.mercadotransferencia.domain.dtos.GolAssistenciaDto;
+import com.mercadodabola.mercadotransferencia.domain.dtos.GolsAssistenciasDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.PartidaDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.GolAssistPartidaEntity;
@@ -31,8 +37,21 @@ public class GolAssistPartidaService {
 	@Autowired
 	private ClubeRepository clubeRepository;
 	
+	@Autowired GolsAssistenciasConverter golAssistConverter;
+	
 	public GolAssistPartidaEntity salvar(GolAssistPartidaEntity golAssist) {
 		return golAssistRepository.save(golAssist);
+	}
+	
+	public List<GolsAssistenciasDto> listar() {
+		List<GolsAssistenciasDto> retorno = new ArrayList<>();
+		List<GolAssistPartidaEntity> listEntity = golAssistRepository.verificaGols(0, null);
+		
+		listEntity.forEach(golAssistPartidaEntity -> {
+			GolsAssistenciasDto dto = golAssistConverter.listaGolsAssistencias(golAssistPartidaEntity);
+			retorno.add(dto);
+		});
+		return retorno;
 	}
 
 	public GolAssistPartidaEntity cadastrar(GolAssistenciaDto golAssistDto, PartidaDto partidaDto) {
