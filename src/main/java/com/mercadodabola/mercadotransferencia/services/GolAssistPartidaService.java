@@ -1,9 +1,13 @@
 package com.mercadodabola.mercadotransferencia.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mercadodabola.mercadotransferencia.domain.dtos.GolAssistenciaDto;
+import com.mercadodabola.mercadotransferencia.domain.dtos.GolsAssistenciasDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.PartidaDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.GolAssistPartidaEntity;
@@ -35,8 +39,7 @@ public class GolAssistPartidaService {
 	public GolAssistPartidaEntity salvar(GolAssistPartidaEntity golAssist) {
 		return golAssistRepository.save(golAssist);
 	}
-	
-	
+		
 
 	public GolAssistPartidaEntity cadastrar(GolAssistenciaDto golAssistDto, PartidaDto partidaDto) {
 		GolAssistPartidaEntity golAssistPartidaEntity = new GolAssistPartidaEntity();
@@ -46,7 +49,6 @@ public class GolAssistPartidaService {
 						String.format("Não existe um cadastro de jogador com este Id"))));
 		PartidaEntity partida = partidaRepository.findById(partidaDto.getPartidaId()).get();
 		ClubeEntity clube = clubeRepository.findById(golAssistDto.getIdClube()).get();
-		
 		
 		golAssistPartidaEntity.setTipoLance(golAssistDto.getTipoLance());
 		golAssistPartidaEntity.setPartida(partida);

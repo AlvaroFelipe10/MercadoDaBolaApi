@@ -10,8 +10,12 @@ public class ClubeDto {
 	
 	private String nome;
 		
-	private Long gols;
+	private Long golsCarreira;
 	
-	private Long assistencias;
+	private Long assistenciasCarreira;
+	
+	private Long golsClube;
+	
+	private Long assistenciasClube;
 	
 }

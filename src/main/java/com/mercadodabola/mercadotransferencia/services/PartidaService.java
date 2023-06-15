@@ -73,7 +73,6 @@ public class PartidaService {
 				.orElseThrow(() -> new CampeonatoNaoEncontradoException(MSG_CAMPEONATO_INVALIDO));
 		ClubeEntity visitante = clubeRepository.findById(partidaDto.getVisitanteId())
 				.orElseThrow(() -> new ClubeNaoEncontradoException(MSG_VISITANTE_INVALIDO));;
-
 		PartidaEntity partidaEntity = new PartidaEntity();
 		partidaEntity.setId(partidaDto.getPartidaId());
 		partidaEntity.setMandante(mandante);
@@ -93,7 +92,6 @@ public class PartidaService {
 		this.somarDinheiroCaixa(partidaDto);
 		partidaRepository.save(partidaEntity);
 		this.cadastroDeGolAssist(partidaDto);
-	
 		return partidaRepository.save(partidaEntity);
 	}
 
