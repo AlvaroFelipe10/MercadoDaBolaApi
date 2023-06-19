@@ -16,8 +16,25 @@ public interface GolAssistPartidaRepository extends JpaRepository<GolAssistParti
 			+ "inner join jogador jog on golassis.jogador_id=jog.id\r\n"
 			+ "where golassis.tipo_lance = 'gol' and golassis.clube_id = :clubeId and jogador_id = :jogadorId\r\n"
 			+ "group by golassis.jogador_id;" , nativeQuery = true)
-	Long listaGolsClube(long clubeId, long jogadorId);
+	Long qtdGolsClube(long clubeId, long jogadorId);
 	
+	@Query(value = "select count(golassis.tipo_lance) from gol_assist_partida golassis\r\n"
+			+ "inner join jogador jog on golassis.jogador_id=jog.id\r\n"
+			+ "where golassis.tipo_lance = 'assistencia' and golassis.clube_id = :clubeId and jogador_id = :jogadorId\r\n"
+			+ "group by golassis.jogador_id;",  nativeQuery = true)
+	Long qtdAssistenciasClube(Long clubeId, long jogadorId);
+	
+	@Query(value = "select count(golassis.tipo_lance) from gol_assist_partida golassis\r\n"
+			+ "inner join jogador jog on golassis.jogador_id=jog.id\r\n"
+			+ "where golassis.tipo_lance = 'assistencia' and jogador_id = :jogadorId\r\n"
+			+ "group by golassis.jogador_id;",  nativeQuery = true)
+	Long qtdAssistenciasCarreira(long jogadorId);
+	
+	@Query(value = "select count(golassis.tipo_lance) from gol_assist_partida golassis\r\n"
+			+ "inner join jogador jog on golassis.jogador_id=jog.id\r\n"
+			+ "where golassis.tipo_lance = 'gol' and jogador_id = :jogadorId\r\n"
+			+ "group by golassis.jogador_id;",  nativeQuery = true)
+	Long qtdGolsCarreira(long jogadorId);
 	
 	
 }
