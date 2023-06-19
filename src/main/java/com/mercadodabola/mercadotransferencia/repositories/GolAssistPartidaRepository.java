@@ -12,17 +12,14 @@ import com.mercadodabola.mercadotransferencia.domain.enums.TipoGolAssist;
 @Repository
 public interface GolAssistPartidaRepository extends JpaRepository<GolAssistPartidaEntity, Long>{
 
-	@Query(value = "select jogador.nome, count(gol_assist_partida.tipo_lance), clube.nome from gol_assist_partida\r\n"
-			+ "inner join jogador on gol_assist_partida.jogador_id=jogador.id\r\n"
-			+ "inner join clube on gol_assist_partida.clube_id=clube.id\r\n"
-			+ "where gol_assist_partida.tipo_lance = 'GOL' group by jogador_id  ;", nativeQuery = true)
-	List<GolAssistPartidaEntity> listaGols(long jogadorId, TipoGolAssist tipoGolAssist, long clubeId);
+	@Query(value = "select count(golassis.tipo_lance) from gol_assist_partida golassis\r\n"
+			+ "inner join jogador jog on golassis.jogador_id=jog.id\r\n"
+			+ "where golassis.tipo_lance = 'gol' and golassis.clube_id = :clubeId and jogador_id = :jogadorId\r\n"
+			+ "group by golassis.jogador_id;" , nativeQuery = true)
+	Long listaGolsClube(long clubeId, long jogadorId);
 	
-	@Query(value = "select jogador.nome, count(gol_assist_partida.tipo_lance), clube.nome from gol_assist_partida\r\n"
-			+ "inner join jogador on gol_assist_partida.jogador_id=jogador.id\r\n"
-			+ "inner join clube on gol_assist_partida.clube_id=clube.id\r\n"
-			+ "where gol_assist_partida.tipo_lance = 'ASSISTENCIA' group by jogador_id ;", nativeQuery = true)
-	List<GolAssistPartidaEntity> listaAssistencia(long jogadorId, TipoGolAssist tipoGolAssist, long clubeId);
+	
+	
 }
 
 

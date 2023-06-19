@@ -1,5 +1,9 @@
 package com.mercadodabola.mercadotransferencia.domain.dtos;
 
+import java.util.List;
+
+import com.mercadodabola.mercadotransferencia.domain.entities.GolAssistPartidaEntity;
+
 import lombok.Builder;
 import lombok.Data;
 

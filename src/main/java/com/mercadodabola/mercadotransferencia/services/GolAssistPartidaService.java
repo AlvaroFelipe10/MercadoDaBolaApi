@@ -57,12 +57,11 @@ public class GolAssistPartidaService {
 		golAssistPartidaEntityId.setMinutoSegundos(golAssistDto.getMinutoSegundo());
 		golAssistPartidaEntityId.setClube(clube);
 
-		
 		golAssistPartidaEntity.setId(golAssistPartidaEntityId);
 		return golAssistRepository.save(golAssistPartidaEntity);
 		
 	}
-	
+
 	
 	
 		
