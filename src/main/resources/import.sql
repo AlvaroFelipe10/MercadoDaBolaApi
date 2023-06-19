@@ -62,6 +62,14 @@ insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube
 insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (19, '2022.01.24', '2024.01.24', 11000, 22000, 4, 19);
 insert into contrato (id, data_inicio, data_termino, salario, valor_multa, clube_id, jogador_id) values (20, '2022.01.25', '2024.01.25', 14000, 29000, 4, 20);
 
+#ESTADIOS
+
+insert into estadio (estadio_id, capacidade_maxima, nome, clube_id) values (1, 78838, 'Maracanã', 1)
+insert into estadio (estadio_id, capacidade_maxima, nome, clube_id) values (2, 66795, 'Morumbi', 2)
+insert into estadio (estadio_id, capacidade_maxima, nome, clube_id) values (3, 43713, 'Allianz Parque', 3)
+insert into estadio (estadio_id, capacidade_maxima, nome, clube_id) values (4, 49205, 'Neo Quimica Arena', 4)
+
+
 
 #ATUALIZAÇÃO PARA INSERIR ID
 update jogador set contrato_id = 1 where id = 1;
