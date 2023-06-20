@@ -1,38 +1,27 @@
 package com.mercadodabola.mercadotransferencia.services;
 
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.mercadodabola.mercadotransferencia.domain.converters.JogadorConverter;
-import com.mercadodabola.mercadotransferencia.domain.dtos.ListaJogadorPorClubeIdDto;
-import com.mercadodabola.mercadotransferencia.domain.dtos.TransferenciaJogadorDto;
-import com.mercadodabola.mercadotransferencia.domain.dtos.ClubeDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.JogadorListDto;
+import com.mercadodabola.mercadotransferencia.domain.dtos.ListaJogadorPorClubeIdDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ContratoEntity;
-import com.mercadodabola.mercadotransferencia.domain.entities.GolAssistPartidaEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
 import com.mercadodabola.mercadotransferencia.domain.exception.ClubeNaoEncontradoException;
-import com.mercadodabola.mercadotransferencia.domain.exception.ContratoNaoEncontradoException;
 import com.mercadodabola.mercadotransferencia.domain.exception.IdadeNaoPermitadaException;
-import com.mercadodabola.mercadotransferencia.domain.exception.JogadorNaoEncontradoException;
 import com.mercadodabola.mercadotransferencia.domain.exception.NegocioException;
 import com.mercadodabola.mercadotransferencia.domain.util.CalculaIdade;
-import com.mercadodabola.mercadotransferencia.domain.util.CalculaTempoContrato;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ContratoRepository;
-import com.mercadodabola.mercadotransferencia.repositories.GolAssistPartidaRepository;
 import com.mercadodabola.mercadotransferencia.repositories.JogadorRepository;
 
 @Service
@@ -51,18 +40,9 @@ public class JogadorService {
 	private ContratoRepository contratoRepository;
 
 	@Autowired
-	private ContratoService contratoService;
-
-	@Autowired
 	private CalculaIdade calculaIdade;
 
-	@Autowired
-	private CalculaTempoContrato calculaTempo;
-	
-	@Autowired
-	private GolAssistPartidaRepository golAssistRepository;
 
-	private static final String MSG_JOGADOR_NAO_ENCONTRADO = "Não existe um cadastro de jogador com código %d";
 
 	public JogadorEntity salvar(JogadorEntity jogador) {
 //		Long clubeId = jogador.getClube().getId();

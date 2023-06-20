@@ -1,19 +1,21 @@
 package com.mercadodabola.mercadotransferencia.services;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mercadodabola.mercadotransferencia.domain.converters.CampeonatoConverter;
 import com.mercadodabola.mercadotransferencia.domain.dtos.CampeonatoDto;
-import com.mercadodabola.mercadotransferencia.domain.dtos.ListaJogadorPorClubeIdDto;
+import com.mercadodabola.mercadotransferencia.domain.dtos.CampeonatoTabelaDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.CampeonatoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoEntity;
-import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
-import com.mercadodabola.mercadotransferencia.domain.exception.CampeonatoNaoEncontradoException;
+import com.mercadodabola.mercadotransferencia.domain.entities.PartidaEntity;
 import com.mercadodabola.mercadotransferencia.repositories.CampeonatoRepository;
+import com.mercadodabola.mercadotransferencia.repositories.ClubeCampeonatoRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
+import com.mercadodabola.mercadotransferencia.repositories.PartidaRepository;
 
 @Service
 public class CampeonatoService {
@@ -25,7 +27,16 @@ public class CampeonatoService {
 	private ClubeRepository clubeRepository;
 	
 	@Autowired 
-	private ClubeCampeonatoService clubeCampeonato;
+	private ClubeCampeonatoService clubeCampeonatoService;
+	
+	@Autowired
+	private CampeonatoConverter campeonatoConverter;
+	
+	@Autowired 
+	private ClubeCampeonatoRepository clubeCampeonatoRepository;
+	
+	@Autowired 
+	private PartidaRepository partidaRepository;
 	
 	CampeonatoEntity campeonatoEntity;
 	
@@ -37,10 +48,7 @@ public class CampeonatoService {
 		return campeonatoRepository.save(campeonato);
 	}
 
-	public CampeonatoEntity buscarCampeonato(Long campeonatoId) {
-		return campeonatoRepository.findById(campeonatoId)
-				.orElseThrow(() -> new CampeonatoNaoEncontradoException(String.format("Não existe um cadastro de campeonato com o id %d", campeonatoId)));
-	}
+	
 	
 	public CampeonatoEntity cadastrarCampeonato(CampeonatoDto campeonatoDto) {
 		campeonatoEntity = new CampeonatoEntity();
@@ -51,13 +59,22 @@ public class CampeonatoService {
 		campeonatoEntity = campeonatoRepository.save(campeonatoEntity);
 		
 		campeonatoDto.getClubesCadastrados().forEach(clube -> {
-						ClubeCampeonatoEntity dto = clubeCampeonato.cadastrarClubeCampeonato(campeonatoEntity, clube);
-						
-	
+						ClubeCampeonatoEntity dto = clubeCampeonatoService.cadastrarClubeCampeonato(campeonatoEntity, clube);
 			//chamarmeumetodoPassandoEssesParametros(clube.getId(), campeonatoEntity.getCampeonatoId());
 		});
 		
 		return campeonatoEntity;
+		
+	}
+	
+	public List<CampeonatoTabelaDto> listaTabela(long campeonatoId){
+		List<CampeonatoTabelaDto> retorno = new ArrayList<>();
+		List<CampeonatoEntity> listEntity = campeonatoRepository.findByCampeonatoId(campeonatoId);
+		listEntity.forEach(campeonatoEntity -> {
+			CampeonatoTabelaDto dto = campeonatoConverter.tabelaCampeonato(null);
+			retorno.add(dto);
+		});
+		return retorno;
 		
 	}
 	

@@ -14,7 +14,7 @@ import com.mercadodabola.mercadotransferencia.domain.dtos.ListaJogadorPorClubeId
 import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
 import com.mercadodabola.mercadotransferencia.domain.util.CalculaIdade;
 import com.mercadodabola.mercadotransferencia.domain.util.CalculaTempoContrato;
-
+import com.mercadodabola.mercadotransferencia.repositories.GolAssistPartidaRepository;
 
 
 @Component
@@ -25,6 +25,9 @@ public class JogadorConverterImpl implements JogadorConverter{
 	
 	@Autowired
 	private CalculaTempoContrato calculaContrato;
+	
+	@Autowired
+	private GolAssistPartidaRepository golAssistRepository;
 		
 	
 	public JogadorDto toJogadorDto(JogadorEntity jogadorEntity) {
@@ -59,9 +62,9 @@ public class JogadorConverterImpl implements JogadorConverter{
 				.nome(jogadorEntity.getNome())
 				.posicao(jogadorEntity.getPosicao().name())
 				.build();
+	
 		retorno.setClube(jogadorEntity.getContrato().getClube().getNome());
 		retorno.setSalario(jogadorEntity.getContrato().getSalario());
-		
 		return retorno;
 	}
 	

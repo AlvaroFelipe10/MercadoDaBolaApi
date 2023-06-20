@@ -14,7 +14,6 @@ public class ClubeConverterImpl implements ClubeConverter {
 	@Autowired
 	GolAssistPartidaRepository golAssistRepository;
 
-	
 	public ClubeDto listaClubeDto(JogadorEntity jogadorEntity) {
 		ClubeDto retorno = ClubeDto.builder()
 				.nome(jogadorEntity.getNome())
@@ -34,5 +33,5 @@ public class ClubeConverterImpl implements ClubeConverter {
 		return retorno;
 	}
 	
-
+ 
 }

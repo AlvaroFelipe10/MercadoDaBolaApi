@@ -14,4 +14,5 @@ public class JogadorListDto {
 	private String clube;
 	private BigDecimal salario;
 
+
 }

@@ -9,16 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.mercadodabola.mercadotransferencia.domain.converters.ClubeConverter;
-import com.mercadodabola.mercadotransferencia.domain.converters.JogadorConverter;
 import com.mercadodabola.mercadotransferencia.domain.dtos.AtualizacaoDeCaixaDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.ClubeDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ContratoEntity;
-import com.mercadodabola.mercadotransferencia.domain.entities.GolAssistPartidaEntity;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ContratoRepository;
-import com.mercadodabola.mercadotransferencia.repositories.GolAssistPartidaRepository;
-import com.mercadodabola.mercadotransferencia.repositories.JogadorRepository;
 
 @Service
 public class ClubeService {
@@ -28,16 +24,6 @@ public class ClubeService {
 	
 	@Autowired 
 	private ContratoRepository contratoRepository;
-	
-	@Autowired
-	private JogadorConverter jogadorConverter;
-	
-	@Autowired 
-	private GolAssistPartidaRepository golAssistRepository;
-	
-	
-	@Autowired 
-	private JogadorRepository jogadorRepository;
 	
 	@Autowired 
 	private ClubeConverter clubeConverter;

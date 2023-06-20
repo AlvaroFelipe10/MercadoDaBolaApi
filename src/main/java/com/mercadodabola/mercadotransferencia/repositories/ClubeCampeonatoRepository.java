@@ -15,5 +15,7 @@ public interface ClubeCampeonatoRepository  extends JpaRepository <ClubeCampeona
 	@Query(value = "SELECT * FROM clube_campeonato WHERE clube_id = :visitanteId AND campeonato_id = :campeonatoId",  nativeQuery = true)
 	ClubeCampeonatoEntity verificaRodadaVisitante(Long visitanteId, Long campeonatoId);
 	
+
+	
 	
 }
