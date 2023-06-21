@@ -11,7 +11,7 @@ import com.mercadodabola.mercadotransferencia.domain.dtos.CampeonatoDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.CampeonatoTabelaDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.CampeonatoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoEntity;
-import com.mercadodabola.mercadotransferencia.domain.entities.PartidaEntity;
+import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.repositories.CampeonatoRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeCampeonatoRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;

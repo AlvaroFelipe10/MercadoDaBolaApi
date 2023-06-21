@@ -17,10 +17,10 @@ public class CampeonatoTabelaDto {
 
 	private Long pontos;
 	
-	private long golsSofridos;
+	private Long golsSofridos;
 	
-	private long golsFeitos;
+	private Long golsFeitos;
 	
-	private long saldoDeGols;
+	private Long saldoDeGols;
 
 }

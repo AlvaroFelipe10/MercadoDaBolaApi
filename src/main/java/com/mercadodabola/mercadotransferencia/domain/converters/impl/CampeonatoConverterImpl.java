@@ -17,6 +17,7 @@ public class CampeonatoConverterImpl implements CampeonatoConverter {
 	@Override
 	public CampeonatoTabelaDto tabelaCampeonato(ClubeEntity clubeEntity) {
 		CampeonatoTabelaDto retorno = CampeonatoTabelaDto.builder()
+				.nome(clubeEntity.getNome())
 				.build();
 		return retorno;
 	}
