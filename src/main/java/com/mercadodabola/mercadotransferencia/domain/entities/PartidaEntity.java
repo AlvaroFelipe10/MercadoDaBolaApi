@@ -5,12 +5,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.Valid;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -35,7 +37,9 @@ public class PartidaEntity {
 	@ManyToOne @JoinColumn(name = "visitante_id")
 	private ClubeEntity visitante;
 	
-	@ManyToOne @JoinColumn(name = "campeonato_id")
+	@Valid
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "campeonato_id")
 	private CampeonatoEntity campeonato;
 
 	

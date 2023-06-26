@@ -10,5 +10,5 @@ import com.mercadodabola.mercadotransferencia.domain.entities.CampeonatoEntity;
 @Repository
 public interface CampeonatoRepository extends JpaRepository<CampeonatoEntity, Long> {
 
-	List<CampeonatoEntity> findByCampeonatoId(long campeonatoId);
+	
 }

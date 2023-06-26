@@ -11,7 +11,7 @@ import com.mercadodabola.mercadotransferencia.domain.dtos.CampeonatoDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.CampeonatoTabelaDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.CampeonatoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoEntity;
-import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
+import com.mercadodabola.mercadotransferencia.domain.entities.PartidaEntity;
 import com.mercadodabola.mercadotransferencia.repositories.CampeonatoRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeCampeonatoRepository;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeRepository;
@@ -19,6 +19,8 @@ import com.mercadodabola.mercadotransferencia.repositories.PartidaRepository;
 
 @Service
 public class CampeonatoService {
+	
+	
 	
 	@Autowired 
 	private CampeonatoRepository campeonatoRepository;
@@ -34,7 +36,7 @@ public class CampeonatoService {
 	
 	@Autowired 
 	private ClubeCampeonatoRepository clubeCampeonatoRepository;
-	
+	 
 	@Autowired 
 	private PartidaRepository partidaRepository;
 	
@@ -67,15 +69,16 @@ public class CampeonatoService {
 		
 	}
 	
-	public List<CampeonatoTabelaDto> listaTabela(long campeonatoId){
+	public List<CampeonatoTabelaDto> listarTabela(long campeonatoId){
 		List<CampeonatoTabelaDto> retorno = new ArrayList<>();
-		List<CampeonatoEntity> listEntity = campeonatoRepository.findByCampeonatoId(campeonatoId);
-		listEntity.forEach(campeonatoEntity -> {
-			CampeonatoTabelaDto dto = campeonatoConverter.tabelaCampeonato(null);
+		List<PartidaEntity> listEntity = partidaRepository.findByCampeonatoId(campeonatoId);
+		listEntity.forEach(partidaEntity -> 
+		{
+			CampeonatoTabelaDto dto = campeonatoConverter.tabelaCampeonato(partidaEntity.getMandante());
 			retorno.add(dto);
 		});
-		return retorno;
 		
+		return retorno;
 	}
 	
 	

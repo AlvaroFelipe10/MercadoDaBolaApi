@@ -69,6 +69,15 @@ insert into estadio (estadio_id, capacidade_maxima, nome, clube_id) values (2, 6
 insert into estadio (estadio_id, capacidade_maxima, nome, clube_id) values (3, 43713, 'Allianz Parque', 3)
 insert into estadio (estadio_id, capacidade_maxima, nome, clube_id) values (4, 49205, 'Neo Quimica Arena', 4)
 
+#CAMPEONATO
+insert into campeonato (id, nome_campeonato, quantidade_clubes, tipo_de_campeonato) values (1, "Brasileirao", 4, "PONTOS_CORRIDOS_IDA_VOLTA");
+insert into campeonato (id, nome_campeonato, quantidade_clubes, tipo_de_campeonato) values (2, "Paulistao", 4, "MATA_MATA_IDA_VOLTA");
+
+#ClubeCampeonato
+insert into clube_campeonato(pontos, rodadas_restantes, campeonato_id, clube_id) values (0, 6, 1, 1);
+insert into clube_campeonato(pontos, rodadas_restantes, campeonato_id, clube_id) values (0, 6, 1, 2);
+insert into clube_campeonato(pontos, rodadas_restantes, campeonato_id, clube_id) values (0, 6, 1, 3);
+insert into clube_campeonato(pontos, rodadas_restantes, campeonato_id, clube_id) values (0, 6, 1, 4);
 
 
 #ATUALIZAÇÃO PARA INSERIR ID

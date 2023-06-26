@@ -34,7 +34,7 @@ public class CampeonatoController {
 	
 	@GetMapping("/{campeonatoId}") 
 	public List<CampeonatoTabelaDto> buscarCampeonatoEntity(@PathVariable Long campeonatoId) {
-		return campeonatoService.listaTabela(campeonatoId);
+		return campeonatoService.listarTabela(campeonatoId);
 	}
 	
 	@PostMapping

@@ -9,7 +9,7 @@ public class CampeonatoTabelaDto {
 	
 	private String nome;
 	
-	private long vitorias;
+	private Long vitorias;
 	
 	private Long derrotas;
 	

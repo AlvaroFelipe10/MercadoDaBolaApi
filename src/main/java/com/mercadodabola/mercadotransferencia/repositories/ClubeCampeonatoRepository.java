@@ -1,5 +1,7 @@
 package com.mercadodabola.mercadotransferencia.repositories;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -14,8 +16,6 @@ public interface ClubeCampeonatoRepository  extends JpaRepository <ClubeCampeona
 	
 	@Query(value = "SELECT * FROM clube_campeonato WHERE clube_id = :visitanteId AND campeonato_id = :campeonatoId",  nativeQuery = true)
 	ClubeCampeonatoEntity verificaRodadaVisitante(Long visitanteId, Long campeonatoId);
-	
-
 	
 	
 }
