@@ -58,4 +58,6 @@ public class PartidaEntity {
 	@JsonIgnore
 	@OneToMany
 	private List<GolAssistPartidaEntity> golAssistencia;
+	
+	
 }
