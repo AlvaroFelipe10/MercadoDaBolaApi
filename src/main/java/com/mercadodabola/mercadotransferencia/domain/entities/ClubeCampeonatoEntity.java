@@ -2,8 +2,8 @@ package com.mercadodabola.mercadotransferencia.domain.entities;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -25,6 +25,12 @@ public class ClubeCampeonatoEntity {
 //	@OneToOne
 //	@JoinColumn(name = "campeonato_id", nullable = false)
 //	private CampeonatoEntity campeonatoId;
+	
+	private int vitorias;
+	
+	private int derrotas;
+	
+	private int empates;
 	
 	private int rodadasRestantes;
 	

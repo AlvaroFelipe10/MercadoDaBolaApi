@@ -74,10 +74,10 @@ insert into campeonato (id, nome_campeonato, quantidade_clubes, tipo_de_campeona
 insert into campeonato (id, nome_campeonato, quantidade_clubes, tipo_de_campeonato) values (2, "Paulistao", 4, "MATA_MATA_IDA_VOLTA");
 
 #ClubeCampeonato
-insert into clube_campeonato(pontos, rodadas_restantes, campeonato_id, clube_id) values (0, 6, 1, 1);
-insert into clube_campeonato(pontos, rodadas_restantes, campeonato_id, clube_id) values (0, 6, 1, 2);
-insert into clube_campeonato(pontos, rodadas_restantes, campeonato_id, clube_id) values (0, 6, 1, 3);
-insert into clube_campeonato(pontos, rodadas_restantes, campeonato_id, clube_id) values (0, 6, 1, 4);
+insert into clube_campeonato(pontos, rodadas_restantes, campeonato_id, clube_id, vitorias, derrotas, empates) values (0, 6, 1, 1, 0, 0, 0);
+insert into clube_campeonato(pontos, rodadas_restantes, campeonato_id, clube_id, vitorias, derrotas, empates) values (0, 6, 1, 2, 0, 0, 0);
+insert into clube_campeonato(pontos, rodadas_restantes, campeonato_id, clube_id, vitorias, derrotas, empates) values (0, 6, 1, 3, 0, 0, 0);
+insert into clube_campeonato(pontos, rodadas_restantes, campeonato_id, clube_id, vitorias, derrotas, empates) values (0, 6, 1, 4, 0, 0, 0);
 
 
 #ATUALIZAÇÃO PARA INSERIR ID

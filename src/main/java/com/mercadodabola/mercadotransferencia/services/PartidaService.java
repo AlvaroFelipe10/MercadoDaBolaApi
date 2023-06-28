@@ -162,11 +162,15 @@ public class PartidaService {
 		clubeCampeonato.setId(clubeCampeonatoId);
 		clubeCampeonato.setRodadasRestantes(mandante.getRodadasRestantes() - 1);
 		if (partidaEntity.getGolsMandante() > partidaEntity.getGolsVisitante()) {
-			clubeCampeonato.setPontos(clubeCampeonato.getPontos() + 3);
+			clubeCampeonato.setPontos(clubeCampeonato.getPontos() +3);
+			clubeCampeonato.setVitorias(clubeCampeonato.getVitorias() + 1);
 		} else if (partidaEntity.getGolsMandante() < partidaEntity.getGolsVisitante()) {
 			mandante.setPontos(0);
+			clubeCampeonato.setDerrotas(clubeCampeonato.getDerrotas() + 1);
 		} else if (partidaEntity.getGolsMandante() == partidaEntity.getGolsVisitante())
 			clubeCampeonato.setPontos(clubeCampeonato.getPontos() + 1);
+			clubeCampeonato.setEmpates(clubeCampeonato.getEmpates() +1);
+			
 		clubeCampeonatoRepository.save(clubeCampeonato);
 	}
 
@@ -182,10 +186,13 @@ public class PartidaService {
 		clubeCampeonato.setRodadasRestantes(visitante.getRodadasRestantes() - 1);
 		if (partidaEntity.getGolsVisitante() > partidaEntity.getGolsMandante()) {
 			clubeCampeonato.setPontos(clubeCampeonato.getPontos() + 3);
+			clubeCampeonato.setVitorias(clubeCampeonato.getVitorias() + 1);
 		} else if (partidaEntity.getGolsVisitante() < partidaEntity.getGolsMandante()) {
 			visitante.setPontos(0);
+			clubeCampeonato.setDerrotas(clubeCampeonato.getDerrotas() + 1);
 		} else if (partidaEntity.getGolsMandante() == partidaEntity.getGolsVisitante())
 			clubeCampeonato.setPontos(clubeCampeonato.getPontos() + 1);
+			clubeCampeonato.setEmpates(clubeCampeonato.getEmpates() +1);
 		clubeCampeonatoRepository.save(clubeCampeonato);
 	}
 
