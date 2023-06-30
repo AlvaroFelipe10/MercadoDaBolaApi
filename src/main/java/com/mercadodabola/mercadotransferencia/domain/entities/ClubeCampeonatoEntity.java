@@ -15,7 +15,7 @@ public class ClubeCampeonatoEntity {
 	
 
 	@EmbeddedId
-    private ClubeCampeonatoId id = new ClubeCampeonatoId();
+	private ClubeCampeonatoId id = new ClubeCampeonatoId();
 	
 //	
 //	@OneToOne

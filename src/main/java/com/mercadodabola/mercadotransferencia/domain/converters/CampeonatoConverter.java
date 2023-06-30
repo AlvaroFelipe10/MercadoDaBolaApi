@@ -5,7 +5,7 @@ import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.PartidaEntity;
 
 public interface CampeonatoConverter {
-	public CampeonatoTabelaDto tabelaCampeonato(ClubeEntity clubeEntity,PartidaEntity partidaEntity);
+	public CampeonatoTabelaDto tabelaCampeonato(ClubeEntity clubeEntity);
 	
 	
 }
