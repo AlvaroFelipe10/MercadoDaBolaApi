@@ -74,7 +74,7 @@ public class CampeonatoService {
 		List<ClubeCampeonatoEntity> clubeCampeonato = clubeCampeonatoRepository.findAll();
 		List<PartidaEntity> listEntity = partidaRepository.findByCampeonatoId(campeonatoId);
 		clubeCampeonato.forEach(clubeCampeonatoEntity -> {
-			CampeonatoTabelaDto dto = campeonatoConverter.tabelaCampeonato(clubeCampeonatoEntity.getId().getClubeId());
+			CampeonatoTabelaDto dto = campeonatoConverter.tabelaCampeonato(clubeCampeonatoEntity.getId().getClubeId(), clubeCampeonatoEntity.getId().getCampeonatoId());
 			retorno.add(dto);
 		});
 		

@@ -33,6 +33,10 @@ public interface GolAssistPartidaRepository extends JpaRepository<GolAssistParti
 			+ "group by golassis.jogador_id;",  nativeQuery = true)
 	Long qtdGolsCarreira(long jogadorId);
 	
+	@Query(value = " select count(golassis.tipo_lance) from gol_assist_partida golassis\r\n"
+			+ " inner join clube cb on golassis.clube_id=cb.id\r\n"
+			+ " where golassis.tipo_lance = 'gol' and  clube_id = :clubeId", nativeQuery = true)
+	Long qtdGolsFeitos(Long clubeId);
 	
 }
 

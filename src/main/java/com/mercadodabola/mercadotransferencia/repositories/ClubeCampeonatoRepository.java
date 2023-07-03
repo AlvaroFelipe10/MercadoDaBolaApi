@@ -39,4 +39,14 @@ public interface ClubeCampeonatoRepository  extends JpaRepository <ClubeCampeona
 			+ " from clube_campeonato"
 			+ " where clube_campeonato.clube_id = :clubeId", nativeQuery = true)
 	Long qtdEmpates(Long clubeId);
+	
+//	@Query(value = "select clube.id,\r\n"
+//			+ "(select sum(partida.gols_mandante or partida.gols_visitante)\r\n"
+//			+ "from partida\r\n"
+//			+ "where partida.mandante_id = :clubeId or partida.visitante_id = :clubeId and campeonato_id = :campeonatoId) \r\n"
+//			+ "from clube_campeonato\r\n"
+//			+ "inner join clube on clube_campeonato.clube_id=clube.id\r\n"
+//			+ "where clube_campeonato.campeonato_id = :campeonatoId and clube.id = :clubeId\r\n"
+//			+ "group by clube.id", nativeQuery = true)						
+//	Long qtdGols(Long clubeId, Long campeonatoId);
 }
