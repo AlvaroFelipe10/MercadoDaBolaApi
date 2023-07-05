@@ -8,6 +8,7 @@ import com.mercadodabola.mercadotransferencia.domain.converters.CampeonatoConver
 import com.mercadodabola.mercadotransferencia.domain.dtos.CampeonatoTabelaDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.CampeonatoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
+import com.mercadodabola.mercadotransferencia.domain.entities.PartidaEntity;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeCampeonatoRepository;
 import com.mercadodabola.mercadotransferencia.repositories.GolAssistPartidaRepository;
 import com.mercadodabola.mercadotransferencia.repositories.PartidaRepository;
@@ -26,25 +27,17 @@ public class CampeonatoConverterImpl implements CampeonatoConverter {
 	private PartidaRepository partidaRepository;
 
 	@Override
-	public CampeonatoTabelaDto tabelaCampeonato(ClubeEntity clubeEntity, CampeonatoEntity campeonatoEntity) {
+	public CampeonatoTabelaDto tabelaCampeonato(ClubeEntity clubeEntity, CampeonatoEntity campeonatoEntity, PartidaEntity partidaEntity) {
 		CampeonatoTabelaDto dto = CampeonatoTabelaDto.builder()
 				.nome(clubeEntity.getNome())
-				//.golsFeitos(partidaEntity.getGolsMandante())
-				//.golsSofridos(partidaEntity.getGolsVisitante())
 				.build();
 		dto.setVitorias(clubeCampeonatoRepository.qtdVitorias(clubeEntity.getId()));
 		dto.setPontos(clubeCampeonatoRepository.qtdPontos(clubeEntity.getId()));
 		dto.setDerrotas(clubeCampeonatoRepository.qtdDerrotas(clubeEntity.getId()));
 		dto.setEmpates(clubeCampeonatoRepository.qtdEmpates(clubeEntity.getId()));
-		dto.setGolsFeitos(partidaRepository.qtdGols(campeonatoEntity.getId(), clubeEntity.getId()));
-	
-		//dto.setSaldoDeGols(partidaEntity.getGolsMandante() - partidaEntity.getGolsVisitante());
-//		if(dto.getGolsFeitos() > dto.getGolsSofridos())
-//			dto.setVitorias((long) + 1); dto.setDerrotas((long) 0); dto.setEmpates((long) 0);
-//		if(dto.getGolsSofridos() > dto.getGolsFeitos())
-//			dto.setDerrotas((long) + 1);
-//		if(dto.getGolsFeitos() == dto.getGolsSofridos())
-//			dto.setEmpates((long) + 1);
+		dto.setGolsFeitos(golAssistPartidaRepository.qtdGolsClubesTab(campeonatoEntity.getId(), clubeEntity.getId()));
+		dto.setGolsSofridos(golAssistPartidaRepository.qtdGolsTomadosTab(campeonatoEntity.getId(), clubeEntity.getId(), partidaEntity.getId()));
+		dto.setSaldoDeGols(dto.getGolsFeitos() - dto.getGolsSofridos());
 		return dto;
 	}
 	

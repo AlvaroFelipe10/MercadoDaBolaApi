@@ -21,4 +21,5 @@ public class ClubeCampeonatoId implements Serializable {
     @ManyToOne @JoinColumn(name = "campeonato_id")
 	private CampeonatoEntity campeonatoId;
 	
+   
 }

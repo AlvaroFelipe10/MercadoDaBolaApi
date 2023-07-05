@@ -26,6 +26,7 @@ public class ClubeCampeonatoEntity {
 //	@JoinColumn(name = "campeonato_id", nullable = false)
 //	private CampeonatoEntity campeonatoId;
 	
+
 	private int vitorias;
 	
 	private int derrotas;

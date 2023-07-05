@@ -1,13 +1,9 @@
 package com.mercadodabola.mercadotransferencia.services;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mercadodabola.mercadotransferencia.domain.dtos.GolAssistenciaDto;
-import com.mercadodabola.mercadotransferencia.domain.dtos.GolsAssistenciasDto;
 import com.mercadodabola.mercadotransferencia.domain.dtos.PartidaDto;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.GolAssistPartidaEntity;
@@ -53,6 +49,7 @@ public class GolAssistPartidaService {
 		golAssistPartidaEntity.setTipoLance(golAssistDto.getTipoLance());
 		golAssistPartidaEntity.setPartida(partida);
 		golAssistPartidaEntity.setIdJogador(jogador);
+		golAssistPartidaEntity.setCampeonato(partida.getCampeonato());
 		
 		golAssistPartidaEntityId.setMinutoSegundos(golAssistDto.getMinutoSegundo());
 		golAssistPartidaEntityId.setClube(clube);

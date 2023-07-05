@@ -36,6 +36,11 @@ public class GolAssistPartidaEntity  {
 	
 	@JsonIgnore
 	@ManyToOne
+	@JoinColumn(name = "campeonato_id")
+	private CampeonatoEntity campeonato;
+
+	@JsonIgnore
+	@ManyToOne
 	@JoinColumn(name = "partida_id")
 	private PartidaEntity partida;
 	

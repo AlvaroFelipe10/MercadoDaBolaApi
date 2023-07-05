@@ -9,6 +9,7 @@ import com.mercadodabola.mercadotransferencia.domain.entities.CampeonatoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoId;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
+import com.mercadodabola.mercadotransferencia.domain.entities.PartidaEntity;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeCampeonatoRepository;
 
 @Service
@@ -31,6 +32,7 @@ public class ClubeCampeonatoService {
 		ClubeCampeonatoId clubeCampeonatoId = new ClubeCampeonatoId();
 		clubeCampeonatoId.setCampeonatoId(campeonatoEntity);
 		clubeCampeonatoId.setClubeId(clubeEntity);
+		
 		
 		int quantidadeRodadas = campeonatoEntity.getQuantidadeClubes()
 				* campeonatoEntity.getTipoDeCampeonato().valorTipoCampeonato

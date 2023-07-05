@@ -2,6 +2,7 @@ package com.mercadodabola.mercadotransferencia.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,6 @@ import com.mercadodabola.mercadotransferencia.repositories.PartidaRepository;
 
 @Service
 public class CampeonatoService {
-	
-	
 	
 	@Autowired 
 	private CampeonatoRepository campeonatoRepository;
@@ -74,9 +73,9 @@ public class CampeonatoService {
 		List<ClubeCampeonatoEntity> clubeCampeonato = clubeCampeonatoRepository.findAll();
 		List<PartidaEntity> listEntity = partidaRepository.findByCampeonatoId(campeonatoId);
 		clubeCampeonato.forEach(clubeCampeonatoEntity -> {
-			CampeonatoTabelaDto dto = campeonatoConverter.tabelaCampeonato(clubeCampeonatoEntity.getId().getClubeId(), clubeCampeonatoEntity.getId().getCampeonatoId());
+			CampeonatoTabelaDto dto = campeonatoConverter.tabelaCampeonato(clubeCampeonatoEntity.getId().getClubeId(), clubeCampeonatoEntity.getId().getCampeonatoId(), null);
 			retorno.add(dto);
-		});
+		}); 
 		
 //		listEntity.forEach(partidaEntity -> {
 //		CampeonatoTabelaDto dto = campeonatoConverter.tabelaCampeonato(partidaEntity.getMandante(), partidaEntity);
