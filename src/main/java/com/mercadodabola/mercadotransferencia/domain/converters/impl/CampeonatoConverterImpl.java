@@ -27,7 +27,7 @@ public class CampeonatoConverterImpl implements CampeonatoConverter {
 	private PartidaRepository partidaRepository;
 
 	@Override
-	public CampeonatoTabelaDto tabelaCampeonato(ClubeEntity clubeEntity, CampeonatoEntity campeonatoEntity, PartidaEntity partidaEntity) {
+	public CampeonatoTabelaDto tabelaCampeonato(ClubeEntity clubeEntity, CampeonatoEntity campeonatoEntity) {
 		CampeonatoTabelaDto dto = CampeonatoTabelaDto.builder()
 				.nome(clubeEntity.getNome())
 				.build();
@@ -35,8 +35,8 @@ public class CampeonatoConverterImpl implements CampeonatoConverter {
 		dto.setPontos(clubeCampeonatoRepository.qtdPontos(clubeEntity.getId()));
 		dto.setDerrotas(clubeCampeonatoRepository.qtdDerrotas(clubeEntity.getId()));
 		dto.setEmpates(clubeCampeonatoRepository.qtdEmpates(clubeEntity.getId()));
-		dto.setGolsFeitos(golAssistPartidaRepository.qtdGolsClubesTab(campeonatoEntity.getId(), clubeEntity.getId()));
-		dto.setGolsSofridos(golAssistPartidaRepository.qtdGolsTomadosTab(campeonatoEntity.getId(), clubeEntity.getId(), partidaEntity.getId()));
+		dto.setGolsFeitos(partidaRepository.qtdGolsClubeCampeonato(clubeEntity.getId(), campeonatoEntity.getId()));
+		dto.setGolsSofridos(partidaRepository.qtdGolsClubeTomadosCampeonato(clubeEntity.getId(), campeonatoEntity.getId()));
 		dto.setSaldoDeGols(dto.getGolsFeitos() - dto.getGolsSofridos());
 		return dto;
 	}

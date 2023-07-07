@@ -18,5 +18,36 @@ public interface PartidaRepository  extends JpaRepository<PartidaEntity, Long> {
 	
 	List<PartidaEntity> findByCampeonatoId(Long campeonatoId);
 	
-
+	@Query(value ="select sum(coalesce(\r\n"
+			+ "(select sum(part.gols_mandante) as gols_feitos_mandante\r\n"
+			+ "from partida part\r\n"
+			+ "inner join clube_campeonato clube_camp ON clube_camp.clube_id = part.mandante_id\r\n"
+			+ "inner join clube clube ON clube.id = clube_camp.clube_id\r\n"
+			+ "inner join campeonato camp ON camp.id = clube_camp.campeonato_id\r\n"
+			+ "WHERE part.mandante_id = :clubeId\r\n"
+			+ "AND camp.id = :campeonatoId) , 0) +\r\n"
+			+ "COALESCE((select sum(part.gols_visitante)as gols_feitos_visitante from partida part\r\n"
+			+ "inner join clube_campeonato clube_camp ON clube_camp.clube_id = part.visitante_id\r\n"
+			+ "inner join clube clube ON clube.id = clube_camp.clube_id\r\n"
+			+ "inner join campeonato camp ON camp.id = clube_camp.campeonato_id\r\n"
+			+ "WHERE part.visitante_id = :clubeId\r\n"
+			+ "AND camp.id = :campeonatoId), 0))", nativeQuery = true)
+	Long qtdGolsClubeCampeonato(Long clubeId, Long campeonatoId);
+	
+	@Query(value = "select sum(coalesce(\r\n"
+			+ "(select sum(part.gols_visitante) as gols_feitos_mandante\r\n"
+			+ "from partida part\r\n"
+			+ "inner join clube_campeonato clube_camp ON clube_camp.clube_id = part.mandante_id\r\n"
+			+ "inner join clube clube ON clube.id = clube_camp.clube_id\r\n"
+			+ "inner join campeonato camp ON camp.id = clube_camp.campeonato_id\r\n"
+			+ "WHERE part.mandante_id = :clubeId\r\n"
+			+ "AND camp.id = :campeonatoId) , 0) +\r\n"
+			+ "COALESCE((select sum(part.gols_mandante)as gols_feitos_visitante from partida part\r\n"
+			+ "inner join clube_campeonato clube_camp ON clube_camp.clube_id = part.visitante_id\r\n"
+			+ "inner join clube clube ON clube.id = clube_camp.clube_id\r\n"
+			+ "inner join campeonato camp ON camp.id = clube_camp.campeonato_id\r\n"
+			+ "WHERE part.visitante_id = :clubeId\r\n"
+			+ "AND camp.id = :campeonatoId), 0))", nativeQuery = true)
+	Long qtdGolsClubeTomadosCampeonato (Long clubeId, Long campeonatoId);
 }
+ 

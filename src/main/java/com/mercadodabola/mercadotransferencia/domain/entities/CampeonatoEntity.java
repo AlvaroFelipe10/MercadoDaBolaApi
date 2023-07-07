@@ -40,7 +40,7 @@ public class CampeonatoEntity {
 	@JsonIgnore
 	@OneToMany
 	private List<PartidaEntity> partida;
-	
+
 
 	 
 }

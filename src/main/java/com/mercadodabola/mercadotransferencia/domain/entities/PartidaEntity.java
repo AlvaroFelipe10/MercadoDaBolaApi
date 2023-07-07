@@ -50,7 +50,7 @@ public class PartidaEntity {
 	private LocalDateTime dataHoraPartida;
 	
 	private BigDecimal publico;
-	
+	 
 	private BigDecimal renda;
 	
 	private int numeroRodada;
