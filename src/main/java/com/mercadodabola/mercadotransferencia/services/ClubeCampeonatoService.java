@@ -32,8 +32,6 @@ public class ClubeCampeonatoService {
 		ClubeCampeonatoId clubeCampeonatoId = new ClubeCampeonatoId();
 		clubeCampeonatoId.setCampeonatoId(campeonatoEntity);
 		clubeCampeonatoId.setClubeId(clubeEntity);
-		
-		
 		int quantidadeRodadas = campeonatoEntity.getQuantidadeClubes()
 				* campeonatoEntity.getTipoDeCampeonato().valorTipoCampeonato
 				- campeonatoEntity.getTipoDeCampeonato().valorTipoCampeonato;
@@ -46,8 +44,6 @@ public class ClubeCampeonatoService {
 //		} if(partidaEntity.getGolsMandante() == partidaEntity.getGolsVisitante())
 //			clubeCampeonato.setPontos(+ 1);
 		return clubeCampeonatoRepository.save(clubeCampeonato);
-		 
-		
 	}
 	
 }
