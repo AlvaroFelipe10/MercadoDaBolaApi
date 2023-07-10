@@ -197,54 +197,6 @@ public class PartidaService {
 	}
 }
 	
-//	private void somarPontosMandante(PartidaEntity partidaEntity, PartidaDto partidaDto) {
-//		ClubeCampeonatoEntity clubeCampeonato = new ClubeCampeonatoEntity();
-//		ClubeCampeonatoEntity mandante = clubeCampeonatoRepository.verificaRodadaMandante(partidaDto.getMandanteId(),
-//				partidaDto.getCampeonatoId());
-//		CampeonatoEntity campeonato = campeonatoRepository.findById(partidaDto.getCampeonatoId()).get();
-//		ClubeCampeonatoId clubeCampeonatoId = new ClubeCampeonatoId();
-//		clubeCampeonatoId.setCampeonatoId(campeonato);
-//		clubeCampeonatoId.setClubeId(mandante.getId().getClubeId());
-//		clubeCampeonato.setId(clubeCampeonatoId);
-//		clubeCampeonato.setRodadasRestantes(mandante.getRodadasRestantes() - 1);
-//		if (partidaEntity.getGolsMandante() > partidaEntity.getGolsVisitante()) {
-//			clubeCampeonato.setPontos(mandante.getPontos() +3);
-//			clubeCampeonato.setVitorias(mandante.getVitorias() +1);
-//		} else if (partidaEntity.getGolsMandante() < partidaEntity.getGolsVisitante()) {
-//			mandante.setPontos(0);
-//			clubeCampeonato.setDerrotas(mandante.getDerrotas() + 1);
-//		}else if(partidaEntity.getGolsMandante() == partidaEntity.getGolsVisitante()) {
-//			clubeCampeonato.setEmpates(mandante.getEmpates() + 1);
-//		} else if (partidaEntity.getGolsMandante() == partidaEntity.getGolsVisitante())
-//			clubeCampeonato.setPontos(mandante.getPontos() + 1);
-//		clubeCampeonatoRepository.save(clubeCampeonato);
-//	}
-
-//	private void somarPontosVisitante(PartidaEntity partidaEntity, PartidaDto partidaDto) {
-//		ClubeCampeonatoEntity clubeCampeonato = new ClubeCampeonatoEntity();
-//		ClubeCampeonatoEntity visitante = clubeCampeonatoRepository.verificaRodadaVisitante(partidaDto.getVisitanteId(),
-//				partidaDto.getCampeonatoId());
-//		CampeonatoEntity campeonato = campeonatoRepository.findById(partidaDto.getCampeonatoId()).get();
-//		ClubeCampeonatoId clubeCampeonatoId = new ClubeCampeonatoId();
-//		clubeCampeonatoId.setCampeonatoId(campeonato);
-//		clubeCampeonatoId.setClubeId(visitante.getId().getClubeId());
-//		clubeCampeonato.setId(clubeCampeonatoId);
-//		clubeCampeonato.setRodadasRestantes(visitante.getRodadasRestantes() - 1);
-//		if (partidaEntity.getGolsVisitante() > partidaEntity.getGolsMandante()) {
-//			clubeCampeonato.setPontos(visitante.getPontos() + 3);
-//			clubeCampeonato.setVitorias(visitante.getVitorias() + 1);
-//		} else if (partidaEntity.getGolsVisitante() < partidaEntity.getGolsMandante()) {
-//			visitante.setPontos(0);
-//			clubeCampeonato.setDerrotas(visitante.getDerrotas() + 1);
-//		}else if(partidaEntity.getGolsMandante() == partidaEntity.getGolsVisitante()) {
-//			clubeCampeonato.setEmpates(visitante.getEmpates() + 1);
-//		} else if (partidaEntity.getGolsMandante() == partidaEntity.getGolsVisitante())
-//			clubeCampeonato.setPontos(visitante.getPontos() + 1);
-//		 
-//		clubeCampeonatoRepository.save(clubeCampeonato);
-//	}
-
-
 
 //	private Long qtdGolsVisitanteSemStream(List<GolAssistenciaDto> golsAssistencia) {
 //		Long qtdGols = 0L;
