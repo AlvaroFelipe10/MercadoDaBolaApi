@@ -14,7 +14,6 @@ import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoEnt
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoId;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.GolAssistPartidaEntity;
-import com.mercadodabola.mercadotransferencia.domain.entities.JogadorEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.PartidaEntity;
 import com.mercadodabola.mercadotransferencia.domain.enums.MandanteOuVisitante;
 import com.mercadodabola.mercadotransferencia.domain.enums.TipoGolAssist;
@@ -152,59 +151,47 @@ public class PartidaService {
 	}
 
 	private void somarPontosMandante(PartidaEntity partidaEntity, PartidaDto partidaDto) {
-		ClubeCampeonatoEntity clubeCampeonato = new ClubeCampeonatoEntity();
-		ClubeCampeonatoEntity mandante = clubeCampeonatoRepository.verificaRodadaMandante(partidaDto.getMandanteId(),
-				partidaDto.getCampeonatoId());
+		ClubeCampeonatoEntity clubeCampeonato = clubeCampeonatoRepository
+				.verificaRodadaMandante(partidaDto.getMandanteId(), partidaDto.getCampeonatoId());
 		CampeonatoEntity campeonato = campeonatoRepository.findById(partidaDto.getCampeonatoId()).get();
 		ClubeCampeonatoId clubeCampeonatoId = new ClubeCampeonatoId();
 		clubeCampeonatoId.setCampeonatoId(campeonato);
-		clubeCampeonatoId.setClubeId(mandante.getId().getClubeId());
+		clubeCampeonatoId.setClubeId(clubeCampeonato.getId().getClubeId());
 		clubeCampeonato.setId(clubeCampeonatoId);
-		clubeCampeonato.setRodadasRestantes(mandante.getRodadasRestantes() - 1);
+		clubeCampeonato.setRodadasRestantes(clubeCampeonato.getRodadasRestantes() - 1);
 		if(partidaEntity.getGolsMandante() > partidaEntity.getGolsVisitante()) {
-			clubeCampeonato.setPontos(mandante.getPontos() + 3);
-			clubeCampeonato.setVitorias(mandante.getVitorias() + 1);
-			clubeCampeonato.setDerrotas(mandante.getDerrotas() + 0);
-			clubeCampeonato.setEmpates(mandante.getEmpates() + 0);
+			clubeCampeonato.setPontos(+ 3);
+			clubeCampeonato.setVitorias(+ 1);
 		} else if (partidaEntity.getGolsMandante() == partidaEntity.getGolsVisitante()) {
-			clubeCampeonato.setPontos(mandante.getPontos() + 1);
-			clubeCampeonato.setEmpates(mandante.getEmpates() + 1);
-			clubeCampeonato.setVitorias(mandante.getVitorias() + 0);
-			clubeCampeonato.setDerrotas(mandante.getDerrotas() + 0);
+			clubeCampeonato.setPontos(+ 1);
+			clubeCampeonato.setEmpates(+ 1);
+
 		} else {
-			clubeCampeonato.setPontos(mandante.getPontos() + 0);
-			clubeCampeonato.setDerrotas(mandante.getDerrotas() + 1);
-			clubeCampeonato.setVitorias(mandante.getVitorias() + 0);
+			clubeCampeonato.setDerrotas(+ 1);
+
 		}
 			
 		clubeCampeonatoRepository.save(clubeCampeonato);
 	}
 	
 	private void somarPontosVisitante(PartidaEntity partidaEntity, PartidaDto partidaDto) {
-		ClubeCampeonatoEntity clubeCampeonato = new ClubeCampeonatoEntity();
-		ClubeCampeonatoEntity visitante = clubeCampeonatoRepository.verificaRodadaVisitante(partidaDto.getVisitanteId(),
+		ClubeCampeonatoEntity clubeCampeonato = clubeCampeonatoRepository.verificaRodadaVisitante(partidaDto.getVisitanteId(),
 				partidaDto.getCampeonatoId());
 		CampeonatoEntity campeonato = campeonatoRepository.findById(partidaDto.getCampeonatoId()).get();
 		ClubeCampeonatoId clubeCampeonatoId = new ClubeCampeonatoId();
 		clubeCampeonatoId.setCampeonatoId(campeonato);
-		clubeCampeonatoId.setClubeId(visitante.getId().getClubeId());
+		clubeCampeonatoId.setClubeId(clubeCampeonato.getId().getClubeId());
 		clubeCampeonato.setId(clubeCampeonatoId);
-		clubeCampeonato.setRodadasRestantes(visitante.getRodadasRestantes() - 1);
+		clubeCampeonato.setRodadasRestantes(clubeCampeonato.getRodadasRestantes() - 1);
 		if (partidaEntity.getGolsVisitante() > partidaEntity.getGolsMandante()) {
-			clubeCampeonato.setPontos(visitante.getPontos() + 3);
-			clubeCampeonato.setVitorias(visitante.getVitorias() + 1);
-			clubeCampeonato.setDerrotas(visitante.getDerrotas() + 0);
-			clubeCampeonato.setEmpates(visitante.getEmpates() + 0);
+			clubeCampeonato.setPontos(+ 3) ;
+			clubeCampeonato.setVitorias(+ 1);
 		} else if (partidaEntity.getGolsMandante() == partidaEntity.getGolsVisitante()) {
-			clubeCampeonato.setPontos(visitante.getPontos() + 1);
-			clubeCampeonato.setEmpates(visitante.getEmpates() + 1);
-			clubeCampeonato.setVitorias(visitante.getVitorias() + 0);
-			clubeCampeonato.setDerrotas(visitante.getDerrotas() + 0);
+			clubeCampeonato.setPontos(+ 1);
+			clubeCampeonato.setEmpates(+ 1);
 		} else {
-			clubeCampeonato.setPontos(visitante.getPontos() + 0);
-			clubeCampeonato.setDerrotas(visitante.getDerrotas() + 1);
-			clubeCampeonato.setVitorias(visitante.getVitorias() + 0);
-			clubeCampeonato.setEmpates(visitante.getEmpates() + 0);
+			clubeCampeonato.setDerrotas(+ 1);
+
 		}
 		clubeCampeonatoRepository.save(clubeCampeonato);
 	}
