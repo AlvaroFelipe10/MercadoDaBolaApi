@@ -9,7 +9,6 @@ import com.mercadodabola.mercadotransferencia.domain.entities.CampeonatoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoEntity;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeCampeonatoId;
 import com.mercadodabola.mercadotransferencia.domain.entities.ClubeEntity;
-import com.mercadodabola.mercadotransferencia.domain.entities.PartidaEntity;
 import com.mercadodabola.mercadotransferencia.repositories.ClubeCampeonatoRepository;
 
 @Service
@@ -37,12 +36,6 @@ public class ClubeCampeonatoService {
 				- campeonatoEntity.getTipoDeCampeonato().valorTipoCampeonato;
 		clubeCampeonato.setRodadasRestantes(quantidadeRodadas);
 		clubeCampeonato.setId(clubeCampeonatoId);
-//		if(partidaEntity.getGolsMandante() > partidaEntity.getGolsVisitante()) {
-//			clubeCampeonato.setPontos(+ 3);
-//		} if(partidaEntity.getGolsMandante() < partidaEntity.getGolsVisitante()) {
-//			clubeCampeonato.setPontos(0);
-//		} if(partidaEntity.getGolsMandante() == partidaEntity.getGolsVisitante())
-//			clubeCampeonato.setPontos(+ 1);
 		return clubeCampeonatoRepository.save(clubeCampeonato);
 	}
 	
